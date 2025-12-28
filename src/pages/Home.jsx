@@ -19,9 +19,9 @@ export default function Home() {
             <div className="flex-1 flex flex-col justify-center items-start px-2 md:px-0 relative z-10 mt-20 md:mt-0">
                 {/* Giant Name - Responsive Clamp */}
                 <h1 className="leading-[0.85] font-bold tracking-tighter uppercase break-words w-full border-b border-grid pb-4 md:pb-10 pl-4 md:pl-10">
-                    <span className="block text-[clamp(15vw,15vw,120px)] md:text-[clamp(10vw,11vw,200px)]">Catur*</span>
-                    <span className="block text-[clamp(15vw,15vw,120px)] md:text-[clamp(10vw,11vw,200px)]">→ Setyo</span>
-                    <span className="block text-[clamp(15vw,15vw,120px)] md:text-[clamp(10vw,11vw,200px)]">Ragil+++++</span>
+                    <span className="block text-[13vw] md:text-[clamp(10vw,11vw,200px)]">Catur*</span>
+                    <span className="block ml-[8vw] md:ml-[10vw] text-[13vw] md:text-[clamp(10vw,11vw,200px)]">→ Setyo</span>
+                    <span className="block text-[13vw] md:text-[clamp(10vw,11vw,200px)]">Ragil+++++</span>
                 </h1>
 
                 {/* Subtext */}
