@@ -1,8 +1,14 @@
+import { motion } from 'framer-motion';
+
 export default function About() {
     return (
-        <section
+        <motion.section
             id="about"
             className="min-h-screen bg-background border-x border-grid max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 relative z-10"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-10%" }}
+            transition={{ duration: 0.8 }}
         >
             {/* Photo Section */}
             <div className="border-b md:border-b-0 md:border-r border-grid p-6 md:p-10 flex items-center justify-center bg-[url('https://placehold.co/800x1200/111/333')] bg-cover bg-center grayscale contrast-125 relative overflow-hidden min-h-[50vh] md:min-h-auto md:h-full">
@@ -36,6 +42,6 @@ export default function About() {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }

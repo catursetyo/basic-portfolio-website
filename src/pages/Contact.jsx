@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 const contacts = [
@@ -9,9 +10,13 @@ const contacts = [
 
 export default function Contact() {
     return (
-        <section
+        <motion.section
             id="contact"
             className="min-h-screen bg-background text-foreground border-x border-grid max-w-[1920px] mx-auto flex flex-col relative z-10"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-10%" }}
+            transition={{ duration: 0.8 }}
         >
             <div className="border-b border-grid p-6 md:p-10 sticky top-16 md:top-20 bg-background z-20">
                 <h1 className="text-6xl md:text-9xl font-bold uppercase tracking-tighter">Connect with me.</h1>
@@ -45,6 +50,6 @@ export default function Contact() {
             <div className="p-6 md:p-10 font-mono text-xs md:text-sm opacity-50 uppercase text-center md:text-left mt-auto">
                 [SYSTEM READY] • SENDING DATA...
             </div>
-        </section>
+        </motion.section>
     );
 }
