@@ -7,16 +7,35 @@ import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
 
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+      // If passing standard touch events, maybe also:
+      // document.body.style.position = 'fixed'; 
+      // but overflow hidden should suffice for basic blocking
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isLoading]);
+
   return (
     <>
-      <Preloader />
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
       <SmoothScroller />
       <Navbar />
       <DataOverlay />
 
       <main className="bg-background min-h-screen">
-        <Home />
+        <Home startAnimation={!isLoading} />
         <Projects />
         <About />
         <Contact />

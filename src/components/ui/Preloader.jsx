@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Preloader() {
-    const [show, setShow] = useState(true);
+export default function Preloader({ onComplete }) {
     const [text, setText] = useState('');
     const fullText = 'hi!';
 
@@ -18,39 +17,35 @@ export default function Preloader() {
             }
         }, 200);
 
-        // Fade out/Slide up after delay
+        // Notify parent after delay
         const timer = setTimeout(() => {
-            setShow(false);
+            onComplete();
         }, 2500);
 
         return () => {
             clearInterval(typingInterval);
             clearTimeout(timer);
         }
-    }, []);
+    }, [onComplete]);
 
     return (
-        <AnimatePresence>
-            {show && (
-                <motion.div
-                    initial={{ y: 0 }}
-                    exit={{ y: '-100%', transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-                    className="fixed inset-0 z-[100] bg-background flex items-center justify-center text-foreground cursor-none"
-                >
-                    <motion.h1
-                        className="text-6xl md:text-9xl font-bold tracking-tighter"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                    >
-                        {text}
-                    </motion.h1>
+        <motion.div
+            initial={{ y: 0 }}
+            exit={{ y: '-100%', transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+            className="fixed inset-0 z-[100] bg-background flex items-center justify-center text-foreground cursor-none pointer-events-auto"
+        >
+            <motion.h1
+                className="text-6xl md:text-9xl font-bold tracking-tighter"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+            >
+                {text}
+            </motion.h1>
 
-                    {/* Optional: Coordinates decoration inside preloader too */}
-                    <div className="absolute bottom-10 left-10 font-mono text-xs opacity-50">
-                        INITIALIZING SEQUENCE...
-                    </div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+            {/* Optional: Coordinates decoration inside preloader too */}
+            <div className="absolute bottom-10 left-10 font-mono text-xs opacity-50">
+                INITIALIZING SEQUENCE...
+            </div>
+        </motion.div>
     );
 }

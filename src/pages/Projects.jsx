@@ -69,10 +69,14 @@ export default function Projects() {
     };
 
     return (
-        <section
+        <motion.section
             id="projects"
             className="min-h-screen bg-background text-foreground border-x border-grid max-w-[1920px] mx-auto cursor-crosshair relative z-10"
             onMouseMove={handleMouseMove}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-10%" }}
+            transition={{ duration: 0.8 }}
         >
             <div className="border-b border-grid p-6 md:p-10 sticky top-16 md:top-20 bg-background z-20">
                 <h1 className="text-6xl md:text-9xl font-bold uppercase tracking-tighter">Project.</h1>
@@ -119,11 +123,20 @@ export default function Projects() {
                                     transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                                 >
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 px-6 md:px-10 pb-12 pt-4">
-                                        {/* Spacer to align with name column */}
-                                        <div className="hidden md:block col-span-2"></div>
+                                        {/* Image Placeholder - Responsive */}
+                                        <div className="col-span-12 md:col-span-4">
+                                            <div className="aspect-video w-full bg-grid/10 border border-grid overflow-hidden relative group">
+                                                <img
+                                                    src={project.img}
+                                                    alt={project.name}
+                                                    className="w-full h-full object-cover grayscale contrast-125 transition-transform duration-500 group-hover:scale-110"
+                                                />
+                                                <div className="absolute inset-0 bg-background/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            </div>
+                                        </div>
 
                                         {/* Description & Tech Stack */}
-                                        <div className="col-span-12 md:col-span-6 flex flex-col gap-6">
+                                        <div className="col-span-12 md:col-span-5 flex flex-col gap-6">
                                             <p className="font-mono text-sm md:text-base leading-relaxed opacity-80 uppercase text-justify">
                                                 {project.description}
                                             </p>
@@ -138,7 +151,7 @@ export default function Projects() {
                                         </div>
 
                                         {/* CTA Button */}
-                                        <div className="col-span-12 md:col-span-4 flex md:justify-end items-start md:items-end">
+                                        <div className="col-span-12 md:col-span-3 flex md:justify-end items-start md:items-end">
                                             <a
                                                 href={project.githubUrl}
                                                 target="_blank"
@@ -172,6 +185,6 @@ export default function Projects() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </section>
+        </motion.section>
     );
 }
