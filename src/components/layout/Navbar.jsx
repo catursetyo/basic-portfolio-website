@@ -9,8 +9,8 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 w-full z-50 bg-background border-b border-grid">
-            <div className="flex justify-between items-stretch h-16 md:h-20">
-                <a href="#home" className="flex items-center px-6 md:px-10 border-r border-grid font-bold text-xl md:text-2xl tracking-tighter hover:bg-foreground hover:text-background transition-colors duration-300">
+            <div className="flex justify-between items-stretch h-14 md:h-20">
+                <a href="#home" className="flex items-center px-4 md:px-10 border-r border-grid font-bold text-lg md:text-2xl tracking-tighter hover:bg-foreground hover:text-background transition-colors duration-300">
                     caursty.
                 </a>
 
@@ -19,7 +19,7 @@ export default function Navbar() {
                         <a
                             key={link.name}
                             href={link.href}
-                            className="flex items-center px-6 md:px-10 text-sm md:text-lg font-medium hover:bg-foreground hover:text-background transition-colors duration-300 uppercase"
+                            className="flex items-center px-3 md:px-10 text-[10px] md:text-lg font-bold hover:bg-foreground hover:text-background transition-colors duration-300 uppercase tracking-widest"
                         >
                             {link.name}
                         </a>
