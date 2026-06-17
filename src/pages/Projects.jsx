@@ -6,52 +6,34 @@ const projects = [
     {
         id: 1,
         year: "2024",
-        name: "AI Ethics Classifier",
-        category: "NLP / RESEARCH",
-        img: "https://placehold.co/600x400/111/FFF?text=AI+ETHICS",
-        description: "A transformer-based model designed to detect bias in synthetic text generation. This project explores the intersection of ethical AI guidelines and practical NLP implementation, ensuring generated content adheres to safety standards.",
-        techStack: ["PYTHON", "PYTORCH", "HUGGING FACE", "REACT"],
-        githubUrl: "https://github.com/catursetyo"
+        name: "PokeZOO Management System",
+        category: "FULL STACK / DATABASE",
+        img: "https://placehold.co/600x400/111/FFF?text=POKEZOO+DBS",
+        description: "Complete zoo management system with hybrid database architecture combining MySQL for relational data and MongoDB for unstructured logs. Features role-based access control for admin, keepers, and visitors with real-time health tracking, incident reporting, and behavioral logging.",
+        techStack: ["PYTHON", "FASTAPI", "MYSQL", "MONGODB", "JINJA2", "TAILWIND"],
+        githubUrl: "https://github.com/catursetyo/pokezoo-dbs"
     },
     {
         id: 2,
         year: "2024",
-        name: "Predictive Analytics",
-        category: "DATA VIS",
-        img: "https://placehold.co/600x400/111/FFF?text=PREDICTIVE",
-        description: "An advanced dashboard for visualizing high-dimensional datasets. features real-time clustering algorithms and interactive t-SNE projections to reveal hidden patterns in complex data structures.",
-        techStack: ["D3.JS", "PYTHON", "FLASK", "SCIKIT-LEARN"],
-        githubUrl: "https://github.com/catursetyo"
+        name: "UNA Project",
+        category: "E-COMMERCE / NEXT.JS",
+        img: "https://placehold.co/600x400/111/FFF?text=UNA+PROJECT",
+        description: "Modern e-commerce website for digital display products including prayer time clocks, LED running text, and custom digital solutions. Features product catalog, tutorials, order flow documentation, and WhatsApp integration for consultations.",
+        techStack: ["NEXT.JS", "TYPESCRIPT", "TAILWIND CSS", "REACT"],
+        externalUrl: "https://unaproject.my.id/",
+        status: "UNDER DEVELOPMENT"
     },
     {
         id: 3,
-        year: "2023",
-        name: "Neural Net Visualizer",
-        category: "DEEP LEARNING",
-        img: "https://placehold.co/600x400/111/FFF?text=NEURAL+NET",
-        description: "Educational tool for visualizing the flow of tensors through a neural network. Users can adjust weights and biases in real-time to see how they affect activation functions.",
-        techStack: ["TENSORFLOW.JS", "WEBGL", "REACT", "TYPESCRIPT"],
-        githubUrl: "https://github.com/catursetyo"
-    },
-    {
-        id: 4,
-        year: "2023",
-        name: "Smart City Traffic",
-        category: "COMPUTER VISION",
-        img: "https://placehold.co/600x400/111/FFF?text=SMART+CITY",
-        description: "Computer vision system for real-time traffic density estimation using YOLOv8. Optimized for edge devices to monitor congestion and automate traffic light intervals.",
-        techStack: ["OPENCV", "YOLOv8", "PYTHON", "DOCKER"],
-        githubUrl: "https://github.com/catursetyo"
-    },
-    {
-        id: 5,
-        year: "2022",
-        name: "Algo Trading Bot",
-        category: "FINTECH",
-        img: "https://placehold.co/600x400/111/FFF?text=ALGO+TRADING",
-        description: "Automated trading algorithm utilizing sentiment analysis on financial news and historical price data. Includes a backtesting engine to validate strategies against past market conditions.",
-        techStack: ["PANDAS", "NUMPY", "ALPACA API", "AWS"],
-        githubUrl: "https://github.com/catursetyo"
+        year: "2024",
+        name: "El Lotus IMK",
+        category: "REACT / UI-UX",
+        img: "https://placehold.co/600x400/111/FFF?text=EL+LOTUS",
+        description: "Interactive café ordering application built as a Human-Computer Interaction (IMK) final project. Single-page app featuring order flow, outlet selection, payment methods, QRIS integration, activity tracking, and user profiles with smooth animations.",
+        techStack: ["REACT", "VITE", "JAVASCRIPT", "CSS", "RESPONSIVE"],
+        externalUrl: "https://el-lotus.netlify.app",
+        status: "UNDER DEVELOPMENT"
     },
 ];
 
@@ -151,14 +133,19 @@ export default function Projects() {
                                         </div>
 
                                         {/* CTA Button */}
-                                        <div className="col-span-12 md:col-span-3 flex md:justify-end items-start md:items-end">
+                                        <div className="col-span-12 md:col-span-3 flex md:justify-end items-start md:items-end gap-3">
+                                            {project.status && (
+                                                <span className="px-3 py-1 text-xs font-mono uppercase bg-foreground text-background rounded whitespace-nowrap">
+                                                    {project.status}
+                                                </span>
+                                            )}
                                             <a
-                                                href={project.githubUrl}
+                                                href={project.externalUrl || project.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="inline-flex items-center gap-2 border border-current px-6 py-3 font-bold uppercase tracking-tight hover:bg-foreground hover:text-background transition-colors duration-300"
                                             >
-                                                VIEW ON GITHUB
+                                                {project.externalUrl ? "VIEW LIVE" : "VIEW ON GITHUB"}
                                                 <ArrowUpRight className="w-5 h-5" />
                                             </a>
                                         </div>

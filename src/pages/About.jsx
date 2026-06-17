@@ -11,13 +11,13 @@ export default function About() {
             transition={{ duration: 0.8 }}
         >
             {/* Photo Section */}
-            <div className="border-b md:border-b-0 md:border-r border-grid p-6 md:p-10 flex items-center justify-center bg-[url('https://placehold.co/800x1200/111/333')] bg-cover bg-center grayscale contrast-125 relative overflow-hidden min-h-[50vh] md:min-h-auto md:h-full">
+            <div className="border-b md:border-b-0 md:border-r border-grid p-6 md:p-10 flex items-center justify-center relative overflow-hidden min-h-[50vh] md:min-h-auto md:h-full">
                 {/* Halftone Overlay Effect using CSS gradients */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle,var(--color-grid)_1px,transparent_1px)] [background-size:4px_4px] opacity-20 pointer-events-none"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle,var(--color-grid)_1px,transparent_1px)] [background-size:4px_4px] opacity-20 pointer-events-none z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
 
-                {/* Actual Image if user had one, placeholder for now */}
-                <div className="relative z-10 w-full max-w-sm aspect-[3/4] border border-grid bg-grid/10 backdrop-blur-sm grayscale brightness-90"></div>
+                {/* Profile Image */}
+                <img src="/profile.png" alt="Catur Setyo Ragil" className="relative z-5 w-full max-w-sm aspect-[3/4] object-cover border border-grid grayscale contrast-125 brightness-90" />
             </div>
 
             {/* Text Section */}
@@ -39,6 +39,7 @@ export default function About() {
                         <h3 className="uppercase opacity-50 mb-2">[Focus]</h3>
                         <p>DATA SCIENCE</p>
                         <p>MACHINE LEARNING</p>
+                        <p>BACKEND DEVELOPMENT</p>
                     </div>
                 </div>
             </div>

@@ -78,7 +78,7 @@ export default function Home({ startAnimation = true }) {
                     >
                         {[...Array(4)].map((_, i) => (
                             <span key={i} className="flex items-center gap-8">
-                                DATA SCIENCE ENTHUSIAST • INFORMATION TECHNOLOGY STUDENT AT INSTITUT TEKNOLOGI SEPULUH NOPEMBER •
+                                DATA SCIENCE ENTHUSIAST • BACKEND DEVELOPER • INFORMATION TECHNOLOGY STUDENT AT INSTITUT TEKNOLOGI SEPULUH NOPEMBER •
                             </span>
                         ))}
                     </motion.div>
