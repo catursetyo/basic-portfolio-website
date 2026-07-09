@@ -17,10 +17,11 @@ The current visual style is high-contrast neo-brutalist: black/white, grid borde
 
 The redesign should become a cinematic personal archive:
 
-- Full-bleed hero with dark overlay.
+- Full-bleed first viewport with fixed scenic background, dark overlay, left identity block, vertical menu, and visit counter.
+- Same-background scroll into about/social row, compact work cards, then guestbook at the bottom.
 - Small navigational menu inspired by akryst.
 - Soft glass panels for nav, project cards, guestbook, and counters.
-- Project showcase with image previews.
+- Project showcase preview on home plus a dedicated project route.
 - Blog and resume routes.
 - Guestbook, reply/like, and view counter integrations.
 
@@ -28,11 +29,10 @@ The redesign should become a cinematic personal archive:
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Home, hero, about preview, featured project, view counter. |
+| `/` | Home long-scroll: hero, about/socials, featured work, guestbook, view counter. |
 | `/projects` | Showcase all projects. |
 | `/blog` | Blog index. |
 | `/resume` | Redirect to public CV file. |
-| `/guestbook` | Guestbook view and message form. |
 | `/contact` | Contact/social links if not folded into home. |
 
 ## Data Types

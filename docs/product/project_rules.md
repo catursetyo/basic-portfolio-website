@@ -6,11 +6,11 @@ Redesign the portfolio into a personal, cinematic, akryst-inspired site that pre
 
 ## Required Features
 
-- Home page with a strong hero and one featured repo/project.
+- Home page with akryst-like long-scroll layout: hero, about/socials, featured work, and guestbook at the bottom.
 - Project showcase page with project cards/detail views.
 - Blog page.
 - Resume page or route that redirects to the CV file.
-- Guestbook for visitors with one-level replies and likes.
+- Guestbook for visitors with one-level replies and likes, rendered on the homepage lower section.
 - View counter using Abacus when possible.
 - Contact/social section.
 
@@ -36,6 +36,7 @@ Redesign the portfolio into a personal, cinematic, akryst-inspired site that pre
 - Blog may start with static markdown-like data inside the repo.
 - Resume route must fail gracefully if the CV file is missing.
 - Guestbook must make clear whether messages/replies are live, pending moderation, or temporarily unavailable.
+- Do not add a standalone `/guestbook` route unless the homepage section becomes too large.
 
 ## Non-Goals
 

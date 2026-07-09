@@ -1,89 +1,160 @@
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { posts } from '../data/posts';
+import { projects } from '../data/projects';
+import { socials } from '../data/socials';
+import { getSiteViews } from '../lib/viewCounter';
+import Guestbook from './Guestbook';
 
-export default function Home({ startAnimation = true }) {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.5 // Wait for preloader curtain to lift slightly
-            }
-        }
-    };
+const menu = [
+  ['01', 'about me', '#about'],
+  ['02', 'portfolio', '#work'],
+  ['03', 'blog', '/blog'],
+  ['04', 'guestbook', '#guestbook'],
+];
 
-    const itemVariants = {
-        hidden: { y: 100, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-        }
-    };
+export default function Home({ startAnimation = true, onNavigate }) {
+  const [views, setViews] = useState(null);
 
-    return (
-        <section id="home" className="relative min-h-screen flex flex-col justify-center border-x border-grid max-w-[1920px] mx-auto bg-background overflow-hidden relative z-10">
-            {/* Vertical Grid Lines Decoration */}
-            <div className="absolute inset-0 pointer-events-none select-none flex justify-between px-[10%] md:px-[20%] opacity-20 z-0">
-                <div className="w-[1px] h-full bg-grid"></div>
-                <div className="w-[1px] h-full bg-grid"></div>
-                <div className="w-[1px] h-full bg-grid"></div>
+  useEffect(() => {
+    getSiteViews().then(({ count }) => setViews(count));
+  }, []);
+
+  return (
+    <section className="home-page">
+      <div className="home-bg" />
+
+      <section className={`home-hero ${startAnimation ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="home-hero-copy">
+          <h1 className="home-logo">caursty</h1>
+          <p className="meta mt-4">data scientist · ai engineer · backend developer</p>
+
+          <nav className="home-menu" aria-label="Home sections">
+            {menu.map(([number, label, href]) => (
+              <a
+                key={href}
+                className="home-menu-link soft-link"
+                href={href}
+                onClick={(event) => {
+                  if (href.startsWith('/')) {
+                    event.preventDefault();
+                    onNavigate(href);
+                  }
+                }}
+              >
+                <span>{number}</span>
+                <strong>{label}</strong>
+              </a>
+            ))}
+          </nav>
+          <p className="meta mt-5">scroll to explore</p>
+        </div>
+
+        <p className="home-counter meta">{views ? `${views.toLocaleString()} visits / v1` : '-- visits / v1'}</p>
+      </section>
+
+      <div className="home-scroll">
+        <section id="about" className="home-section home-two-col">
+          <div>
+            <p className="section-label">about me</p>
+            <div className="about-lockup">
+              <img className="h-20 w-20 rounded-full object-cover" src="/profile.png" alt="Catur Setyo Ragil" />
+              <div>
+                <p className="muted text-xl">hey, i'm</p>
+                <h2 className="text-5xl font-bold leading-none">caur.</h2>
+              </div>
             </div>
+            <p className="muted mt-7 max-w-2xl text-lg leading-8">
+              I build practical data, AI, and backend systems as an Information Technology student at Institut Teknologi
+              Sepuluh Nopember.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {['Python', 'FastAPI', 'React', 'PostgreSQL', 'Machine Learning', 'Tailwind'].map((item) => (
+                <span key={item} className="chip">{item}</span>
+              ))}
+            </div>
+          </div>
 
-            {/*Corner Decor */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={startAnimation ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="absolute top-24 right-4 md:right-10 font-mono text-[10px] md:text-xs text-grid text-right select-none z-10"
-            >
-                [SYSTEM: ONLINE]<br />
-                [MODE: NEO-BRUTALISM]
-            </motion.div>
-
-            <motion.div
-                className="flex-1 flex flex-col justify-center items-start px-2 md:px-0 relative z-10 mt-20 md:mt-0"
-                variants={containerVariants}
-                initial="hidden"
-                animate={startAnimation ? "visible" : "hidden"}
-            >
-                {/* Giant Name - Responsive Clamp */}
-                <h1 className="leading-[0.85] font-bold tracking-tighter uppercase break-words w-full border-b border-grid pb-4 md:pb-10 pl-4 md:pl-10 overflow-hidden">
-                    <motion.span variants={itemVariants} className="block text-[13vw] md:text-[clamp(10vw,11vw,200px)]">Catur*</motion.span>
-                    <motion.span variants={itemVariants} className="block ml-[8vw] md:ml-[10vw] text-[13vw] md:text-[clamp(10vw,11vw,200px)]">→ Setyo</motion.span>
-                    <motion.span variants={itemVariants} className="block text-[13vw] md:text-[clamp(10vw,11vw,200px)]">Ragil+++++</motion.span>
-                </h1>
-
-                {/* Subtext */}
-                <motion.div variants={itemVariants} className="w-full grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-grid border-b border-grid bg-background">
-                    <div className="p-4 md:p-8">
-                        <p className="font-mono text-sm uppercase opacity-60">[Role]</p>
-                        <p className="text-xl md:text-3xl font-medium mt-2">DATA SCIENTIST & AI ENGINEER</p>
-                    </div>
-                    <div className="p-4 md:p-8">
-                        <p className="font-mono text-sm uppercase opacity-60">[Located]</p>
-                        <p className="text-xl md:text-3xl font-medium mt-2">SURABAYA, INDONESIA</p>
-                    </div>
-                    <div className="p-4 md:p-8 flex items-end justify-end">
-                        <p className="font-mono text-xs opacity-50 uppercase">SCROLL FOR ARCHIVE ↓</p>
-                    </div>
-                </motion.div>
-
-                {/* Infinite Marquee */}
-                <motion.div variants={itemVariants} className="w-full border-b border-grid py-3 md:py-6 overflow-hidden flex bg-foreground text-background">
-                    <motion.div
-                        animate={{ x: "-50%" }}
-                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                        className="flex whitespace-nowrap min-w-max gap-8 font-bold text-3xl md:text-5xl uppercase tracking-tight"
-                    >
-                        {[...Array(4)].map((_, i) => (
-                            <span key={i} className="flex items-center gap-8">
-                                DATA SCIENCE ENTHUSIAST • BACKEND DEVELOPER • INFORMATION TECHNOLOGY STUDENT AT INSTITUT TEKNOLOGI SEPULUH NOPEMBER •
-                            </span>
-                        ))}
-                    </motion.div>
-                </motion.div>
-            </motion.div>
+          <div>
+            <p className="section-label">find me at</p>
+            <div className="social-list">
+              {socials.map((social) => (
+                <a key={social.label} className="soft-link social-row" href={social.href}>
+                  <span className="meta">{social.label}</span>
+                  <span className="muted">/ {social.value}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </section>
-    );
+
+        <section id="work" className="home-section">
+          <p className="section-label">my work</p>
+          <div className="work-grid">
+            {projects.map((project) => (
+              <article key={project.id} className="work-card">
+                <p className="meta">{project.year} / {project.category}</p>
+                <h3 className="mt-3 text-xl font-semibold">{project.name}</h3>
+                <p className="muted mt-3 leading-7">{project.description}</p>
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="chip">{project.techStack[0]}</span>
+                  <a
+                    className="soft-link inline-flex items-center gap-2 text-sm font-semibold"
+                    href={project.externalUrl || project.githubUrl || '/projects'}
+                    target={project.externalUrl || project.githubUrl ? '_blank' : undefined}
+                    rel={project.externalUrl || project.githubUrl ? 'noopener noreferrer' : undefined}
+                  >
+                    open <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="muted mt-5 text-sm">
+            also check the full <a className="soft-link underline" href="/projects" onClick={(event) => {
+              event.preventDefault();
+              onNavigate('/projects');
+            }}>portfolio</a>
+          </p>
+        </section>
+
+        <section id="guestbook" className="home-section home-two-col home-bottom">
+          <Guestbook embedded />
+
+          {posts.length > 0 && (
+            <aside>
+              <p className="section-label">recent posts</p>
+              <div className="post-list">
+                {posts.slice(0, 4).map((post) => (
+                <a
+                  key={post.slug}
+                  className="soft-link post-row"
+                  href={`/blog/${post.slug}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onNavigate(`/blog/${post.slug}`);
+                  }}
+                >
+                  <span>
+                    <strong>{post.title}</strong>
+                    <small className="muted">{post.tags.join(' · ')}</small>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+                ))}
+              </div>
+            </aside>
+          )}
+        </section>
+
+        <footer className="home-footer meta">
+          <span>surabaya</span>
+          <span>·</span>
+          <span>web portfolio</span>
+          <span>·</span>
+          <span>v1</span>
+        </footer>
+      </div>
+    </section>
+  );
 }

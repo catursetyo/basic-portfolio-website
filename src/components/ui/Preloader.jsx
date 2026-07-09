@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Preloader({ onComplete }) {
     const [text, setText] = useState('');
-    const fullText = 'hi!';
+    const fullText = 'caur.';
 
     useEffect(() => {
         // Typing effect
@@ -15,12 +14,11 @@ export default function Preloader({ onComplete }) {
             } else {
                 clearInterval(typingInterval);
             }
-        }, 200);
+        }, 90);
 
-        // Notify parent after delay
         const timer = setTimeout(() => {
             onComplete();
-        }, 2500);
+        }, 900);
 
         return () => {
             clearInterval(typingInterval);
@@ -29,23 +27,14 @@ export default function Preloader({ onComplete }) {
     }, [onComplete]);
 
     return (
-        <motion.div
-            initial={{ y: 0 }}
-            exit={{ y: '-100%', transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-            className="fixed inset-0 z-[100] bg-background flex items-center justify-center text-foreground cursor-none pointer-events-auto"
-        >
-            <motion.h1
-                className="text-6xl md:text-9xl font-bold tracking-tighter"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-            >
+        <div className="fixed inset-0 z-[100] flex cursor-none items-center justify-center bg-background text-foreground pointer-events-auto">
+            <h1 className="text-5xl font-bold md:text-8xl">
                 {text}
-            </motion.h1>
+            </h1>
 
-            {/* Optional: Coordinates decoration inside preloader too */}
-            <div className="absolute bottom-10 left-10 font-mono text-xs opacity-50">
-                INITIALIZING SEQUENCE...
+            <div className="meta absolute bottom-8 left-8">
+                loading archive
             </div>
-        </motion.div>
+        </div>
     );
 }

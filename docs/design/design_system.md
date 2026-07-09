@@ -6,6 +6,13 @@ Reference: akryst.moe.
 
 Interpretation: cinematic dark personal archive with restrained glassmorphism.
 
+Homepage layout target: match the akryst scroll rhythm. The home route is a long-scroll composition, not a dashboard:
+
+1. Full-viewport hero with fixed scenic background, left-aligned identity, small metadata, vertical menu, and visit counter at the lower right.
+2. About/social row appears over the same background as the visitor scrolls.
+3. Work/project cards follow as compact glass panels.
+4. Guestbook lives at the lower part of the homepage.
+
 Do:
 
 - Full-bleed hero imagery or video-like treatment.
@@ -18,6 +25,8 @@ Do:
 Do not:
 
 - Copy akryst identity.
+- Use akryst assets or character art.
+- Use the owner's portrait as the hero background.
 - Make every block a glass card.
 - Use bright frosted-white glass.
 - Keep the current brutalist black/white grid as the dominant system.
@@ -81,7 +90,8 @@ If the design feels too far from akryst after implementation, consider one font 
 
 ## Layout
 
-- Hero should occupy the first viewport but hint at the next section.
+- Hero should occupy the first viewport and scroll into about/social content over the same background.
+- Homepage sections after the hero should keep akryst-like centered widths: about/social row, work grid, then guestbook/side content.
 - Keep content max width around `1100px` to `1200px`.
 - Use two-column layouts on desktop and single-column on mobile.
 - Use cards only for repeated items or functional panels.
@@ -97,5 +107,5 @@ If the design feels too far from akryst after implementation, consider one font 
 ## Imagery
 
 - Use existing project screenshots for project cards.
-- Use `profile.png` as a personal visual anchor.
-- Add a dedicated hero asset later only if the profile image cannot carry the mood.
+- Use `profile.png` only as a small avatar, never as full hero background.
+- Use a non-personal generated/curated scenic asset later if the abstract CSS background feels too thin.

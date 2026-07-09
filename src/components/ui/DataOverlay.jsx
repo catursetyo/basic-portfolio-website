@@ -1,29 +1,19 @@
-import { useState, useEffect } from 'react';
-import useMeasure from 'react-use-measure';
+import { useEffect, useState } from 'react';
 
 export default function DataOverlay() {
-    const [time, setTime] = useState(Date.now());
-    const [mouse, setMouse] = useState({ x: 0, y: 0 });
+    const [time, setTime] = useState(new Date());
 
     useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 100);
-
-        const handleMouseMove = (e) => {
-            setMouse({ x: e.clientX, y: e.clientY });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
+        const interval = setInterval(() => setTime(new Date()), 1000);
         return () => {
             clearInterval(interval);
-            window.removeEventListener('mousemove', handleMouseMove);
         }
     }, []);
 
     return (
-        <div className="fixed bottom-6 left-6 md:bottom-10 md:left-10 z-40 pointer-events-none font-mono text-[10px] md:text-xs text-grid flex flex-col gap-1 mix-blend-difference">
-            <div>XY: {String(mouse.x).padStart(4, '0')} / {String(mouse.y).padStart(4, '0')}</div>
-            <div>TS: {time}</div>
-            <div>LOC: SURABAYA, ID</div>
+        <div className="pointer-events-none fixed bottom-5 right-5 z-40 hidden text-right md:block">
+            <div className="meta">surabaya, id</div>
+            <div className="meta">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
         </div>
     )
 }

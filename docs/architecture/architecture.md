@@ -16,7 +16,7 @@ Do not migrate to Next.js for this redesign. Akryst's stack is a reference, not 
 Use a small app shell:
 
 - Global layout: nav, preloader, scroll behavior, background treatment.
-- Route switch: home, projects, blog, guestbook, contact, resume redirect.
+- Route switch: home, projects, blog, contact, resume redirect.
 - Shared data: projects, posts, social links.
 
 ## Routing

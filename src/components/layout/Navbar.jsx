@@ -1,31 +1,41 @@
 
+import { Home } from 'lucide-react';
 
-export default function Navbar() {
-    const navLinks = [
-        { name: 'work', href: '#projects' },
-        { name: 'about', href: '#about' },
-        { name: 'contact', href: '#contact' },
-    ];
+const navLinks = [
+  { name: 'portfolio', path: '/projects' },
+  { name: 'blog', path: '/blog' },
+  { name: 'resume', path: '/resume' },
+];
 
-    return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-background border-b border-grid">
-            <div className="flex justify-between items-stretch h-14 md:h-20">
-                <a href="#home" className="flex items-center px-4 md:px-10 border-r border-grid font-bold text-lg md:text-2xl tracking-tighter hover:bg-foreground hover:text-background transition-colors duration-300">
-                    caursty.
-                </a>
+export default function Navbar({ activePath, onNavigate }) {
+  return (
+    <nav className="fixed left-4 right-4 top-4 z-50 flex items-center gap-3 md:left-8 md:right-auto">
+      <a
+        href="/"
+        aria-label="Home"
+        onClick={(event) => handleNav(event, '/', onNavigate)}
+        className="glass nav-button soft-link inline-flex h-11 w-11 items-center justify-center"
+      >
+        <Home className="h-4 w-4" />
+      </a>
 
-                <div className="flex items-stretch divide-x divide-grid border-l border-grid">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className="flex items-center px-3 md:px-10 text-[10px] md:text-lg font-bold hover:bg-foreground hover:text-background transition-colors duration-300 uppercase tracking-widest"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
-                </div>
-            </div>
-        </nav>
-    );
+      <div className="glass flex max-w-[calc(100vw-84px)] items-center gap-1 overflow-x-auto rounded-xl p-1">
+        {navLinks.map((link) => (
+          <a
+            key={link.path}
+            href={link.path}
+            onClick={(event) => handleNav(event, link.path, onNavigate)}
+            className={`nav-button meta soft-link whitespace-nowrap ${activePath === link.path ? 'active' : ''}`}
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function handleNav(event, path, onNavigate) {
+  event.preventDefault();
+  onNavigate(path);
 }

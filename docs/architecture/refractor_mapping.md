@@ -25,7 +25,7 @@ This file keeps the requested `refractor_mapping.md` spelling while documenting 
 | `src/data/posts.js` | Blog post metadata and content. |
 | `src/data/socials.js` | Social/contact links. |
 | `src/pages/Blog.jsx` | Blog index page. |
-| `src/pages/Guestbook.jsx` | Guestbook page and form. |
+| `src/pages/Guestbook.jsx` | Reusable homepage guestbook section and form. |
 | `src/pages/Resume.jsx` | Redirect component for CV file. |
 | `src/lib/viewCounter.js` | Abacus fetch helper. |
 | `src/lib/guestbook.js` | Guestbook fetch helper. |
@@ -35,5 +35,5 @@ This file keeps the requested `refractor_mapping.md` spelling while documenting 
 1. Move project data out of `Projects.jsx`.
 2. Replace visual tokens in `index.css`.
 3. Rebuild `Home`, `Navbar`, `Projects`.
-4. Add blog, guestbook, resume routes.
+4. Add blog and resume routes; keep guestbook embedded on home.
 5. Add counter and guestbook integrations after the visual shell works.

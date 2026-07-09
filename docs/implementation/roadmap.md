@@ -11,19 +11,20 @@
 
 - Update global tokens in `index.css`.
 - Rebuild navbar as compact glass navigation.
-- Rebuild home hero with cinematic dark/glass direction.
+- Rebuild home as akryst-like long-scroll layout: fixed scenic background, hero menu, about/social row, work grid.
 - Shorten or soften preloader.
 
 ## Phase 2: Content Structure
 
 - Move project data into `src/data/projects.js`.
 - Add featured project support.
-- Add `Blog.jsx`, `Guestbook.jsx`, and `Resume.jsx`.
+- Add `Blog.jsx`, `Guestbook.jsx` as a home section, and `Resume.jsx`.
 - Add simple route switch.
 
 ## Phase 3: Required Features
 
 - Add featured project on home.
+- Place guestbook at the bottom of home.
 - Build projects showcase page.
 - Build blog index.
 - Build resume redirect.
@@ -51,6 +52,5 @@ Then manually check:
 - `/`
 - `/projects`
 - `/blog`
-- `/guestbook`
 - `/resume`
 - Mobile viewport.
