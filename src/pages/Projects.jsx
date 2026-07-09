@@ -17,10 +17,10 @@ const projects = [
         id: 2,
         year: "2024",
         name: "UNA Project",
-        category: "E-COMMERCE / NEXT.JS",
+        category: "PRODUCT CATALOG / NEXT.JS",
         img: "/una-project.png",
-        description: "Modern e-commerce website for digital display products including prayer time clocks, LED running text, and custom digital solutions. Features product catalog, tutorials, order flow documentation, and WhatsApp integration for consultations.",
-        techStack: ["NEXT.JS", "TYPESCRIPT", "TAILWIND CSS", "REACT"],
+        description: "Modern product catalog website for UNA Project, a digital display provider offering prayer time clocks, running text LED, digital clocks, and custom display products. Features product listings, featured product highlights, transaction guidance, tutorials, consultation flow, and backend-powered admin dashboard for managing catalog content.",
+        techStack: ["NEXT.JS", "TYPESCRIPT", "GO", "POSTGRESQL", "TAILWIND CSS", "REACT"],
         externalUrl: "https://unaproject.my.id/",
         status: "UNDER DEVELOPMENT"
     },
