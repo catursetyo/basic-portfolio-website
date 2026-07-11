@@ -47,7 +47,7 @@ These are prototypes, not final architecture.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Hero, about/socials, featured project, supporting work, optional guestbook, footer. |
+| `/` | Hero, about/socials, repository-format project grid, optional guestbook, footer. |
 | `/projects` | All selected projects. |
 | `/projects/:slug` | Detailed project case study. |
 | `/blog` | Useful posts or deliberate empty state. |

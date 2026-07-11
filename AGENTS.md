@@ -216,10 +216,9 @@ The homepage should contain:
 1. Full-viewport hero.
 2. Identity and compact navigation.
 3. About and social links.
-4. One primary featured project.
-5. Supporting projects.
-6. Guestbook only after persistence is ready, or clearly labeled as unavailable/demo.
-7. Footer metadata.
+4. Compact repository-format project list linking to the full project archive.
+5. Guestbook only after persistence is ready, or clearly labeled as unavailable/demo.
+6. Footer metadata.
 
 ### Projects
 

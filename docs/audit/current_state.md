@@ -27,9 +27,9 @@ Reviewed date: 2026-07-11
 ## Strengths
 
 - Optimized owner-supplied hero video and poster replace the generic gradient-only hero.
-- Hero, about, featured work, supporting work, and guestbook share one continuous visual atmosphere.
+- Hero, about, repository-format work grid, and guestbook share one continuous visual atmosphere.
 - Identity copy now follows the documented `caursty` and Catur naming roles.
-- One project is visually dominant and uses a real screenshot.
+- Homepage projects use compact owner/repository, description, and language metadata; screenshots remain on `/projects`.
 - Desktop, tablet, mobile, keyboard focus, and reduced-motion behavior have explicit CSS paths.
 - The homepage no longer blocks rendering with a fixed preloader.
 - Guestbook controls have visible labels and native input constraints.

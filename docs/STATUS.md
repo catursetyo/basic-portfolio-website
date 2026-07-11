@@ -15,8 +15,7 @@ This file describes what exists now. It is not a wish list.
   - an owner-supplied video hero with a still poster,
   - compact hero navigation,
   - about and social sections,
-  - one dominant featured project,
-  - supporting projects,
+  - a compact repository-format project grid,
   - embedded guestbook preview,
   - quiet footer metadata.
 - Hero uses `public/hero.webm` (VP9, 1.57 MB) with `public/hero.mp4` (H.264, 2.77 MB) fallback.
@@ -58,7 +57,7 @@ This file describes what exists now. It is not a wish list.
 
 - Project summaries are not complete case studies.
 - Personal contribution, challenge, result, and learning fields are incomplete.
-- Blog data is empty; its routes remain directly reachable but are not promoted.
+- Blog data is empty; its routes are intentionally promoted without filler content.
 - The real resume file is not configured.
 
 ### Counter

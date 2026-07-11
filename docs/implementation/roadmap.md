@@ -67,7 +67,7 @@ Acceptance:
 Tasks:
 
 - Expand project data with slugs and case-study content.
-- Render one dominant featured project on Home.
+- Render a compact repository-format project grid on Home.
 - Add `/projects/:slug`.
 - Include problem, role, contribution, challenge, result, and links.
 - Improve screenshot loading and dimensions.
@@ -76,7 +76,7 @@ Acceptance:
 
 - One complete project case study exists.
 - Unknown project slug is handled.
-- Homepage featured project is visually distinct.
+- Homepage project cards follow one compact repository information pattern.
 - All links are verified.
 - Team/personal contribution is explicit.
 

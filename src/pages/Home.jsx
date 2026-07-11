@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, BookOpen } from 'lucide-react';
 import { posts } from '../data/posts';
-import { featuredProject, projects } from '../data/projects';
+import { projects } from '../data/projects';
 import { socials } from '../data/socials';
 import { getSiteViews } from '../lib/viewCounter';
 import Guestbook from './Guestbook';
@@ -14,7 +14,11 @@ const menu = [
 ];
 
 const skills = ['Python', 'FastAPI', 'PostgreSQL', 'Machine Learning', 'React', 'Tailwind'];
-const supportingProjects = projects.filter((project) => project.id !== featuredProject.id);
+const languageColors = {
+  Python: '#3572a5',
+  'Next.js': '#f1f1f1',
+  React: '#61dafb',
+};
 
 export default function Home({ onNavigate }) {
   const [views, setViews] = useState(null);
@@ -104,76 +108,47 @@ export default function Home({ onNavigate }) {
         </section>
 
         <section id="work" className="home-section home-work">
-          <p className="section-label">selected work</p>
+          <p className="section-label">my work</p>
 
-          <article className="featured-work">
-            <a
-              className="featured-work-media soft-link"
-              href={featuredProject.externalUrl || featuredProject.githubUrl || '/projects'}
-              target={featuredProject.externalUrl || featuredProject.githubUrl ? '_blank' : undefined}
-              rel={featuredProject.externalUrl || featuredProject.githubUrl ? 'noopener noreferrer' : undefined}
-              onClick={(event) => {
-                if (!featuredProject.externalUrl && !featuredProject.githubUrl) {
-                  handleInternalLink(event, '/projects', onNavigate);
-                }
-              }}
-            >
-              <img src={featuredProject.img} alt={`${featuredProject.name} interface`} loading="lazy" />
-            </a>
-            <div className="featured-work-copy">
-              <p className="work-meta">featured / {featuredProject.year}</p>
-              <h2>{featuredProject.name}</h2>
-              <p>{featuredProject.longDescription}</p>
-              <ul className="tech-list" aria-label={`${featuredProject.name} technologies`}>
-                {featuredProject.techStack.slice(0, 4).map((tech) => <li key={tech}>{tech}</li>)}
-              </ul>
-              <a
-                className="work-action soft-link"
-                href={featuredProject.githubUrl || featuredProject.externalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                inspect project <ArrowUpRight aria-hidden="true" />
-              </a>
-            </div>
-          </article>
-
-          <div className="work-grid">
-            {supportingProjects.map((project) => {
+          <div className="repo-grid">
+            {projects.map((project) => {
               const href = project.externalUrl || project.githubUrl || '/projects';
               const external = Boolean(project.externalUrl || project.githubUrl);
 
               return (
-                <article key={project.id} className="work-card">
-                  <img src={project.img} alt={`${project.name} interface`} loading="lazy" />
-                  <div>
-                    <p className="work-meta">{project.year} / {project.category}</p>
-                    <h3>{project.name}</h3>
-                    <p>{project.description}</p>
-                    <a
-                      className="work-action soft-link"
-                      href={href}
-                      target={external ? '_blank' : undefined}
-                      rel={external ? 'noopener noreferrer' : undefined}
-                      onClick={(event) => {
-                        if (!external) handleInternalLink(event, href, onNavigate);
-                      }}
-                    >
-                      open <ArrowUpRight aria-hidden="true" />
-                    </a>
+                <a
+                  key={project.id}
+                  className="repo-card soft-link"
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  onClick={(event) => {
+                    if (!external) handleInternalLink(event, href, onNavigate);
+                  }}
+                  style={{ '--repo-language': languageColors[project.techStack[0]] || 'var(--accent)' }}
+                >
+                  <div className="repo-card-header">
+                    <BookOpen aria-hidden="true" />
+                    <span>catursetyo</span>
+                    <span className="repo-slash" aria-hidden="true">/</span>
+                    <strong>{project.id}</strong>
                   </div>
-                </article>
+                  <p>{project.description}</p>
+                  <footer>
+                    <span aria-hidden="true" />
+                    {project.techStack[0]}
+                  </footer>
+                </a>
               );
             })}
           </div>
 
-          <a
-            className="portfolio-link soft-link"
-            href="/projects"
-            onClick={(event) => handleInternalLink(event, '/projects', onNavigate)}
-          >
-            view the full project archive <ArrowUpRight aria-hidden="true" />
-          </a>
+          <p className="repo-note">
+            also check the full{' '}
+            <a className="soft-link" href="/projects" onClick={(event) => handleInternalLink(event, '/projects', onNavigate)}>
+              project archive
+            </a>
+          </p>
         </section>
 
         <section id="guestbook" className={`home-section home-bottom ${posts.length ? 'home-two-col' : ''}`}>

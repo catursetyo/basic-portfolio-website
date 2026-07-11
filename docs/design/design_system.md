@@ -24,10 +24,9 @@ Do not present multiple job titles that the project evidence cannot support.
 
 1. Full-height hero.
 2. About and social row over a continued visual background.
-3. Featured project with visible screenshot.
-4. Supporting project cards.
-5. Optional guestbook and recent posts.
-6. Quiet footer.
+3. Compact repository-format project grid.
+4. Optional guestbook and recent posts.
+5. Quiet footer.
 
 The homepage is not a dashboard.
 
@@ -126,6 +125,8 @@ Current crop:
 
 Projects:
 
+- Homepage cards show owner/repository, description, and primary language only.
+- Keep project screenshots on `/projects` and future case-study routes.
 - Use real screenshots.
 - Preserve aspect ratio.
 - Define dimensions or `aspect-ratio`.
@@ -143,8 +144,7 @@ Desktop:
 
 - Main width: 1100–1200px.
 - Two-column about/social section.
-- One dominant featured project.
-- Supporting project grid.
+- Compact two-column repository grid.
 - Generous section spacing.
 
 Mobile:
