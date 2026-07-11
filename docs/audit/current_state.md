@@ -26,7 +26,7 @@ Reviewed date: 2026-07-11
 
 ## Strengths
 
-- Original optimized hero asset replaces the generic gradient-only hero.
+- Optimized owner-supplied hero video and poster replace the generic gradient-only hero.
 - Hero, about, featured work, supporting work, and guestbook share one continuous visual atmosphere.
 - Identity copy now follows the documented `caursty` and Catur naming roles.
 - One project is visually dominant and uses a real screenshot.
@@ -55,7 +55,7 @@ Reviewed date: 2026-07-11
 ### Design
 
 - A dedicated favicon and social-preview crop are still missing.
-- Final visual review should include owner feedback on the generated hero art.
+- Final visual review should include owner feedback on the video crop and motion pacing.
 - Internal routes need another pass after project detail pages exist.
 
 ### Accessibility

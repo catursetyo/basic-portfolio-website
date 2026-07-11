@@ -111,16 +111,17 @@ Guidelines:
 
 Hero:
 
-- Current V1 asset: `public/hero-data-garden.webp`, an original no-person blue-hour data-garden scene.
-- AVIF or WebP preferred.
+- Current sources: `public/hero.webm` (VP9) followed by `public/hero.mp4` (H.264).
+- Still fallback: `public/hero-poster.webp`.
 - Provide a safe focal point for desktop and mobile crops.
 - Add a dark overlay for text readability.
 - Do not use `profile.png` as the full hero.
-- Do not autoplay a large video by default.
+- Autoplay must remain muted, inline, looped, and audio-free.
+- Reduced-motion users receive only the poster and do not download the video sources.
 
 Current crop:
 
-- Desktop keeps the architecture and moon toward the right while reserving darker copy space on the left.
+- Desktop uses a centered cover crop while reserving darker copy space on the left.
 - Mobile uses a right-biased crop with a stronger dark overlay behind the wordmark and menu.
 
 Projects:

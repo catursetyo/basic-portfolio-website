@@ -60,7 +60,7 @@ body {
   margin: 0;
   background:
     linear-gradient(180deg, oklch(0.08 0.015 265 / 0.45), var(--bg) 42rem, var(--bg-deep)),
-    url('/hero-data-garden.webp') center top / cover fixed no-repeat;
+    url('/hero-poster.webp') center top / cover fixed no-repeat;
   color: var(--text);
   font-family: var(--font-grotesk);
   overflow-x: hidden;
@@ -215,11 +215,14 @@ button {
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: var(--bg);
+  background: var(--bg) url('/hero-poster.webp') center / cover no-repeat;
   pointer-events: none;
 }
 
-.home-bg img {
+.home-bg-media {
+  position: relative;
+  z-index: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -232,6 +235,7 @@ button {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
 }
 
 .home-bg::before {
@@ -997,7 +1001,11 @@ button {
     font-size: 2.75rem;
   }
 
-  .home-bg img {
+  .home-bg {
+    background-position: 67% center;
+  }
+
+  .home-bg-media {
     object-position: 67% center;
   }
 
@@ -1108,5 +1116,9 @@ button {
   .home-menu-link,
   .featured-work-media img {
     transform: none !important;
+  }
+
+  .home-bg-media {
+    display: none;
   }
 }

@@ -1,6 +1,6 @@
 # ADR 002 — Use an Original Still Hero Image in V1
 
-Status: Accepted and implemented
+Status: Superseded by ADR 005
 
 ## Context
 

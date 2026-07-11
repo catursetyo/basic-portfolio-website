@@ -48,7 +48,7 @@ Acceptance:
 Tasks:
 
 - Lock usage of `caursty`, `Catur Setyo Ragil`, and `Catur/caur`.
-- Add one original still hero asset.
+- Add an original hero poster and optimized video sources.
 - Tune overlay and crop for desktop/mobile.
 - Refine hero hierarchy and navigation visibility.
 - Fix ambient Surabaya time.
@@ -57,7 +57,7 @@ Tasks:
 Acceptance:
 
 - Hero is readable at 360px, 768px, 1440px.
-- Hero image has a defined focal point.
+- Hero video and poster share a defined focal point.
 - No horizontal overflow.
 - The design is recognizably original.
 - Preloader does not block repeat visits or reduced-motion users.

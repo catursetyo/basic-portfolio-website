@@ -14,9 +14,10 @@ Decision records capture choices that should not be repeatedly reopened without 
 | ID | Decision | Status |
 | --- | --- | --- |
 | [`001`](001-routing.md) | Use React Router for application routes. | Accepted |
-| [`002`](002-hero-asset.md) | Use an original optimized still image for the V1 hero. | Accepted |
+| [`002`](002-hero-asset.md) | Use an original optimized still image for the V1 hero. | Superseded |
 | [`003`](003-guestbook-persistence.md) | Require shared backend persistence before public guestbook launch. | Accepted; provider pending |
 | [`004`](004-view-counter.md) | Keep view counter provider-neutral and optional. | Accepted |
+| [`005`](005-video-hero.md) | Use optimized video sources with a still poster fallback. | Accepted |
 
 ## Template
 

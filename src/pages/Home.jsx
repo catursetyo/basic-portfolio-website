@@ -18,6 +18,7 @@ const supportingProjects = projects.filter((project) => project.id !== featuredP
 
 export default function Home({ onNavigate }) {
   const [views, setViews] = useState(null);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
     getSiteViews().then(({ count }) => setViews(count));
@@ -26,13 +27,12 @@ export default function Home({ onNavigate }) {
   return (
     <section className="home-page">
       <div className="home-bg" aria-hidden="true">
-        <img
-          src="/hero-data-garden.webp"
-          alt=""
-          width="1815"
-          height="866"
-          fetchPriority="high"
-        />
+        {!reducedMotion && (
+          <video autoPlay muted loop playsInline preload="metadata" poster="/hero-poster.webp" className="home-bg-media">
+            <source src="/hero.webm" type="video/webm" />
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
+        )}
       </div>
 
       <section className="home-hero" aria-labelledby="home-title">

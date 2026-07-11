@@ -51,7 +51,7 @@ Do not use low-contrast metadata for important content.
 - Define image dimensions or aspect ratios.
 - Lazy-load below-the-fold images.
 - Prefer AVIF/WebP.
-- Avoid large autoplay video in V1.
+- Keep autoplay hero sources optimized, audio-free, poster-backed, and disabled for reduced motion.
 - Avoid unnecessary frequent state updates.
 - Do not load duplicate web fonts.
 - Keep optional third-party requests nonblocking.

@@ -12,14 +12,16 @@ This file describes what exists now. It is not a wish list.
 - Tailwind CSS, Framer Motion, Lenis, Lucide React, and local Space Grotesk remain installed.
 - Project and social content live in `src/data/` modules.
 - Homepage now has an image-led long-scroll composition with:
-  - an original no-person hero asset,
+  - an owner-supplied video hero with a still poster,
   - compact hero navigation,
   - about and social sections,
   - one dominant featured project,
   - supporting projects,
   - embedded guestbook preview,
   - quiet footer metadata.
-- The generated hero is stored as `public/hero-data-garden.webp` at 1815 × 866 and about 156 KB.
+- Hero uses `public/hero.webm` (VP9, 1.57 MB) with `public/hero.mp4` (H.264, 2.77 MB) fallback.
+- `public/hero-poster.webp` provides the initial, failure, and reduced-motion background.
+- Both video sources are 1920 × 1080, 30 fps, about 21 seconds, and contain no audio stream.
 - The profile image is used only as a small avatar, not as the background.
 - Primary navigation appears after the homepage hero and remains visible on internal routes.
 - Empty Blog content is hidden from primary navigation.

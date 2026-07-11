@@ -264,8 +264,8 @@ Do not use generic marketing copy when concrete details are available.
 - Prefer AVIF or WebP for large images.
 - Define image width, height, or aspect ratio.
 - Lazy-load below-the-fold images.
-- Do not autoplay a large hero video in V1.
-- A still hero image is the default; add video only after measuring performance.
+- Hero video may autoplay only when muted, inline, audio-free, optimized, and backed by a still poster.
+- Do not render or download hero video for reduced-motion users.
 - Avoid per-second rerenders when minute-level updates are sufficient.
 - Avoid blocking preloaders on every route or every visit.
 - Remove unused packages and imports only after verifying they are unused.
