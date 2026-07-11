@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Heart, MessageCircle } from 'lucide-react';
+import { ChevronDown, Heart, MessageCircle, Send } from 'lucide-react';
 import { addMessage, addReply, initialMessages, toggleLike } from '../lib/guestbook';
 
 const STORAGE_KEY = 'caur_guestbook';
@@ -10,6 +10,7 @@ export default function Guestbook({ embedded = false }) {
   const [replyTo, setReplyTo] = useState(null);
   const [reply, setReply] = useState({ name: '', message: '' });
   const [status, setStatus] = useState('');
+  const [composerOpen, setComposerOpen] = useState(false);
 
   useEffect(() => {
     // ponytail: local demo, swap to backend API when moderation/persistence is ready.
@@ -18,45 +19,14 @@ export default function Guestbook({ embedded = false }) {
 
   return (
     <section className={embedded ? 'guestbook' : 'page-shell guestbook'}>
-      <p className={embedded ? 'section-label' : 'meta'}>
-        guestbook <span>{messages.length} messages</span>
-      </p>
-      {!embedded && <h1 className="page-title mt-4">Leave a message.</h1>}
+      <div className="guestbook-heading">
+        {embedded
+          ? <h2 className="guestbook-title">guestbook</h2>
+          : <h1 className="page-title">guestbook</h1>}
+        <span>{messages.length} messages</span>
+      </div>
+      <p className="guestbook-subtitle">leave a message! i'd love to hear from you.</p>
       <p className="guestbook-note">Local preview: messages, replies, and likes stay in this browser.</p>
-
-      <form
-        className="guestbook-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setMessages((items) => addMessage(items, form));
-          setForm({ name: '', message: '' });
-          setStatus('Message saved in this browser.');
-        }}
-      >
-        <label className="field">
-          <span>Name</span>
-          <input
-            value={form.name}
-            minLength="2"
-            maxLength="40"
-            required
-            onChange={(event) => setForm({ ...form, name: event.target.value })}
-          />
-        </label>
-        <label className="field">
-          <span>Message</span>
-          <textarea
-            value={form.message}
-            maxLength="280"
-            required
-            onChange={(event) => setForm({ ...form, message: event.target.value })}
-          />
-        </label>
-        <button className="command-button" type="submit">
-          leave a message <span aria-hidden="true">→</span>
-        </button>
-        <p className="form-status" aria-live="polite">{status}</p>
-      </form>
 
       <div className="guestbook-list">
         {messages.map((message) => (
@@ -113,13 +83,63 @@ export default function Guestbook({ embedded = false }) {
                   />
                 </label>
                 <button className="command-button" type="submit">
-                  send reply <span aria-hidden="true">→</span>
+                  send reply <Send aria-hidden="true" />
                 </button>
               </form>
             )}
           </article>
         ))}
       </div>
+
+      <button
+        className="command-button guestbook-composer-toggle"
+        type="button"
+        aria-expanded={composerOpen}
+        aria-controls="guestbook-message-form"
+        onClick={() => setComposerOpen((open) => !open)}
+      >
+        {composerOpen ? 'close message form' : 'leave a message'}
+        <ChevronDown aria-hidden="true" />
+      </button>
+
+      {composerOpen && (
+        <form
+          id="guestbook-message-form"
+          className="guestbook-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            setMessages((items) => addMessage(items, form));
+            setForm({ name: '', message: '' });
+            setStatus('Message saved in this browser.');
+            setComposerOpen(false);
+          }}
+        >
+          <label className="field">
+            <span>Name</span>
+            <input
+              value={form.name}
+              minLength="2"
+              maxLength="40"
+              required
+              onChange={(event) => setForm({ ...form, name: event.target.value })}
+            />
+          </label>
+          <label className="field">
+            <span>Message</span>
+            <textarea
+              value={form.message}
+              maxLength="280"
+              required
+              onChange={(event) => setForm({ ...form, message: event.target.value })}
+            />
+          </label>
+          <button className="command-button" type="submit">
+            send message <Send aria-hidden="true" />
+          </button>
+        </form>
+      )}
+
+      <p className="form-status" aria-live="polite">{status}</p>
     </section>
   );
 }

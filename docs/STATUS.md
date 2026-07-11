@@ -25,7 +25,11 @@ This file describes what exists now. It is not a wish list.
 - Primary navigation appears after the homepage hero and remains visible on internal routes.
 - Blog is intentionally visible in the hero and primary navigation while its post data remains empty.
 - Projects index uses inspectable screenshots and a responsive list layout.
+- The homepage landing sections now use the approved Figma typography roles: Barlow Condensed for navigation, Inter for metadata, DM Sans for supporting copy, and the existing Space Grotesk for the `caursty.` wordmark.
+- The long-scroll content uses a transparent-to-black fade that keeps the hero video visible before settling into the solid archive background.
+- About, social links, repository cards, and guestbook rows now share the compact type hierarchy and restrained opacity treatment from the approved landing frame.
 - Guestbook fields have visible labels, native limits, keyboard focus, and an `aria-live` local-save status.
+- The primary guestbook form is collapsed by default and disclosed by an accessible `leave a message` CTA.
 - The fixed preloader has been removed.
 - Lenis skips reduced-motion users, supports hash links, and cancels its animation frame on cleanup.
 - Ambient time uses the `Asia/Jakarta` timezone and updates once per minute.

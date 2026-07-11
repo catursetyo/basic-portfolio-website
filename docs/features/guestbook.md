@@ -72,6 +72,14 @@ A public guestbook is production-ready only when it has:
 
 ## Form
 
+The primary message composer is collapsed by default. A `leave a message` disclosure button must:
+
+- expose the name and message fields only after activation,
+- report its state with `aria-expanded`,
+- reference the composer with `aria-controls`,
+- remain keyboard operable,
+- leave the message list available while the composer is closed.
+
 Every field needs:
 
 - visible label,
@@ -115,5 +123,6 @@ Owner replies may use a verified visual badge based on server data such as `auth
 - Pending moderation is explained.
 - Likes deduplicate.
 - Replies remain one level deep.
+- The message composer opens and closes from the CTA without losing typed input.
 - Keyboard and mobile use are comfortable.
 - Guestbook failure does not break Home.

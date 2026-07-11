@@ -19,7 +19,7 @@ Important files:
 - `src/data/*.js`: local project, post, and social data.
 - `src/lib/guestbook.js`: local guestbook transformations.
 - `src/lib/viewCounter.js`: external counter fetch helper.
-- `src/index.css`: tokens and most shared styles.
+- `src/index.css`: tokens, section-scoped typography roles, and most shared styles.
 
 ## Current Temporary Implementations
 

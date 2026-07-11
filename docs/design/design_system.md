@@ -87,16 +87,21 @@ Glass is not the identity. Imagery, type, spacing, and content create the identi
 
 ## Typography
 
-Primary family:
+Local families:
 
-- Space Grotesk.
+- Space Grotesk: primary wordmark and existing route-level display text.
+- Barlow Condensed: hero menu and fixed-header navigation.
+- Inter: section labels, counters, compact metadata, and form labels.
+- DM Sans: homepage About copy, social values, repository descriptions, guestbook content, and compact action text.
+
+All families load locally through `@fontsource`; do not add a remote Google Fonts request. Import only the Latin subset and weights used by the interface.
 
 Roles:
 
-- Wordmark/display: 600–700.
-- Section titles: 500–700.
-- Body: 300–400.
-- Metadata: system monospace.
+- Wordmark/display: Space Grotesk 600–700.
+- Condensed navigation: Barlow Condensed 600–700.
+- Body and supporting headings: DM Sans 300–700.
+- Metadata: Inter 400.
 
 Guidelines:
 
@@ -105,6 +110,13 @@ Guidelines:
 - Avoid uppercase for long paragraphs.
 - Avoid very wide text lines.
 - Use a consistent heading scale across routes.
+- Keep letter spacing at `0`; the condensed navigation family supplies the intended narrow rhythm without manual tracking.
+
+## Background Fade
+
+- The hero video remains fixed behind the homepage.
+- The long-scroll layer begins transparent, reaches a translucent `#19191e` shortly below the fold, and ends as solid `#19191e`.
+- The fade must preserve readable text without creating a visible hard seam between the hero and About section.
 
 ## Imagery
 
@@ -126,6 +138,7 @@ Current crop:
 Projects:
 
 - Homepage cards show owner/repository, description, and primary language only.
+- Repository cards use compact DM Sans copy, Inter language metadata, a thin border, and a restrained translucent surface.
 - Keep project screenshots on `/projects` and future case-study routes.
 - Use real screenshots.
 - Preserve aspect ratio.
@@ -137,6 +150,12 @@ Avatar:
 
 - Small and secondary.
 - Use accurate alt text if informative.
+
+Guestbook:
+
+- Use compact, unframed rows instead of cards.
+- Use Inter for names, dates, counts, and controls; use DM Sans for message content.
+- Keep the primary composer collapsed until the visitor activates the `leave a message` disclosure CTA.
 
 ## Layout
 

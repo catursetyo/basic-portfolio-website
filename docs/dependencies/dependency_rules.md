@@ -12,6 +12,9 @@
 - `clsx`
 - `tailwind-merge`
 - `@fontsource/space-grotesk`
+- `@fontsource/barlow-condensed`
+- `@fontsource/inter`
+- `@fontsource/dm-sans`
 
 ## Approved Addition
 
@@ -86,6 +89,8 @@ A dependency may be added only when:
 
 ## Font Rules
 
-- Use local `@fontsource/space-grotesk`.
-- Remove redundant remote Inter loading.
-- Add another font only when a documented visual need cannot be met with the existing family and system monospace.
+- Use local `@fontsource` packages; do not duplicate them with remote font requests.
+- Space Grotesk remains the portfolio wordmark and route-level display family.
+- Barlow Condensed, Inter, and DM Sans are approved for the section-specific roles documented in `docs/design/design_system.md` because the user-supplied Figma frame depends on those distinct proportions.
+- Import only the Latin subset and weights used by the implementation.
+- Add another family only when a documented visual need cannot be met with the approved set.

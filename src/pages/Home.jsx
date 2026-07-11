@@ -98,8 +98,9 @@ export default function Home({ onNavigate }) {
                   target={social.href.startsWith('http') ? '_blank' : undefined}
                   rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 >
-                  <span>{social.label}</span>
-                  <strong>/ {social.value}</strong>
+                  <span className="social-label">{social.label}</span>
+                  <span className="social-slash" aria-hidden="true">/</span>
+                  <strong>{social.value}</strong>
                   <ArrowUpRight aria-hidden="true" />
                 </a>
               ))}

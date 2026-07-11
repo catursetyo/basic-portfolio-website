@@ -22,6 +22,10 @@
   --accent: oklch(0.82 0.11 220);
   --accent-warm: oklch(0.79 0.13 72);
   --glass: oklch(0.17 0.018 265 / 0.68);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-nav: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-meta: 'Inter', sans-serif;
+  --font-copy: 'DM Sans', 'Space Grotesk', sans-serif;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -132,14 +136,20 @@ button {
 
 .site-nav-home {
   display: inline-flex;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3.05rem;
+  height: 3.05rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line-strong);
+  border: 2px solid rgb(0 0 0 / 0.55);
   border-radius: 6px;
-  background: var(--glass);
-  backdrop-filter: blur(16px);
+  background: #575757;
+  box-shadow: 3px 3px 0 rgb(0 0 0 / 0.55);
+  transform: rotate(-5deg);
+}
+
+.site-nav-home svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .site-nav-links {
@@ -148,14 +158,22 @@ button {
   gap: 1.4rem;
 }
 
-.site-nav-link {
+.site-nav-link.soft-link {
   position: relative;
   padding: 0.75rem 0;
-  color: var(--muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
+  color: rgb(255 255 255 / 0.55);
+  font-family: var(--font-nav);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.5;
   text-transform: uppercase;
+}
+
+.site-nav-link.soft-link:hover,
+.site-nav-link.soft-link:focus-visible,
+.site-nav-link.soft-link.active {
+  color: var(--text);
 }
 
 .site-nav-link::after {
@@ -268,7 +286,7 @@ button {
 .home-scroll-note,
 .home-hero-meta,
 .home-footer {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-meta);
   text-transform: uppercase;
 }
 
@@ -314,35 +332,49 @@ button {
 
 .home-menu-link {
   display: grid;
-  min-height: 2.6rem;
-  grid-template-columns: 2.3rem 1fr;
+  min-height: 2.5rem;
+  grid-template-columns: 3.4rem 1fr;
   align-items: center;
-  color: var(--muted);
   transition: color 160ms ease, transform 220ms var(--ease-out);
 }
 
 .home-menu-link span {
-  color: var(--faint);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.66rem;
+  padding-left: 1.25rem;
+  color: rgb(255 255 255 / 0.15);
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
 }
 
 .home-menu-link strong {
-  font-size: 0.78rem;
+  color: rgb(255 255 255 / 0.42);
+  font-family: var(--font-nav);
+  font-size: 1.125rem;
   font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
   text-transform: uppercase;
 }
 
-.home-menu-link:hover,
-.home-menu-link:focus-visible {
+.home-menu-link.soft-link:hover,
+.home-menu-link.soft-link:focus-visible {
   color: var(--text);
   transform: translateX(0.3rem);
 }
 
+.home-menu-link.soft-link:hover strong,
+.home-menu-link.soft-link:focus-visible strong {
+  color: var(--text);
+}
+
 .home-scroll-note {
   margin: 1.25rem 0 0;
-  color: var(--faint);
-  font-size: 0.64rem;
+  color: rgb(255 255 255 / 0.72);
+  font-size: 0.625rem;
+  letter-spacing: 0;
+  line-height: 1.5;
 }
 
 .home-hero-meta {
@@ -359,7 +391,13 @@ button {
 .home-scroll {
   position: relative;
   z-index: 1;
-  background: linear-gradient(180deg, oklch(0.07 0.014 268 / 0.2), oklch(0.08 0.014 268 / 0.78) 36rem, var(--bg-deep) 76%);
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 0%,
+    rgb(25 25 30 / 0.6) 10%,
+    rgb(25 25 30 / 0.9) 50%,
+    #19191e 100%
+  );
 }
 
 .home-section {
@@ -386,9 +424,12 @@ button {
   align-items: center;
   gap: 0.8rem;
   margin: 0;
-  color: var(--faint);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
+  color: rgb(255 255 255 / 0.3);
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
   text-transform: uppercase;
 }
 
@@ -412,32 +453,43 @@ button {
 }
 
 .about-lockup img {
-  width: 5rem;
-  height: 5rem;
-  border: 1px solid var(--line-strong);
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 2px solid rgb(255 255 255 / 0.15);
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 0 2rem rgb(59 130 246 / 0.3);
 }
 
 .about-intro {
   margin: 0 0 0.2rem;
-  color: var(--muted);
-  font-size: 1.1rem;
+  color: rgb(255 255 255 / 0.45);
+  font-family: var(--font-copy);
+  font-size: 1.1875rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1.02;
 }
 
 .about-lockup h2 {
   margin: 0;
+  background: linear-gradient(90deg, #f3f4f5 0%, #f3f4f5 20%, rgb(148 170 210 / 0.9) 50%, #f3f4f5 80%);
+  background-clip: text;
+  color: transparent;
+  font-family: var(--font-copy);
   font-size: 4rem;
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 1.02;
   letter-spacing: 0;
 }
 
 .about-copy {
   max-width: 60ch;
   margin: 1.8rem 0 0;
-  color: var(--muted);
+  color: rgb(255 255 255 / 0.72);
+  font-family: var(--font-copy);
   font-size: 1rem;
+  font-weight: 300;
   line-height: 1.85;
   text-wrap: pretty;
 }
@@ -471,24 +523,42 @@ button {
 .social-row {
   display: grid;
   min-height: 3.1rem;
-  grid-template-columns: 6rem minmax(0, 1fr) 1rem;
-  gap: 1rem;
+  grid-template-columns: 5.4rem 0.5rem minmax(0, 1fr) 1rem;
+  gap: 0.65rem;
   align-items: center;
   border-top: 1px solid var(--line);
+  opacity: 0.62;
+  transition: color 160ms ease, opacity 160ms ease;
 }
 
-.social-row span {
-  color: var(--faint);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.7rem;
-  text-transform: uppercase;
+.social-row:hover,
+.social-row:focus-visible {
+  opacity: 1;
+}
+
+.social-row .social-label {
+  color: var(--text);
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: lowercase;
+}
+
+.social-row .social-slash {
+  color: rgb(255 255 255 / 0.25);
+  font-family: var(--font-copy);
+  font-size: 0.6875rem;
 }
 
 .social-row strong {
   min-width: 0;
-  color: var(--muted);
-  font-size: 0.84rem;
-  font-weight: 400;
+  color: rgb(255 255 255 / 0.78);
+  font-family: var(--font-copy);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
@@ -505,7 +575,7 @@ button {
 }
 
 .home-work {
-  width: min(900px, calc(100% - 40px));
+  width: min(1008px, calc(100% - 40px));
   padding-top: 5rem;
 }
 
@@ -518,13 +588,13 @@ button {
 
 .repo-card {
   display: flex;
-  min-height: 10rem;
+  min-height: 10.75rem;
   flex-direction: column;
   gap: 0.75rem;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: oklch(0.16 0.017 266 / 0.62);
-  padding: 1.5rem;
+  background: rgb(31 31 36 / 0.52);
+  padding: 1.85rem 2rem;
   transition: border-color 180ms ease, background-color 180ms ease, transform 220ms var(--ease-out);
 }
 
@@ -541,7 +611,10 @@ button {
   min-width: 0;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.8rem;
+  font-family: var(--font-copy);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.5;
 }
 
 .repo-card-header svg {
@@ -564,6 +637,7 @@ button {
   min-width: 0;
   overflow: hidden;
   color: var(--muted);
+  font-size: 0.875rem;
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -572,9 +646,11 @@ button {
 .repo-card > p {
   flex: 1;
   margin: 0;
-  color: oklch(0.67 0.016 245);
-  font-size: 0.82rem;
-  line-height: 1.7;
+  color: rgb(255 255 255 / 0.48);
+  font-family: var(--font-copy);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.75;
   text-wrap: pretty;
 }
 
@@ -583,8 +659,9 @@ button {
   align-items: center;
   gap: 0.45rem;
   color: var(--faint);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  letter-spacing: 0;
 }
 
 .repo-card footer span {
@@ -597,8 +674,10 @@ button {
 .repo-note {
   margin: 1.25rem 0 0;
   color: var(--faint);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.7rem;
+  font-family: var(--font-copy);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 .repo-note a {
@@ -639,22 +718,61 @@ button {
 }
 
 .home-bottom > .guestbook:only-child {
-  width: min(42rem, 100%);
+  width: min(30rem, 100%);
+}
+
+.guestbook-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+
+.guestbook-title {
+  margin: 0;
+  color: rgb(255 255 255 / 0.58);
+  font-family: var(--font-nav);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.guestbook-heading > span {
+  color: rgb(255 255 255 / 0.2);
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.guestbook-subtitle,
+.guestbook-note {
+  max-width: 58ch;
+  color: rgb(255 255 255 / 0.45);
+  font-family: var(--font-copy);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.guestbook-subtitle {
+  margin: 0.25rem 0 0;
 }
 
 .guestbook-note {
-  max-width: 58ch;
-  margin: 1rem 0 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.65;
+  margin: 0.45rem 0 0;
+  color: rgb(255 255 255 / 0.3);
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+  letter-spacing: 0;
 }
 
 .guestbook-form {
   display: grid;
-  max-width: 34rem;
+  max-width: 30rem;
   gap: 1rem;
-  margin-top: 1.8rem;
+  margin-top: 1rem;
 }
 
 .field {
@@ -663,9 +781,10 @@ button {
 }
 
 .field > span {
-  color: var(--faint);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
+  color: rgb(255 255 255 / 0.48);
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -675,6 +794,9 @@ button {
   border: 1px solid var(--line-strong);
   border-radius: 6px;
   background: oklch(0.11 0.014 268 / 0.72);
+  font-family: var(--font-copy);
+  font-size: 0.875rem;
+  font-weight: 300;
   padding: 0.8rem 0.9rem;
   caret-color: var(--accent);
   resize: vertical;
@@ -692,18 +814,37 @@ button {
 .command-button {
   display: inline-flex;
   width: fit-content;
-  min-height: 2.75rem;
+  min-height: 2.2rem;
   align-items: center;
   gap: 1rem;
   border: 1px solid var(--line-strong);
   border-radius: 6px;
-  background: var(--glass);
-  padding: 0.65rem 1rem;
+  background: rgb(255 255 255 / 0.045);
+  padding: 0.48rem 0.95rem;
   color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.7rem;
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0;
   text-transform: lowercase;
   transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.command-button svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.guestbook-composer-toggle {
+  margin-top: 1.75rem;
+}
+
+.guestbook-composer-toggle svg {
+  transition: transform 180ms var(--ease-out);
+}
+
+.guestbook-composer-toggle[aria-expanded='true'] svg {
+  transform: rotate(180deg);
 }
 
 .command-button:hover,
@@ -714,20 +855,25 @@ button {
 
 .form-status {
   min-height: 1.2rem;
-  margin: 0;
+  margin: 0.65rem 0 0;
   color: var(--muted);
+  font-family: var(--font-copy);
   font-size: 0.75rem;
+  font-weight: 300;
 }
 
 .guestbook-list {
   display: grid;
   gap: 0;
-  margin-top: 2.5rem;
+  margin-top: 1.75rem;
+}
+
+.guestbook-list:empty {
+  display: none;
 }
 
 .guestbook-entry {
-  border-top: 1px solid var(--line);
-  padding: 1.5rem 0;
+  padding: 0.75rem 0;
 }
 
 .guestbook-header {
@@ -739,14 +885,23 @@ button {
 
 .guestbook-header p {
   margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
+  color: rgb(255 255 255 / 0.58);
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  letter-spacing: 0;
+}
+
+.guestbook-header > div {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
 }
 
 .guestbook-header time {
-  color: var(--faint);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.65rem;
+  color: rgb(255 255 255 / 0.22);
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+  letter-spacing: 0;
 }
 
 .guestbook-like,
@@ -757,13 +912,17 @@ button {
   border: 0;
   background: transparent;
   color: var(--faint);
-  font-size: 0.72rem;
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
 }
 
 .guestbook-message {
-  margin: 0.8rem 0 0;
-  color: var(--muted);
-  line-height: 1.7;
+  margin: 0.25rem 0 0;
+  color: rgb(255 255 255 / 0.56);
+  font-family: var(--font-copy);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.6;
   overflow-wrap: anywhere;
 }
 
@@ -923,8 +1082,7 @@ button {
 }
 
 @supports not (backdrop-filter: blur(1px)) {
-  .glass,
-  .site-nav-home {
+  .glass {
     background: var(--surface);
   }
 }
@@ -1032,7 +1190,7 @@ button {
   }
 
   .social-row {
-    grid-template-columns: 4.5rem minmax(0, 1fr) 1rem;
+    grid-template-columns: 4.25rem 0.4rem minmax(0, 1fr) 0.9rem;
     gap: 0.65rem;
   }
 
