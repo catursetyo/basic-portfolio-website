@@ -2,46 +2,128 @@
 
 ## Goal
 
-Redesign the portfolio into a personal, cinematic, akryst-inspired site that presents Catur Setyo Ragil as a data scientist, AI engineer, backend developer, and IT student.
+Create a personal, cinematic, readable portfolio that presents Catur Setyo Ragil through real backend, data, AI, web, coursework, and competition projects.
 
-## Required Features
+The site should feel memorable without pretending that visual effects are professional experience.
 
-- Home page with akryst-like long-scroll layout: hero, about/socials, featured work, and guestbook at the bottom.
-- Project showcase page with project cards/detail views.
-- Blog page.
-- Resume page or route that redirects to the CV file.
-- Guestbook for visitors with one-level replies and likes, rendered on the homepage lower section.
-- View counter using Abacus when possible.
-- Contact/social section.
+## Positioning
 
-## Visual Rules
+Use this baseline positioning:
 
-- Reference akryst.moe for mood, layout rhythm, and interaction style.
-- Do not copy akryst assets, names, CSS wholesale, character imagery, or site identity.
-- Use restrained glassmorphism: translucent dark surfaces, thin borders, blur only where it improves depth.
-- Keep the site dark, readable, and image-led.
-- Avoid turning every section into a glass card. Hero imagery and spacing carry the page.
+> IT student · backend developer · data & AI builder
 
-## Technical Rules
+Avoid broad claims such as “data scientist” or “AI engineer” as the primary identity unless the project evidence and resume support them clearly.
 
-- Keep Vite + React. Do not migrate to Next.js just because akryst appears to use Next.js.
-- Keep Tailwind and Framer Motion already in the project.
-- Prefer native browser APIs for routing, redirect, and fetch logic until the site genuinely outgrows them.
-- No new UI kit.
-- No backend except the small API needed for guestbook persistence, replies, likes, moderation, or secret-backed counters.
+## Audience
+
+Primary:
+
+- Internship and junior-role recruiters.
+- Technical reviewers.
+- Potential collaborators.
+
+Secondary:
+
+- Competition teammates.
+- Other students and developers.
+- General visitors.
+
+## Required V1 Experience
+
+- Long-scroll homepage.
+- Original hero asset and identity block.
+- About and social/contact section.
+- One strong featured project.
+- Supporting project list.
+- Dedicated project index.
+- Project detail/case-study route.
+- Public resume route.
+- Real not-found page.
+- Responsive mobile experience.
+- Metadata and social preview.
+- Accessible keyboard and reduced-motion behavior.
+
+Conditional V1 features:
+
+- Blog only when useful content exists.
+- Guestbook only when shared persistence, validation, moderation, and failure states exist.
+- View counter only when it can fail quietly and does not delay the page.
+
+## Priority
+
+1. Truthful content.
+2. Working navigation and routes.
+3. Readability and accessibility.
+4. Strong project presentation.
+5. Responsive visual identity.
+6. Performance.
+7. Optional social features.
+8. Decorative effects.
 
 ## Content Rules
 
-- Featured project on home should be one real project, not a generic stat block.
-- Blog may start with static markdown-like data inside the repo.
-- Resume route must fail gracefully if the CV file is missing.
-- Guestbook must make clear whether messages/replies are live, pending moderation, or temporarily unavailable.
-- Do not add a standalone `/guestbook` route unless the homepage section becomes too large.
+- Use real dates, links, screenshots, and roles.
+- Clearly distinguish personal, team, coursework, competition, and client work.
+- State what Catur personally implemented.
+- Do not invent impact metrics.
+- Do not call a prototype “production” without evidence.
+- Do not mark broken or unfinished demos as live.
+- Use `Under development`, `Archived`, or `Prototype` where appropriate.
+- An empty section should be hidden or intentionally explained.
 
-## Non-Goals
+## Brand Rules
 
-- No dashboard/admin panel in the first redesign.
-- No full CMS in the first redesign.
-- No music integration unless explicitly requested later.
-- No account system.
-- No exact clone of akryst.
+- Primary handle/wordmark: `caursty`.
+- Personal name: `Catur Setyo Ragil`.
+- Casual introduction: `Catur` or `caur`.
+- Do not use an unrelated fictional persona.
+- Inspiration from akryst.moe is limited to mood, hierarchy, pacing, and restrained interaction patterns.
+
+## Visual Rules
+
+- Dark and image-led.
+- Calm motion.
+- Soft overlays and selective glass surfaces.
+- Thin separators and small metadata.
+- Content width around 1100–1200px on desktop.
+- Original imagery only.
+- Avoid a direct visual clone.
+- Avoid all-glass layouts.
+- Avoid unreadably low-contrast text.
+
+## Technical Rules
+
+- Keep Vite + React.
+- Keep Tailwind CSS, Framer Motion, Lenis, Lucide React, and Space Grotesk.
+- React Router is approved for route correctness.
+- Static content stays local until a genuine editing workflow requires more.
+- Secrets require a backend boundary.
+- Guestbook state must be shared and server-validated before launch.
+
+## Non-Goals for V1
+
+- Next.js migration.
+- Full CMS.
+- User accounts.
+- Admin dashboard.
+- Music integration.
+- Live Discord status.
+- Three-dimensional scenes.
+- Complex WebGL effects.
+- Full analytics dashboard.
+- Exact akryst.moe recreation.
+
+## V1 Definition of Shipped
+
+V1 is shipped when:
+
+- Core routes load directly and through client navigation.
+- One project has a complete case study.
+- Resume and contact methods work.
+- Mobile layout works at 360px width.
+- Keyboard focus is visible.
+- Reduced-motion users can navigate without smooth-scroll or transform-heavy effects.
+- The hero asset is optimized.
+- No primary route is empty or exposes developer-facing setup text.
+- `npm run lint` and `npm run build` pass.
+- Deployment fallback, metadata, favicon, and social preview are configured.

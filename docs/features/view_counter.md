@@ -2,41 +2,25 @@
 
 ## Goal
 
-Show a small view count/status element inspired by akryst's visitor counter.
+Show a small optional visit count that supports the personal-archive mood.
 
-## Service
+The counter is decorative metadata, not a core feature.
 
-Use Abacus if available. The referenced project describes itself as a highly scalable, stateless counting API and a CountAPI replacement.
+## Provider Rule
 
-Reference:
+The UI and client helper must be provider-neutral.
 
-- https://github.com/jasonlovesdoggo/abacus
-- https://abacus.jasoncameron.dev
+Do not couple component logic to one service response shape. Normalize the result in `src/lib/viewCounter.js`.
 
-## Rules
+Possible providers:
 
-- Keep the API base URL in an env var: `VITE_ABACUS_BASE_URL`.
-- Keep namespace/key values in env vars or constants.
-- Do not guess endpoints. Verify the current Abacus docs before implementation.
-- Counter failure must not break the page.
+- the same backend used by guestbook,
+- a public counting service,
+- a simple serverless endpoint.
 
-## UI
+Provider selection must be recorded in a decision document before production integration.
 
-Place the counter in the hero/footer metadata:
-
-```text
-1,482 players visited / v2.1
-```
-
-Adapted for this site:
-
-```text
-1,482 visits / v1
-```
-
-## Fetch Helper Contract
-
-`getSiteViews()` should return:
+## Client Contract
 
 ```js
 {
@@ -45,4 +29,85 @@ Adapted for this site:
 }
 ```
 
-The component decides whether to show the count, a placeholder, or nothing.
+A valid count of `0` must remain `0`.
+
+Correct normalization pattern:
+
+```js
+const count = Number(rawValue);
+
+return {
+  count: Number.isFinite(count) ? count : null,
+  error: null,
+};
+```
+
+Do not use:
+
+```js
+Number(rawValue) || null
+```
+
+## UI
+
+Examples:
+
+```text
+1,482 visits / v2
+```
+
+or when unavailable:
+
+```text
+-- visits / v2
+```
+
+The UI may hide the count completely if failure would look cleaner.
+
+## Counting Semantics
+
+Document whether the value means:
+
+- requests,
+- page loads,
+- sessions,
+- unique anonymous visitors,
+- homepage views,
+- all-route views.
+
+Do not label page loads as unique visitors without deduplication.
+
+## Privacy
+
+- Do not fingerprint visitors.
+- Do not expose IP information.
+- Use only the minimum anonymous identifier required by the selected counting semantics.
+
+## Failure Rules
+
+- Counter request must not block hero rendering.
+- Use a short timeout if the provider can hang.
+- Failure does not produce a global error.
+- Avoid repeated increments caused by rerenders.
+- Do not increment once per second or once per component mount in development Strict Mode without protection.
+
+## Environment
+
+Prefer a generic endpoint name:
+
+```text
+VITE_VIEW_COUNTER_URL=
+```
+
+If the counter uses the shared API, use `VITE_API_BASE_URL` and a fixed `/api/views` path instead.
+
+Do not maintain two different environment-variable names for the same endpoint.
+
+## Acceptance Criteria
+
+- Zero displays correctly.
+- A view is not accidentally counted multiple times per intended event.
+- Error fallback works.
+- Counter does not delay content.
+- Semantics are documented.
+- Provider can be replaced without rewriting Home.

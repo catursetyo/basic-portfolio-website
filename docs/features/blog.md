@@ -1,34 +1,78 @@
 # Blog
 
-## Goal
+## Purpose
 
-Add a blog page for notes, project writeups, learning logs, and AI/data/backend experiments.
+The Blog contains real technical notes, project case studies, competition write-ups, and learning records. It is not required to make the portfolio look complete.
 
-## V1 Scope
+## Launch Rule
 
-- Blog index route: `/blog`.
-- Static post metadata in a local data file.
-- Optional inline post body or external markdown later.
-- No CMS.
-- No search in V1.
+Blog may appear in primary navigation only when at least one useful published post exists.
 
-## Post Model
+When no post exists:
 
-| Field | Rule |
-| --- | --- |
-| `title` | Required. |
-| `slug` | Required, URL-safe. |
-| `date` | ISO date string. |
-| `excerpt` | 1-2 short sentences. |
-| `tags` | Short array. |
-| `body` | Optional for V1. |
+- hide Blog from primary navigation, or
+- render a deliberate public empty state.
 
-## Layout
+Do not render an unexplained empty grid.
 
-- Compact list, not a heavy card grid.
-- Date/tag metadata in small text.
-- First featured post can be highlighted with a glass panel.
+## Content Rules
 
-## Later
+Allowed:
 
-Add per-post routes only after there are enough posts to justify it.
+- project architecture notes,
+- backend or database lessons,
+- AI experiments,
+- CTF write-ups that do not expose active competition flags or unsafe secrets,
+- coursework reflections,
+- deployment and debugging notes.
+
+Avoid:
+
+- generated filler,
+- copied tutorials,
+- invented experience,
+- shallow summaries written only for SEO.
+
+## Data
+
+Static V1 posts may live in `src/data/posts.js`.
+
+Required fields:
+
+```js
+{
+  slug,
+  title,
+  date,
+  excerpt,
+  tags,
+  sections,
+  published
+}
+```
+
+Only render `published: true` in production.
+
+## Routes
+
+- `/blog`
+- `/blog/:slug`
+
+Unknown slugs must show NotFound or a clear missing-post state.
+
+## Accessibility
+
+- Use an `article` element for a post.
+- Keep line length readable.
+- Use hierarchical headings.
+- Link text must be descriptive.
+- Code blocks must be horizontally scrollable without breaking the page.
+
+## Acceptance Criteria
+
+- At least one real post exists before primary navigation exposure.
+- Direct loading of a post works.
+- Unknown slug is handled.
+- Dates format consistently.
+- Mobile typography is readable.
+- Empty state is intentional.

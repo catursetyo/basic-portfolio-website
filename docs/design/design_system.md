@@ -2,38 +2,36 @@
 
 ## Direction
 
-Reference: akryst.moe.
+A cinematic, dark, personal archive with restrained glass surfaces, clear project content, small metadata, and calm motion.
 
-Interpretation: cinematic dark personal archive with restrained glassmorphism.
+Reference sites may guide mood and pacing. They must not supply copied identity, artwork, layout measurements, CSS, or content.
 
-Homepage layout target: match the akryst scroll rhythm. The home route is a long-scroll composition, not a dashboard:
+## Brand Naming
 
-1. Full-viewport hero with fixed scenic background, left-aligned identity, small metadata, vertical menu, and visit counter at the lower right.
-2. About/social row appears over the same background as the visitor scrolls.
-3. Work/project cards follow as compact glass panels.
-4. Guestbook lives at the lower part of the homepage.
+Use:
 
-Do:
+- `caursty` as the primary handle and wordmark.
+- `Catur Setyo Ragil` in metadata, resume, SEO, and formal introductions.
+- `Catur` or `caur` in conversational copy.
 
-- Full-bleed hero imagery or video-like treatment.
-- Soft dark overlays.
-- Small metadata text.
-- Thin separators.
-- Compact glass panels.
-- Calm motion and hover tilt.
+Recommended hero line:
 
-Do not:
+> IT student · backend developer · data & AI builder
 
-- Copy akryst identity.
-- Use akryst assets or character art.
-- Use the owner's portrait as the hero background.
-- Make every block a glass card.
-- Use bright frosted-white glass.
-- Keep the current brutalist black/white grid as the dominant system.
+Do not present multiple job titles that the project evidence cannot support.
+
+## Homepage Rhythm
+
+1. Full-height hero.
+2. About and social row over a continued visual background.
+3. Featured project with visible screenshot.
+4. Supporting project cards.
+5. Optional guestbook and recent posts.
+6. Quiet footer.
+
+The homepage is not a dashboard.
 
 ## Color Tokens
-
-Use OKLCH tokens when implementing the redesign:
 
 ```css
 :root {
@@ -42,17 +40,26 @@ Use OKLCH tokens when implementing the redesign:
   --surface: oklch(0.22 0.02 270);
   --surface-soft: oklch(0.26 0.018 260);
   --text: oklch(0.93 0.012 255);
-  --muted: oklch(0.68 0.018 255);
-  --faint: oklch(0.5 0.018 255);
+  --muted: oklch(0.72 0.018 255);
+  --faint: oklch(0.56 0.018 255);
   --line: oklch(0.92 0.012 255 / 0.1);
   --accent: oklch(0.75 0.11 235);
   --accent-warm: oklch(0.78 0.12 75);
 }
 ```
 
-This keeps the site dark without becoming one-note slate.
+Tokens may be tuned after testing on the final hero asset. Do not change them randomly per component.
 
-## Glass Tokens
+## Contrast
+
+- Main body text must remain readable on the darkest and brightest hero crops.
+- Muted text is secondary, not nearly invisible.
+- Metadata may be faint only when it is nonessential.
+- Interactive text must not rely only on a subtle color shift.
+
+## Glass
+
+Base:
 
 ```css
 .glass {
@@ -62,50 +69,154 @@ This keeps the site dark without becoming one-note slate.
 }
 ```
 
-Use glass for:
+Use for:
 
-- Navigation.
-- Project cards.
-- Guestbook messages.
-- Counter/status chips.
-- Small social panels.
+- compact navigation,
+- project cards,
+- guestbook rows,
+- status chips,
+- small functional panels.
 
-Avoid glass for:
+Avoid for:
 
-- Full sections.
-- Main body background.
-- Every nested child element.
+- entire sections,
+- the body background,
+- every nested element,
+- large empty containers.
+
+Glass is not the identity. Imagery, type, spacing, and content create the identity.
 
 ## Typography
 
-V1 uses the installed `Space Grotesk` to avoid a new dependency.
+Primary family:
+
+- Space Grotesk.
 
 Roles:
 
-- Display: Space Grotesk 600-700, tight but readable.
-- Body: Space Grotesk 300-400.
+- Wordmark/display: 600–700.
+- Section titles: 500–700.
+- Body: 300–400.
 - Metadata: system monospace.
 
-If the design feels too far from akryst after implementation, consider one font addition later for condensed labels.
+Guidelines:
 
-## Layout
-
-- Hero should occupy the first viewport and scroll into about/social content over the same background.
-- Homepage sections after the hero should keep akryst-like centered widths: about/social row, work grid, then guestbook/side content.
-- Keep content max width around `1100px` to `1200px`.
-- Use two-column layouts on desktop and single-column on mobile.
-- Use cards only for repeated items or functional panels.
-- Section spacing should breathe: larger top/bottom spacing, tighter internal groups.
-
-## Motion
-
-- First-load transition should be short.
-- Hero content can reveal once.
-- Cards may tilt or brighten subtly on hover.
-- Reduced motion should remove transforms and long transitions.
+- Wordmark should not cover the visual subject.
+- Body text uses comfortable line height.
+- Avoid uppercase for long paragraphs.
+- Avoid very wide text lines.
+- Use a consistent heading scale across routes.
 
 ## Imagery
 
-- Use existing project screenshots for project cards.
-- Use `profile.png` only as a small avatar, never as full hero background.
-- Use a non-personal generated/curated scenic asset later if the abstract CSS background feels too thin.
+Hero:
+
+- Use an original still image for V1.
+- AVIF or WebP preferred.
+- Provide a safe focal point for desktop and mobile crops.
+- Add a dark overlay for text readability.
+- Do not use `profile.png` as the full hero.
+- Do not autoplay a large video by default.
+
+Projects:
+
+- Use real screenshots.
+- Preserve aspect ratio.
+- Define dimensions or `aspect-ratio`.
+- Lazy-load below-the-fold media.
+- Do not hide screenshots behind decorative masks that prevent inspection.
+
+Avatar:
+
+- Small and secondary.
+- Use accurate alt text if informative.
+
+## Layout
+
+Desktop:
+
+- Main width: 1100–1200px.
+- Two-column about/social section.
+- One dominant featured project.
+- Supporting project grid.
+- Generous section spacing.
+
+Mobile:
+
+- Validate at 360px.
+- Single-column content.
+- Hero copy must remain readable.
+- Navigation must not require horizontal precision.
+- Tap targets should be comfortable.
+- Do not preserve desktop card heights.
+
+## Navigation
+
+Homepage:
+
+- Hero menu may be the primary first-viewport navigation.
+- Fixed nav can remain subtle or appear after the hero.
+
+Internal pages:
+
+- Fixed or sticky navigation is visible immediately.
+- Active state works on nested routes.
+- Home control has an accessible label.
+
+## Motion
+
+Allowed:
+
+- short first reveal,
+- subtle opacity/position entrance,
+- restrained project hover,
+- calm route transition,
+- gentle background movement only when inexpensive.
+
+Avoid:
+
+- constant parallax,
+- cursor replacement,
+- long blocking preloaders,
+- card movement that changes layout,
+- heavy motion on every scroll,
+- effects that conceal content.
+
+Reduced-motion behavior:
+
+- disable Lenis,
+- remove nonessential transforms,
+- remove long transitions,
+- keep all content visible.
+
+## Focus and Interaction
+
+Use a visible focus indicator:
+
+```css
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+```
+
+Hover may enhance an element, but focus must expose the same action.
+
+## Component Rules
+
+- Build a component for repeated real patterns, not hypothetical reuse.
+- Project cards should have consistent information order.
+- Chips are metadata, not primary calls to action.
+- Buttons must look interactive.
+- External links indicate they leave the site when useful.
+- Do not put cards inside cards without a functional reason.
+
+## Visual Acceptance Criteria
+
+- Hero text is readable on desktop and mobile crops.
+- The site still makes sense with blur unsupported.
+- No horizontal overflow at 360px.
+- Focus is visible.
+- Reduced-motion mode is calm and usable.
+- Project screenshots are inspectable.
+- The page does not look like an exact clone of the reference.

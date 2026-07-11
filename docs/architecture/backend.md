@@ -1,53 +1,74 @@
-# Backend
+# Minimal Backend
 
-## Need
+## Scope
 
-Only the guestbook needs backend in V1 because messages, replies, likes, moderation, and anti-spam need shared state.
+The portfolio does not need a general backend in V1.
 
-Blog, projects, resume, and most page content remain static.
+A backend is required only for shared, untrusted, or secret-backed behavior:
 
-## Shape
+- guestbook messages,
+- guestbook replies,
+- likes,
+- moderation,
+- rate limiting,
+- optional view counter.
 
-Use the smallest API shape that fits the deploy target.
+Projects, posts, social links, and most site content remain static.
 
-Vercel-style:
+## Provider Decision
 
-```text
-api/
-  guestbook.js
-  guestbook-replies.js
-  guestbook-likes.js
-  health.js
-```
+Do not implement a production guestbook until the deployment target and persistence provider are chosen.
 
-Standalone server if Vercel functions are not used:
+Allowed shapes:
 
-```text
-server/
-  src/
-    index.js
-    routes/
-      guestbook.js
-      health.js
-    lib/
-      db.js
-      validate.js
-      rateLimit.js
-```
+1. Serverless functions plus a managed database.
+2. A small standalone API.
+3. A browser-safe database REST interface with strict row-level rules.
 
-## Endpoints
+Do not expose service-role or administrative keys to the frontend.
+
+## Suggested API
 
 ```text
 GET  /api/health
+
 GET  /api/guestbook
 POST /api/guestbook
 POST /api/guestbook/:messageId/replies
 POST /api/guestbook/:targetType/:targetId/like
+DELETE /api/guestbook/:targetType/:targetId/like
+
+POST /api/views
+GET  /api/views
 ```
 
-`targetType` is `message` or `reply`.
+The counter endpoints are optional and may be replaced by an external provider adapter.
 
-## Tables
+## Guestbook Response Shape
+
+```json
+{
+  "messages": [],
+  "meta": {
+    "status": "live",
+    "moderation": "pre"
+  }
+}
+```
+
+Allowed status values:
+
+- `live`
+- `read_only`
+- `unavailable`
+
+Allowed moderation values:
+
+- `pre`
+- `post`
+- `none`
+
+## Database Shape
 
 ```text
 guestbook_messages
@@ -56,6 +77,7 @@ guestbook_messages
   message
   created_at
   approved
+  author_role
   ip_hash
 
 guestbook_replies
@@ -65,6 +87,7 @@ guestbook_replies
   message
   created_at
   approved
+  author_role
   ip_hash
 
 guestbook_likes
@@ -73,34 +96,106 @@ guestbook_likes
   target_id
   visitor_id_hash
   created_at
+
+page_views
+  id
+  page_key
+  visitor_id_hash
+  viewed_at
 ```
 
-Add a unique constraint on:
+Use a unique constraint for likes:
 
 ```text
-target_type, target_id, visitor_id_hash
+(target_type, target_id, visitor_id_hash)
 ```
 
-This makes like toggling/deduping cheap and avoids fake inflated counts from one browser session.
+Counter storage does not need a row per view if the provider supports atomic counts. Choose the simplest reliable model for the deployment target.
 
-## Visitor Identity
+## Validation
 
-No login in V1.
+Server-side validation is mandatory.
 
-- Frontend creates a random visitor id and stores it in `localStorage`.
-- Backend hashes it before storing.
-- IP can be hashed for rate limiting, not displayed.
+Messages:
+
+- name: 2–40 characters,
+- message: 1–280 characters.
+
+Replies:
+
+- name: 2–40 characters,
+- message: 1–220 characters.
+
+Reject:
+
+- empty normalized text,
+- unsupported target types,
+- missing parent messages,
+- oversized request bodies,
+- excessive write frequency.
+
+## Rendering Safety
+
+- Store and return text.
+- Render it as text.
+- Do not accept arbitrary HTML.
+- Do not use `dangerouslySetInnerHTML` for guestbook content.
+- Normalize whitespace if needed, but preserve normal punctuation and language.
+
+## Anonymous Visitor Identity
+
+- Frontend creates a random visitor identifier once.
+- Store it locally.
+- Send it over HTTPS.
+- Backend hashes it before persistence.
+- Use the hash for like deduplication and abuse controls.
+- Do not display IP addresses or hashes.
 
 ## Moderation
 
-- Public reads return only `approved = true`.
-- New messages and replies may default to `approved = false` if spam becomes a problem.
-- Owner replies can be inserted manually in the database for V1.
+Default recommendation:
 
-## Rules
+- public reads return only approved content,
+- new public messages and replies enter pending moderation,
+- owner replies may be marked with `author_role = owner`,
+- the UI states whether submission is pending.
 
-- Render user text as text, never HTML.
-- Limit message and reply length.
-- Rate limit posts and likes.
-- Likes must be idempotent.
-- Replies are one level deep only. No nested threads in V1.
+An admin dashboard is not required in V1. Moderation may initially happen through the database/provider console.
+
+## Rate Limiting
+
+Apply separate limits for:
+
+- messages,
+- replies,
+- likes,
+- counter writes if required.
+
+Return clear HTTP status codes and safe messages. Do not expose internal database errors.
+
+## Environment Variables
+
+Frontend:
+
+```text
+VITE_API_BASE_URL=
+VITE_RESUME_URL=
+```
+
+Backend:
+
+```text
+DATABASE_URL=
+VISITOR_HASH_SECRET=
+ALLOWED_ORIGIN=
+```
+
+Provider-specific variables belong only in backend/serverless configuration.
+
+## Failure Behavior
+
+- Guestbook read failure: show unavailable state; do not break Home.
+- Guestbook write failure: preserve form input and allow retry.
+- Like failure: restore the previous UI state.
+- Counter failure: hide count or show `--`.
+- Health failure: do not block static pages.
