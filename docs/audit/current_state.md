@@ -1,12 +1,12 @@
 # Current State Audit
 
-Reviewed branch: `v2-redesign`  
-Reviewed commit: `2cbcb0cf223af548ae689bb4b210f4cd0fb1f76b`
+Reviewed branch: `v2-redesign`
+Reviewed state: current working tree
+Reviewed date: 2026-07-11
 
 ## Existing Stack
 
-- Vite.
-- React.
+- Vite and React.
 - Tailwind CSS.
 - Framer Motion.
 - Lenis.
@@ -15,97 +15,86 @@ Reviewed commit: `2cbcb0cf223af548ae689bb4b210f4cd0fb1f76b`
 
 ## Existing Product Areas
 
-- Long-scroll Home.
+- Image-led long-scroll Home.
 - Projects index.
-- Blog and blog-post scaffolds.
-- Resume redirect scaffold.
+- Empty Blog and blog-post scaffolds hidden from primary navigation.
+- Resume redirect with a public-facing fallback.
 - Contact/social data.
-- Local guestbook demo.
-- View counter helper.
-- Documentation set for product, design, architecture, features, and quality.
+- Local guestbook preview.
+- View-counter helper.
+- Product, design, architecture, feature, decision, and quality documents.
 
 ## Strengths
 
-- No legacy backend to untangle.
-- Project data has been extracted from UI.
-- Visual direction has moved away from the original brutalist layout.
-- Homepage structure broadly matches the desired long-scroll rhythm.
-- Existing screenshots and real project links can support stronger case studies.
+- Original optimized hero asset replaces the generic gradient-only hero.
+- Hero, about, featured work, supporting work, and guestbook share one continuous visual atmosphere.
+- Identity copy now follows the documented `caursty` and Catur naming roles.
+- One project is visually dominant and uses a real screenshot.
+- Desktop, tablet, mobile, keyboard focus, and reduced-motion behavior have explicit CSS paths.
+- The homepage no longer blocks rendering with a fixed preloader.
+- Guestbook controls have visible labels and native input constraints.
+- Metadata no longer contains Vite title or font placeholders.
 - The codebase remains small enough for incremental cleanup.
 
-## Weaknesses
+## Remaining Weaknesses
 
 ### Product
 
-- Project cards are summaries, not case studies.
-- Featured-project data exists but is not used as a distinct homepage composition.
-- Blog is empty.
-- Resume is not configured.
-- Optional widgets are more developed than core case-study content.
+- Projects remain summaries rather than complete case studies.
+- Blog has no useful article content.
+- Resume file is not configured.
+- Guestbook and counter are prototypes rather than launch-ready services.
 
 ### Architecture
 
 - Routing has outgrown manual pathname matching.
 - Unknown routes silently render Home.
-- Scroll behavior is split between browser APIs and Lenis.
-- Guestbook implementation conflicts with the intended shared backend.
-- Counter provider contract is inconsistent.
+- Guestbook state is browser-only.
+- Counter provider and timeout behavior are incomplete.
 
 ### Design
 
-- The finished identity is not locked.
-- Hero lacks an original final asset.
-- Background gradients risk looking like a generic dark portfolio template.
-- Naming roles for `caursty`, `caur`, and `Catur Setyo Ragil` are not reflected consistently in copy.
-- Glass cards remain easy to overuse.
+- A dedicated favicon and social-preview crop are still missing.
+- Final visual review should include owner feedback on the generated hero art.
+- Internal routes need another pass after project detail pages exist.
 
 ### Accessibility
 
-- Focus treatment needs stronger visible outlines.
-- Forms rely on `aria-label` rather than visible labels.
-- Guestbook lacks validation messages and live status.
-- JavaScript smooth scrolling does not fully respect reduced motion.
+- Guestbook still lacks server/network loading and error states.
+- Full keyboard and screen-reader testing remains manual.
+- Contrast should be measured against the final production asset and browser set.
 
 ### Performance
 
-- Preloader introduces unconditional delay.
-- Ambient clock updates more often than needed.
-- Image dimensions and loading policies are not consistently explicit.
-- Hero asset performance has not been budgeted.
+- Project image dimensions are stabilized with CSS but not all have explicit HTML dimensions.
+- Hero performance has been checked by size, not by a production Lighthouse run.
+- Font weights could be reduced after measuring actual usage.
 
 ### Repository Presentation
 
 - Root README is still a Vite template.
-- Document title and favicon are still placeholders.
-- Social metadata is missing.
+- SPA fallback and CI are not configured.
 
 ## Keep
 
 - Vite + React.
-- Tailwind tokens.
-- Framer Motion for limited transitions.
-- Lenis after lifecycle correction.
-- Lucide icons.
-- Local data modules.
-- Existing real project assets.
+- Existing data modules and real project screenshots.
 - Long-scroll homepage direction.
+- Selective glass only on functional or project surfaces.
+- Lenis with reduced-motion opt-out.
+- Lucide icons and local Space Grotesk.
 
-## Change
+## Change Next
 
 - Manual routing.
-- Hero asset and copy hierarchy.
-- Homepage project composition.
-- Metadata and root README.
+- Project data depth and case-study routes.
+- Resume delivery.
 - Guestbook persistence.
-- Counter adapter.
-- Preloader behavior.
-- Accessibility states.
+- Counter contract.
+- Repository metadata and deployment fallback.
 
 ## Remove After Verification
 
-- Legacy `About.jsx`.
-- Typo file `refractor_mapping.md`.
-- Redundant Google Fonts Inter import.
-- Vite favicon.
-- Unused dependencies and obsolete styles.
-- Browser-only guestbook as a production feature.
+- Legacy `src/pages/About.jsx`.
+- Unused dependencies such as `react-use-measure`, if confirmed.
+- Browser-only guestbook code once the production API replaces it.

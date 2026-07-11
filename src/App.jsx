@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import Navbar from './components/layout/Navbar';
 import SmoothScroller from './components/layout/SmoothScroller';
 import DataOverlay from './components/ui/DataOverlay';
-import Preloader from './components/ui/Preloader';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
@@ -12,7 +10,6 @@ import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
   const [path, setPath] = useState(window.location.pathname);
 
   const navigate = (nextPath) => {
@@ -22,16 +19,13 @@ function App() {
   };
 
   useEffect(() => {
-    document.body.style.overflow = isLoading ? 'hidden' : '';
-  }, [isLoading]);
-
-  useEffect(() => {
     const onPopState = () => setPath(window.location.pathname);
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   useEffect(() => {
+    if (window.location.hash) return;
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [path]);
 
@@ -39,23 +33,19 @@ function App() {
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
-
       <SmoothScroller />
       <Navbar activePath={path} onNavigate={navigate} />
-      <DataOverlay />
+      <DataOverlay hidden={path === '/'} />
 
       <main className="site-main">
-        {page ?? <Home startAnimation={!isLoading} onNavigate={navigate} />}
+        {page ?? <Home onNavigate={navigate} />}
       </main>
     </>
   );
 }
 
 function getPage(path, navigate) {
-  if (path === '/') return <Home startAnimation onNavigate={navigate} />;
+  if (path === '/') return <Home onNavigate={navigate} />;
   if (path === '/projects') return <Projects onNavigate={navigate} />;
   if (path === '/blog') return <Blog onNavigate={navigate} />;
   if (path.startsWith('/blog/')) return <BlogPost slug={path.replace('/blog/', '')} onNavigate={navigate} />;

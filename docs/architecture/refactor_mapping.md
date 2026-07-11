@@ -12,7 +12,7 @@ This is the canonical refactor map. The previous file name `refractor_mapping.md
 | `src/index.css` | Tokens and shared styles | Keep, then split only if it becomes difficult to navigate. |
 | `src/components/layout/Navbar.jsx` | Route-aware navigation | Use `NavLink`, nested active state, and homepage visibility behavior. |
 | `src/components/layout/SmoothScroller.jsx` | Lenis lifecycle | Use supported options, reduced-motion opt-out, and safe cleanup. |
-| `src/components/ui/Preloader.jsx` | Optional first-session intro | Shorten, skip for reduced motion, do not hide cursor. |
+| `src/components/ui/Preloader.jsx` | Removed loading overlay | Deleted; add a new intro only when it has measured user value. |
 | `src/components/ui/DataOverlay.jsx` | Ambient location/time metadata | Fix timezone and update once per minute. |
 | `src/pages/Home.jsx` | Homepage composition | Split only when sections become hard to maintain. |
 | `src/pages/Projects.jsx` | Project index | Keep; link each project to a case study. |

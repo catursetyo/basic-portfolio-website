@@ -9,6 +9,7 @@ export default function Guestbook({ embedded = false }) {
   const [form, setForm] = useState({ name: '', message: '' });
   const [replyTo, setReplyTo] = useState(null);
   const [reply, setReply] = useState({ name: '', message: '' });
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     // ponytail: local demo, swap to backend API when moderation/persistence is ready.
@@ -16,51 +17,66 @@ export default function Guestbook({ embedded = false }) {
   }, [messages]);
 
   return (
-    <section className={embedded ? '' : 'page-shell'}>
-      <p className={embedded ? 'section-label' : 'meta'}>guestbook <span className="muted">{messages.length} messages</span></p>
-      {!embedded && <h1 className="page-title mt-4">Leave a message.</h1>}
-      <p className="muted mt-4 max-w-2xl leading-8">
-        Messages, replies, and likes are local to this browser until the guestbook backend is wired.
+    <section className={embedded ? 'guestbook' : 'page-shell guestbook'}>
+      <p className={embedded ? 'section-label' : 'meta'}>
+        guestbook <span>{messages.length} messages</span>
       </p>
+      {!embedded && <h1 className="page-title mt-4">Leave a message.</h1>}
+      <p className="guestbook-note">Local preview: messages, replies, and likes stay in this browser.</p>
 
       <form
-        className={embedded ? 'mt-8 grid gap-4' : 'glass content-card mt-10 grid gap-4'}
+        className="guestbook-form"
         onSubmit={(event) => {
           event.preventDefault();
           setMessages((items) => addMessage(items, form));
           setForm({ name: '', message: '' });
+          setStatus('Message saved in this browser.');
         }}
       >
-        <input
-          aria-label="Name"
-          className="glass rounded-lg px-4 py-3 outline-none"
-          value={form.name}
-          onChange={(event) => setForm({ ...form, name: event.target.value })}
-        />
-        <textarea
-          aria-label="Message"
-          className="glass min-h-28 rounded-lg px-4 py-3 outline-none"
-          value={form.message}
-          onChange={(event) => setForm({ ...form, message: event.target.value })}
-        />
-        <button className="glass nav-button w-fit px-5 text-sm font-semibold" type="submit">leave a message</button>
+        <label className="field">
+          <span>Name</span>
+          <input
+            value={form.name}
+            minLength="2"
+            maxLength="40"
+            required
+            onChange={(event) => setForm({ ...form, name: event.target.value })}
+          />
+        </label>
+        <label className="field">
+          <span>Message</span>
+          <textarea
+            value={form.message}
+            maxLength="280"
+            required
+            onChange={(event) => setForm({ ...form, message: event.target.value })}
+          />
+        </label>
+        <button className="command-button" type="submit">
+          leave a message <span aria-hidden="true">→</span>
+        </button>
+        <p className="form-status" aria-live="polite">{status}</p>
       </form>
 
-      <div className="mt-10 grid gap-5">
+      <div className="guestbook-list">
         {messages.map((message) => (
-          <article key={message.id} className={embedded ? 'guestbook-entry' : 'glass content-card'}>
+          <article key={message.id} className="guestbook-entry">
             <MessageHeader item={message} onLike={() => setMessages((items) => toggleLike(items, message.id))} />
-            <p className="mt-3 leading-7">{message.message}</p>
-            <button className="soft-link mt-4 inline-flex items-center gap-2 text-sm" onClick={() => setReplyTo(replyTo === message.id ? null : message.id)}>
+            <p className="guestbook-message">{message.message}</p>
+            <button
+              className="guestbook-reply soft-link"
+              onClick={() => setReplyTo(replyTo === message.id ? null : message.id)}
+              type="button"
+            >
               <MessageCircle className="h-4 w-4" /> reply
             </button>
 
             {message.replies.length > 0 && (
-              <div className="mt-5 grid gap-4 border-t border-grid pt-5">
+              <div className="guestbook-replies">
                 {message.replies.map((item) => (
-                  <div key={item.id} className="pl-4">
+                  <div key={item.id}>
                     <MessageHeader item={item} onLike={() => setMessages((items) => toggleLike(items, item.id))} />
-                    <p className="muted mt-2 leading-7">{item.message}</p>
+                    <p className="guestbook-message">{item.message}</p>
                   </div>
                 ))}
               </div>
@@ -68,27 +84,37 @@ export default function Guestbook({ embedded = false }) {
 
             {replyTo === message.id && (
               <form
-                className="mt-5 grid gap-3"
+                className="guestbook-form guestbook-reply-form"
                 onSubmit={(event) => {
                   event.preventDefault();
                   setMessages((items) => addReply(items, message.id, reply));
                   setReply({ name: '', message: '' });
                   setReplyTo(null);
+                  setStatus('Reply saved in this browser.');
                 }}
               >
-                <input
-                  aria-label="Reply name"
-                  className="glass rounded-lg px-4 py-3 outline-none"
-                  value={reply.name}
-                  onChange={(event) => setReply({ ...reply, name: event.target.value })}
-                />
-                <textarea
-                  aria-label="Reply message"
-                  className="glass min-h-24 rounded-lg px-4 py-3 outline-none"
-                  value={reply.message}
-                  onChange={(event) => setReply({ ...reply, message: event.target.value })}
-                />
-                <button className="glass nav-button w-fit px-5 text-sm font-semibold" type="submit">send reply</button>
+                <label className="field">
+                  <span>Name</span>
+                  <input
+                    value={reply.name}
+                    minLength="2"
+                    maxLength="40"
+                    required
+                    onChange={(event) => setReply({ ...reply, name: event.target.value })}
+                  />
+                </label>
+                <label className="field">
+                  <span>Reply</span>
+                  <textarea
+                    value={reply.message}
+                    maxLength="220"
+                    required
+                    onChange={(event) => setReply({ ...reply, message: event.target.value })}
+                  />
+                </label>
+                <button className="command-button" type="submit">
+                  send reply <span aria-hidden="true">→</span>
+                </button>
               </form>
             )}
           </article>
@@ -100,12 +126,17 @@ export default function Guestbook({ embedded = false }) {
 
 function MessageHeader({ item, onLike }) {
   return (
-    <div className="flex items-start justify-between gap-4">
+    <div className="guestbook-header">
       <div>
-        <p className="meta">{item.name}</p>
-        <p className="muted mt-1 text-xs">{item.createdAt}</p>
+        <p>{item.name}</p>
+        <time dateTime={item.createdAt}>{item.createdAt}</time>
       </div>
-      <button className="soft-link inline-flex items-center gap-2 text-sm" onClick={onLike} type="button">
+      <button
+        className="guestbook-like soft-link"
+        onClick={onLike}
+        type="button"
+        aria-label={`${item.liked ? 'Unlike' : 'Like'} message by ${item.name}`}
+      >
         <Heart className={`h-4 w-4 ${item.liked ? 'fill-current text-[var(--accent-warm)]' : ''}`} />
         {item.likes}
       </button>

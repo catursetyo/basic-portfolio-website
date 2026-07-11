@@ -35,16 +35,16 @@ The homepage is not a dashboard.
 
 ```css
 :root {
-  --bg: oklch(0.16 0.018 270);
-  --bg-deep: oklch(0.11 0.016 270);
-  --surface: oklch(0.22 0.02 270);
-  --surface-soft: oklch(0.26 0.018 260);
-  --text: oklch(0.93 0.012 255);
-  --muted: oklch(0.72 0.018 255);
-  --faint: oklch(0.56 0.018 255);
-  --line: oklch(0.92 0.012 255 / 0.1);
-  --accent: oklch(0.75 0.11 235);
-  --accent-warm: oklch(0.78 0.12 75);
+  --bg: oklch(0.14 0.018 268);
+  --bg-deep: oklch(0.095 0.014 268);
+  --surface: oklch(0.19 0.02 265);
+  --surface-soft: oklch(0.23 0.022 260);
+  --text: oklch(0.95 0.01 245);
+  --muted: oklch(0.76 0.018 245);
+  --faint: oklch(0.62 0.016 245);
+  --line: oklch(0.92 0.012 245 / 0.13);
+  --accent: oklch(0.82 0.11 220);
+  --accent-warm: oklch(0.79 0.13 72);
 }
 ```
 
@@ -63,9 +63,9 @@ Base:
 
 ```css
 .glass {
-  background: oklch(0.24 0.018 265 / 0.52);
-  border: 1px solid oklch(0.95 0.01 255 / 0.09);
-  backdrop-filter: blur(18px);
+  background: oklch(0.17 0.018 265 / 0.68);
+  border: 1px solid oklch(0.92 0.012 245 / 0.13);
+  backdrop-filter: blur(16px);
 }
 ```
 
@@ -111,12 +111,17 @@ Guidelines:
 
 Hero:
 
-- Use an original still image for V1.
+- Current V1 asset: `public/hero-data-garden.webp`, an original no-person blue-hour data-garden scene.
 - AVIF or WebP preferred.
 - Provide a safe focal point for desktop and mobile crops.
 - Add a dark overlay for text readability.
 - Do not use `profile.png` as the full hero.
 - Do not autoplay a large video by default.
+
+Current crop:
+
+- Desktop keeps the architecture and moon toward the right while reserving darker copy space on the left.
+- Mobile uses a right-biased crop with a stronger dark overlay behind the wordmark and menu.
 
 Projects:
 

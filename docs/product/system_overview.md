@@ -15,7 +15,6 @@ Important files:
 - `src/pages/Resume.jsx`: resume redirect scaffold.
 - `src/components/layout/Navbar.jsx`: fixed glass navigation.
 - `src/components/layout/SmoothScroller.jsx`: Lenis integration.
-- `src/components/ui/Preloader.jsx`: first-load typing overlay.
 - `src/components/ui/DataOverlay.jsx`: location and time metadata.
 - `src/data/*.js`: local project, post, and social data.
 - `src/lib/guestbook.js`: local guestbook transformations.
@@ -29,7 +28,7 @@ Important files:
 - Blog data is empty.
 - Resume URL is environment-driven but unconfigured.
 - Counter provider contract is incomplete.
-- Hero is an abstract CSS background.
+- Hero uses the original `public/hero-data-garden.webp` still image.
 
 These are prototypes, not final architecture.
 
@@ -40,7 +39,7 @@ These are prototypes, not final architecture.
 - React Router.
 - Shared layout containing navigation and global background.
 - Route-aware scroll handling.
-- Optional first-session intro, not a blocking loader on every route.
+- No blocking loader; any future intro must be optional and session-scoped.
 - Global not-found route.
 - Error-safe external integrations.
 

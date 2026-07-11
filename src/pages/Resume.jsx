@@ -8,13 +8,15 @@ export default function Resume() {
   }, [resumeUrl]);
 
   return (
-    <section className="page-shell">
+    <section className="page-shell archive-page">
       <p className="meta">resume</p>
-      <h1 className="page-title mt-4">CV file is not configured yet.</h1>
+      <h1 className="page-title mt-4">Resume is being updated.</h1>
       <p className="muted mt-5 max-w-2xl leading-8">
-        Add `VITE_RESUME_URL` in your local env or place a public CV file before enabling the redirect.
+        For current experience, project details, or internship inquiries, reach me directly by email.
       </p>
-      <a className="soft-link mt-8 inline-block font-semibold" href="mailto:catursetyo26@gmail.com">request by email</a>
+      <a className="work-action soft-link mt-8" href="mailto:catursetyo26@gmail.com">
+        contact by email <span aria-hidden="true">→</span>
+      </a>
     </section>
   );
 }

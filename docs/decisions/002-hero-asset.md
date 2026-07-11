@@ -1,10 +1,10 @@
 # ADR 002 — Use an Original Still Hero Image in V1
 
-Status: Accepted
+Status: Accepted and implemented
 
 ## Context
 
-The reference experience is strongly image-led. The current implementation uses CSS gradients, which are lightweight but risk looking generic.
+The reference experience is strongly image-led. The previous implementation used CSS gradients, which were lightweight but looked generic.
 
 A video hero would increase asset, playback, mobile, and accessibility complexity before the core portfolio content is complete.
 
@@ -21,6 +21,13 @@ Requirements:
 - dark overlay for text,
 - meaningful fallback background,
 - explicit dimensions or stable aspect behavior.
+
+Implementation:
+
+- File: `public/hero-data-garden.webp`.
+- Dimensions: 1815 × 866.
+- Approximate size: 156 KB.
+- Subject: an original no-person blue-hour data garden with left-side copy space.
 
 The profile avatar will not be used as a full-screen hero.
 

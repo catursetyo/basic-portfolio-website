@@ -1,19 +1,26 @@
 import { useEffect, useState } from 'react';
 
-export default function DataOverlay() {
-    const [time, setTime] = useState(new Date());
+const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZone: 'Asia/Jakarta',
+});
 
-    useEffect(() => {
-        const interval = setInterval(() => setTime(new Date()), 1000);
-        return () => {
-            clearInterval(interval);
-        }
-    }, []);
+export default function DataOverlay({ hidden = false }) {
+  const [time, setTime] = useState(new Date());
 
-    return (
-        <div className="pointer-events-none fixed bottom-5 right-5 z-40 hidden text-right md:block">
-            <div className="meta">surabaya, id</div>
-            <div className="meta">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-        </div>
-    )
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 60_000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (hidden) return null;
+
+  return (
+    <div className="ambient-data" aria-label={`Surabaya time ${timeFormatter.format(time)}`}>
+      <span>surabaya, id</span>
+      <span>{timeFormatter.format(time)} wib</span>
+    </div>
+  );
 }

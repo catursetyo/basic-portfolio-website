@@ -1,31 +1,45 @@
-
+import { useEffect, useState } from 'react';
 import { Home } from 'lucide-react';
+import { posts } from '../../data/posts';
 
 const navLinks = [
   { name: 'portfolio', path: '/projects' },
-  { name: 'blog', path: '/blog' },
+  ...(posts.length ? [{ name: 'blog', path: '/blog' }] : []),
   { name: 'resume', path: '/resume' },
 ];
 
 export default function Navbar({ activePath, onNavigate }) {
+  const [scrolled, setScrolled] = useState(() => window.scrollY > window.innerHeight * 0.72);
+
+  useEffect(() => {
+    if (activePath !== '/') return undefined;
+
+    const update = () => setScrolled(window.scrollY > window.innerHeight * 0.72);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, [activePath]);
+
+  const visible = activePath !== '/' || scrolled;
+
   return (
-    <nav className="fixed left-4 right-4 top-4 z-50 flex items-center gap-3 md:left-8 md:right-auto">
+    <nav className={`site-nav ${visible ? 'site-nav--visible' : ''}`} aria-label="Primary navigation">
       <a
         href="/"
         aria-label="Home"
         onClick={(event) => handleNav(event, '/', onNavigate)}
-        className="glass nav-button soft-link inline-flex h-11 w-11 items-center justify-center"
+        className="site-nav-home soft-link"
       >
         <Home className="h-4 w-4" />
       </a>
 
-      <div className="glass flex max-w-[calc(100vw-84px)] items-center gap-1 overflow-x-auto rounded-xl p-1">
+      <div className="site-nav-links">
         {navLinks.map((link) => (
           <a
             key={link.path}
             href={link.path}
             onClick={(event) => handleNav(event, link.path, onNavigate)}
-            className={`nav-button meta soft-link whitespace-nowrap ${activePath === link.path ? 'active' : ''}`}
+            className={`site-nav-link soft-link ${activePath.startsWith(link.path) ? 'active' : ''}`}
           >
             {link.name}
           </a>
@@ -36,6 +50,7 @@ export default function Navbar({ activePath, onNavigate }) {
 }
 
 function handleNav(event, path, onNavigate) {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
   onNavigate(path);
 }
