@@ -17,7 +17,7 @@ Reviewed date: 2026-07-11
 
 - Image-led long-scroll Home.
 - Projects index.
-- Empty Blog and blog-post scaffolds hidden from primary navigation.
+- Empty Blog and blog-post scaffolds intentionally exposed through primary navigation without filler content.
 - Resume redirect with a public-facing fallback.
 - Contact/social data.
 - Local guestbook preview.

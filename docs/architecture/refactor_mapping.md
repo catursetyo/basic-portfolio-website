@@ -24,7 +24,7 @@ This is the canonical refactor map. The previous file name `refractor_mapping.md
 | `src/pages/NotFound.jsx` | Application 404 | Add. |
 | `src/pages/About.jsx` | Legacy brutalist page | Delete after confirming no imports or links remain. |
 | `src/data/projects.js` | Project source data | Expand to case-study fields and add slugs. |
-| `src/data/posts.js` | Blog source data | Add real published content or keep route hidden. |
+| `src/data/posts.js` | Blog source data | Add real published content; the empty route is currently visible by explicit user choice. |
 | `src/data/socials.js` | Contact source data | Keep. |
 | `src/lib/guestbook.js` | Guestbook client/helpers | Separate API calls from pure transformation functions. |
 | `src/lib/viewCounter.js` | Counter adapter | Make provider-neutral and preserve valid zero values. |

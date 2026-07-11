@@ -4,14 +4,15 @@
 
 The Blog contains real technical notes, project case studies, competition write-ups, and learning records. It is not required to make the portfolio look complete.
 
-## Launch Rule
+## Navigation Rule
 
-Blog may appear in primary navigation only when at least one useful published post exists.
+The user has explicitly chosen to expose Blog in the hero and primary navigation before the first post is published.
 
 When no post exists:
 
-- hide Blog from primary navigation, or
-- render a deliberate public empty state.
+- keep `/blog` reachable,
+- render the existing empty archive without fabricated posts,
+- do not add filler merely to populate the page.
 
 Do not render an unexplained empty grid.
 
@@ -70,7 +71,7 @@ Unknown slugs must show NotFound or a clear missing-post state.
 
 ## Acceptance Criteria
 
-- At least one real post exists before primary navigation exposure.
+- Blog remains reachable from the hero and primary navigation.
 - Direct loading of a post works.
 - Unknown slug is handled.
 - Dates format consistently.

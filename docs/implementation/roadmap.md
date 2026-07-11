@@ -87,7 +87,7 @@ Tasks:
 - Add the real CV file or URL.
 - Replace developer-facing resume fallback.
 - Verify contact links.
-- Publish one useful article or hide Blog from primary navigation.
+- Publish one useful article; Blog remains visible and empty until then by explicit user choice.
 - Add intentional Blog empty state.
 
 Acceptance:

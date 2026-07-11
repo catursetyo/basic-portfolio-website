@@ -8,9 +8,9 @@ import Guestbook from './Guestbook';
 
 const menu = [
   ['about me', '#about'],
-  ['selected work', '#work'],
-  ...(posts.length ? [['blog', '/blog']] : []),
-  ['guestbook', '#guestbook'],
+  ['projects', '/projects'],
+  ['blog', '/blog'],
+  ['others', '#guestbook'],
 ];
 
 const skills = ['Python', 'FastAPI', 'PostgreSQL', 'Machine Learning', 'React', 'Tailwind'];

@@ -24,7 +24,7 @@ This file describes what exists now. It is not a wish list.
 - Both video sources are 1920 × 1080, 30 fps, about 21 seconds, and contain no audio stream.
 - The profile image is used only as a small avatar, not as the background.
 - Primary navigation appears after the homepage hero and remains visible on internal routes.
-- Empty Blog content is hidden from primary navigation.
+- Blog is intentionally visible in the hero and primary navigation while its post data remains empty.
 - Projects index uses inspectable screenshots and a responsive list layout.
 - Guestbook fields have visible labels, native limits, keyboard focus, and an `aria-live` local-save status.
 - The fixed preloader has been removed.

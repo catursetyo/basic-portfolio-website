@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Home } from 'lucide-react';
-import { posts } from '../../data/posts';
 
 const navLinks = [
-  { name: 'portfolio', path: '/projects' },
-  ...(posts.length ? [{ name: 'blog', path: '/blog' }] : []),
+  { name: 'projects', path: '/projects' },
+  { name: 'blog', path: '/blog' },
   { name: 'resume', path: '/resume' },
 ];
 
