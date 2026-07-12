@@ -11,7 +11,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
 
                 {/* Profile Image */}
-                <img src="/profile.png" alt="Catur Setyo Ragil" className="relative z-5 w-full max-w-sm aspect-[3/4] object-cover border border-grid grayscale contrast-125 brightness-90" />
+                <img src="/profile/profile.png" alt="Catur Setyo Ragil" className="relative z-5 w-full max-w-sm aspect-[3/4] object-cover border border-grid grayscale contrast-125 brightness-90" />
             </div>
 
             {/* Text Section */}

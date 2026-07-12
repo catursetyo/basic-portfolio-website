@@ -13,7 +13,21 @@ const menu = [
   ['others', '#guestbook'],
 ];
 
-const skills = ['Python', 'FastAPI', 'PostgreSQL', 'Machine Learning', 'React', 'Tailwind'];
+const skills = [
+  ['JavaScript', '/icons/js.svg'],
+  ['TypeScript', '/icons/ts.svg'],
+  ['React', '/icons/react.svg'],
+  ['Tailwind CSS', '/icons/tailwind.svg'],
+  ['Next.js', '/icons/nextjs.svg'],
+  ['Node.js', '/icons/nodejs.svg'],
+  ['Go', '/icons/go.svg'],
+  ['Python', '/icons/python.svg'],
+  ['Django', '/icons/django.svg'],
+  ['MongoDB', '/icons/mongodb.svg'],
+  ['PostgreSQL', '/icons/postgre.svg'],
+  ['PyTorch', '/icons/pytorch.svg'],
+  ['TensorFlow', '/icons/tensorflow.svg'],
+];
 const languageColors = {
   Python: '#3572a5',
   'Next.js': '#f1f1f1',
@@ -32,9 +46,9 @@ export default function Home({ onNavigate }) {
     <section className="home-page" onPointerMove={handlePageSway} onPointerLeave={resetPageSway}>
       <div className="home-bg" aria-hidden="true">
         {!reducedMotion && (
-          <video autoPlay muted loop playsInline preload="metadata" poster="/hero-poster.webp" className="home-bg-media">
-            <source src="/hero.webm" type="video/webm" />
-            <source src="/hero.mp4" type="video/mp4" />
+          <video autoPlay muted loop playsInline preload="metadata" poster="/background/hero-poster.webp" className="home-bg-media">
+            <source src="/background/hero.webm" type="video/webm" />
+            <source src="/background/hero.mp4" type="video/mp4" />
           </video>
         )}
       </div>
@@ -73,7 +87,7 @@ export default function Home({ onNavigate }) {
           <div>
             <p className="section-label">about me</p>
             <div className="about-lockup">
-              <img src="/profile.png" alt="Catur Setyo Ragil" width="80" height="80" loading="lazy" />
+              <img src="/profile/profile.png" alt="Catur Setyo Ragil" width="100" height="100" loading="lazy" />
               <div>
                 <p className="about-intro">hey, i'm</p>
                 <h2>caur.</h2>
@@ -84,7 +98,11 @@ export default function Home({ onNavigate }) {
               Teknologi Sepuluh Nopember.
             </p>
             <ul className="tech-list" aria-label="Core tools">
-              {skills.map((item) => <li key={item}>{item}</li>)}
+              {skills.map(([name, icon]) => (
+                <li key={name} title={name}>
+                  <img src={icon} alt={name} width="28" height="28" loading="lazy" />
+                </li>
+              ))}
             </ul>
           </div>
 

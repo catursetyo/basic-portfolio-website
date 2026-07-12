@@ -93,8 +93,9 @@ Local families:
 - Barlow Condensed: hero menu and fixed-header navigation.
 - Inter: section labels, counters, compact metadata, and form labels.
 - DM Sans: homepage About copy, social values, repository descriptions, guestbook content, and compact action text.
+- FiraMono Nerd Font: social platform labels only, loaded from the local Basic Latin subset in `public/fonts/`.
 
-All families load locally through `@fontsource`; do not add a remote Google Fonts request. Import only the Latin subset and weights used by the interface.
+All families load locally through `@fontsource` or a checked-in subset; do not add a remote Google Fonts request. Import only the Latin subset and weights used by the interface.
 
 Roles:
 
@@ -122,11 +123,11 @@ Guidelines:
 
 Hero:
 
-- Current sources: `public/hero.webm` (VP9) followed by `public/hero.mp4` (H.264).
-- Still fallback: `public/hero-poster.webp`.
+- Current sources: `public/background/hero.webm` (VP9) followed by `public/background/hero.mp4` (H.264).
+- Still fallback: `public/background/hero-poster.webp`.
 - Provide a safe focal point for desktop and mobile crops.
 - Add a dark overlay for text readability.
-- Do not use `profile.png` as the full hero.
+- Do not use `public/profile/profile.png` as the full hero.
 - Autoplay must remain muted, inline, looped, and audio-free.
 - Reduced-motion users receive only the poster and do not download the video sources.
 
@@ -150,6 +151,12 @@ Avatar:
 
 - Small and secondary.
 - Use accurate alt text if informative.
+
+Technology icons:
+
+- Load the local SVG assets from `public/icons/`.
+- Keep each icon in a stable square and allow the row to wrap on narrow screens.
+- Preserve the curated order defined in the homepage data.
 
 Guestbook:
 

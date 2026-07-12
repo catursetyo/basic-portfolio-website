@@ -4,7 +4,7 @@ export const projects = [
     year: '2024',
     name: 'PokeZOO Management System',
     category: 'Full stack / Database',
-    img: '/pokezoo.png',
+    img: '/projects/pokezoo.png',
     description:
       'Zoo management system with MySQL, MongoDB, role-based access, health tracking, incident reports, and behavioral logs.',
     longDescription:
@@ -18,7 +18,7 @@ export const projects = [
     year: '2024',
     name: 'UNA Project',
     category: 'Product catalog / Next.js',
-    img: '/una-project.png',
+    img: '/projects/una-project.png',
     description:
       'Digital display product catalog with product highlights, tutorials, consultation flow, and admin-managed catalog content.',
     longDescription:
@@ -32,7 +32,7 @@ export const projects = [
     year: '2024',
     name: 'El Lotus IMK',
     category: 'React / UI-UX',
-    img: '/el-lotus.png',
+    img: '/projects/el-lotus.png',
     description:
       'Interactive cafe ordering app with order flow, outlet selection, QRIS payment, activity tracking, and animated profiles.',
     longDescription:

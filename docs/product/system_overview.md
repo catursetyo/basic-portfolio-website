@@ -28,7 +28,7 @@ Important files:
 - Blog data is empty.
 - Resume URL is environment-driven but unconfigured.
 - Counter provider contract is incomplete.
-- Hero uses `public/hero.webm` with `public/hero.mp4` fallback and `public/hero-poster.webp` as its still fallback.
+- Hero uses `public/background/hero.webm` with `public/background/hero.mp4` fallback and `public/background/hero-poster.webp` as its still fallback.
 
 These are prototypes, not final architecture.
 
