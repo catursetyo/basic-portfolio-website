@@ -29,7 +29,7 @@ export default function Home({ onNavigate }) {
   }, []);
 
   return (
-    <section className="home-page">
+    <section className="home-page" onPointerMove={handlePageSway} onPointerLeave={resetPageSway}>
       <div className="home-bg" aria-hidden="true">
         {!reducedMotion && (
           <video autoPlay muted loop playsInline preload="metadata" poster="/hero-poster.webp" className="home-bg-media">
@@ -39,6 +39,7 @@ export default function Home({ onNavigate }) {
         )}
       </div>
 
+      <div className="home-content">
       <section className="home-hero" aria-labelledby="home-title">
         <div className="home-hero-copy">
           <p className="home-overline">Catur Setyo Ragil <span>/ portfolio 2026</span></p>
@@ -184,6 +185,7 @@ export default function Home({ onNavigate }) {
           <span>© 2026</span>
         </footer>
       </div>
+      </div>
     </section>
   );
 }
@@ -192,4 +194,20 @@ function handleInternalLink(event, href, onNavigate) {
   if (!href.startsWith('/') || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
   onNavigate(href);
+}
+
+function handlePageSway(event) {
+  if (event.pointerType !== 'mouse') return;
+
+  const x = event.clientX / window.innerWidth - 0.5;
+  const y = event.clientY / window.innerHeight - 0.5;
+
+  event.currentTarget.style.setProperty(
+    '--page-sway-transform',
+    `translate3d(${x * 16}px, ${y * 12}px, 0) rotate(${x * 0.14}deg)`,
+  );
+}
+
+function resetPageSway(event) {
+  event.currentTarget.style.removeProperty('--page-sway-transform');
 }

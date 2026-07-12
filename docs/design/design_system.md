@@ -195,6 +195,7 @@ Allowed:
 - short first reveal,
 - subtle opacity/position entrance,
 - restrained project hover,
+- cursor-directed sway of the complete homepage foreground layer,
 - calm route transition,
 - gentle background movement only when inexpensive.
 
@@ -213,6 +214,8 @@ Reduced-motion behavior:
 - remove nonessential transforms,
 - remove long transitions,
 - keep all content visible.
+
+Cursor sway is limited to fine pointers, moves the full foreground layer no more than 8px horizontally or 6px vertically, uses a soft trailing ease, and never applies to the fixed background media.
 
 ## Focus and Interaction
 

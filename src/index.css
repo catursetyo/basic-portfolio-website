@@ -400,6 +400,14 @@ button {
   );
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .home-content {
+    transform: var(--page-sway-transform, translate3d(0, 0, 0) rotate(0deg));
+    transform-origin: 50% 15vh;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
 .home-section {
   width: min(1060px, calc(100% - 40px));
   margin: 0 auto;
@@ -1225,5 +1233,9 @@ button {
 
   .home-bg-media {
     display: none;
+  }
+
+  .home-content {
+    transform: none !important;
   }
 }

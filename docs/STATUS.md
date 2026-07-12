@@ -30,6 +30,7 @@ This file describes what exists now. It is not a wish list.
 - About, social links, repository cards, and guestbook rows now share the compact type hierarchy and restrained opacity treatment from the approved landing frame.
 - Guestbook fields have visible labels, native limits, keyboard focus, and an `aria-live` local-save status.
 - The primary guestbook form is collapsed by default and disclosed by an accessible `leave a message` CTA.
+- The full homepage foreground from hero through footer sways as one plane with cursor position on fine pointers only.
 - The fixed preloader has been removed.
 - Lenis skips reduced-motion users, supports hash links, and cancels its animation frame on cleanup.
 - Ambient time uses the `Asia/Jakarta` timezone and updates once per minute.
