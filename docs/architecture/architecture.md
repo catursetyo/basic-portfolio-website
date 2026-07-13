@@ -11,6 +11,7 @@ Keep:
 - Lenis.
 - Lucide React.
 - Space Grotesk through `@fontsource`.
+- Supabase JS for guestbook Auth and RPC calls.
 
 Approved addition:
 
@@ -51,6 +52,7 @@ src/
     Resume.jsx
     Contact.jsx
     NotFound.jsx
+    OwnerLogin.jsx
 ```
 
 Do not reorganize everything at once. Move files only when a feature change benefits from it.
@@ -155,6 +157,8 @@ If the content shape becomes cumbersome, TypeScript migration may be considered 
 ## API Boundary
 
 Use one small API client layer for external requests.
+
+The guestbook boundary is `src/lib/guestbookApi.js`. It uses anonymous Auth for visitors, magic-link Auth for the single owner, and database RPC functions for every read or write. Public Supabase URL and publishable key may be exposed; secret and service-role keys may not.
 
 Each request must expose:
 

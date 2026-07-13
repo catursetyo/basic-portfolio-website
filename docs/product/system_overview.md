@@ -11,20 +11,24 @@ Important files:
 - `src/pages/Projects.jsx`: project index.
 - `src/pages/Blog.jsx`: blog index scaffold.
 - `src/pages/BlogPost.jsx`: blog detail scaffold.
-- `src/pages/Guestbook.jsx`: embedded browser-only guestbook prototype.
+- `src/pages/Guestbook.jsx`: embedded guestbook with Supabase mode and labeled local fallback.
+- `src/pages/OwnerLogin.jsx`: private magic-link owner access.
 - `src/pages/Resume.jsx`: resume redirect scaffold.
 - `src/components/layout/Navbar.jsx`: fixed glass navigation.
 - `src/components/layout/SmoothScroller.jsx`: Lenis integration.
 - `src/components/ui/DataOverlay.jsx`: location and time metadata.
 - `src/data/*.js`: local project, post, and social data.
-- `src/lib/guestbook.js`: local guestbook transformations.
+- `src/lib/guestbook.js`: guestbook transformations and local preview helpers.
+- `src/lib/guestbookApi.js`: Supabase Auth and RPC boundary.
+- `src/lib/supabase.js`: public Supabase client configuration.
+- `supabase/migrations/202607120001_guestbook.sql`: guestbook tables and secured RPC functions.
 - `src/lib/viewCounter.js`: external counter fetch helper.
 - `src/index.css`: tokens, section-scoped typography roles, and most shared styles.
 
 ## Current Temporary Implementations
 
 - Routing is manual.
-- Guestbook is localStorage-only.
+- Guestbook falls back to `localStorage` until public Supabase configuration is supplied.
 - Blog data is empty.
 - Resume URL is environment-driven but unconfigured.
 - Counter provider contract is incomplete.
@@ -54,6 +58,7 @@ These are prototypes, not final architecture.
 | `/blog/:slug` | Article detail. |
 | `/resume` | Redirect to or render the public resume. |
 | `/contact` | Optional dedicated contact view. |
+| `/owner/login` | Unlisted magic-link access for guestbook ownership controls. |
 | `*` | Not-found page. |
 
 There is no standalone `/guestbook` route in V1 unless the embedded section becomes too large.
@@ -132,10 +137,12 @@ type GuestbookReply = {
 };
 ```
 
+Production rows also carry server-derived `authorRole`, `likedByMe`, and `ownerLiked` values. They are not accepted from visitor input.
+
 ## External Boundaries
 
 - Resume: static public file or explicit public URL.
-- Guestbook: small API and database.
+- Guestbook: Supabase Auth plus PostgreSQL RPC functions; table access is not exposed to the browser.
 - Counter: same API or replaceable public counting service.
 - No secret-backed API is called directly from the browser.
 

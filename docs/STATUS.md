@@ -2,7 +2,7 @@
 
 Reviewed branch: `v2-redesign`
 Reviewed state: current working tree
-Status date: 2026-07-11
+Status date: 2026-07-12
 
 This file describes what exists now. It is not a wish list.
 
@@ -32,6 +32,9 @@ This file describes what exists now. It is not a wish list.
 - About, social links, repository cards, and guestbook rows now share the compact type hierarchy and restrained opacity treatment from the approved landing frame.
 - Guestbook fields have visible labels, native limits, keyboard focus, and an `aria-live` local-save status.
 - The primary guestbook form is collapsed by default and disclosed by an accessible `leave a message` CTA.
+- A Supabase guestbook adapter and PostgreSQL migration now provide shared messages, anonymous likes, pending moderation, and one-level owner replies when public Supabase credentials are configured.
+- Owner access uses a private `/owner/login` magic-link flow. Owner identity, replies, moderation controls, and the `liked by caur` marker are verified by database functions rather than visitor-submitted names.
+- Direct table access is revoked; browser writes use validated RPC functions and anonymous Supabase Auth identities for rate limiting and like deduplication.
 - The full homepage foreground from hero through footer sways as one plane with cursor position on fine pointers only.
 - The fixed preloader has been removed.
 - Lenis skips reduced-motion users, supports hash links, and cancels its animation frame on cleanup.
@@ -46,7 +49,7 @@ This file describes what exists now. It is not a wish list.
 - React Router migration and real not-found handling.
 - Project case-study routes and contribution details.
 - Final resume PDF or public URL.
-- Shared guestbook persistence and moderation.
+- Provisioning the Supabase project, applying the migration, and configuring the owner Auth account.
 - Final view-counter provider decision.
 - Dedicated favicon and social-preview artwork.
 - Root repository README.
@@ -75,9 +78,9 @@ This file describes what exists now. It is not a wish list.
 
 ### Guestbook
 
-- Messages, replies, and likes still use `localStorage`.
-- The visible local-preview label is intentional; this is not a production guestbook.
-- Shared persistence, moderation, rate limiting, loading, network error, and server validation are not implemented.
+- No local `.env` is configured, so the current local development view intentionally uses the labeled `localStorage` preview mode.
+- The Supabase migration has not been applied to a remote project from this repository session.
+- CAPTCHA and provider-level Auth rate limits still need production configuration in Supabase.
 
 ### Legacy and Cleanup
 
@@ -93,14 +96,14 @@ This file describes what exists now. It is not a wish list.
 3. Configure SPA deployment fallback and verify direct route loads.
 4. Add the final public resume file.
 5. Replace the root README and add a dedicated favicon/social image.
-6. Select and implement guestbook persistence.
+6. Apply the guestbook migration and configure Supabase Auth, redirect URLs, and production CAPTCHA.
 7. Finalize the view-counter provider contract.
 8. Remove verified legacy code and unused dependencies.
 9. Run final accessibility, performance, and cross-browser audits.
 
 ## Blocked Decisions
 
-- Guestbook persistence provider and deployment target.
+- Supabase project URL and publishable key for each deployment environment.
 - Whether the counter shares the guestbook backend or uses an external service.
 - Final CV file name and public path.
 

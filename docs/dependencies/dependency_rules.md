@@ -15,8 +15,13 @@
 - `@fontsource/barlow-condensed`
 - `@fontsource/inter`
 - `@fontsource/dm-sans`
+- `@supabase/supabase-js`
 
 ## Approved Addition
+
+### `@supabase/supabase-js`
+
+Approved because the guestbook uses Supabase anonymous Auth, owner magic links, session changes, and PostgreSQL RPC calls. The SDK replaces custom token and callback handling; no service-role secret is shipped to the browser.
 
 ### `react-router-dom`
 

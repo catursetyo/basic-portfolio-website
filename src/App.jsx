@@ -6,6 +6,7 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
+import OwnerLogin from './pages/OwnerLogin';
 import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 
@@ -51,6 +52,7 @@ function getPage(path, navigate) {
   if (path.startsWith('/blog/')) return <BlogPost slug={path.replace('/blog/', '')} onNavigate={navigate} />;
   if (path === '/contact') return <Contact />;
   if (path === '/resume') return <Resume />;
+  if (path === '/owner/login') return <OwnerLogin onNavigate={navigate} />;
   return null;
 }
 

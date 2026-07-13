@@ -1,6 +1,6 @@
 # Refactor Mapping
 
-This is the canonical refactor map. The previous file name `refractor_mapping.md` was a typo and should be deleted.
+This is the canonical refactor map.
 
 ## Current to Target
 
@@ -19,14 +19,17 @@ This is the canonical refactor map. The previous file name `refractor_mapping.md
 | `src/pages/ProjectDetail.jsx` | Project case study | Add. |
 | `src/pages/Blog.jsx` | Blog index | Add intentional empty state or hide navigation until content exists. |
 | `src/pages/BlogPost.jsx` | Blog detail | Use route params and not-found behavior. |
-| `src/pages/Guestbook.jsx` | Embedded guestbook | Replace localStorage with API-backed state before launch. |
+| `src/pages/Guestbook.jsx` | Embedded guestbook | Supabase-backed when configured, with a labeled local preview fallback. |
+| `src/pages/OwnerLogin.jsx` | Private owner access | Keep unlisted; authenticate by magic link and expose controls inline in Guestbook. |
 | `src/pages/Resume.jsx` | Resume route | Use public PDF or visitor-facing fallback. |
 | `src/pages/NotFound.jsx` | Application 404 | Add. |
 | `src/pages/About.jsx` | Legacy brutalist page | Delete after confirming no imports or links remain. |
 | `src/data/projects.js` | Project source data | Expand to case-study fields and add slugs. |
 | `src/data/posts.js` | Blog source data | Add real published content; the empty route is currently visible by explicit user choice. |
 | `src/data/socials.js` | Contact source data | Keep. |
-| `src/lib/guestbook.js` | Guestbook client/helpers | Separate API calls from pure transformation functions. |
+| `src/lib/guestbook.js` | Guestbook transformations | Keep pure row nesting and local preview helpers here. |
+| `src/lib/guestbookApi.js` | Guestbook API boundary | Keep Supabase Auth and RPC calls here. |
+| `src/lib/supabase.js` | Supabase client | Keep public environment configuration isolated here. |
 | `src/lib/viewCounter.js` | Counter adapter | Make provider-neutral and preserve valid zero values. |
 | `index.html` | Document metadata | Replace Vite title/favicon, remove redundant Inter import, add SEO/social metadata. |
 | `README.md` | Repository documentation | Replace the Vite template. |
@@ -38,7 +41,11 @@ src/app/router.jsx
 src/app/ScrollManager.jsx
 src/pages/ProjectDetail.jsx
 src/pages/NotFound.jsx
+src/pages/OwnerLogin.jsx
 src/lib/api.js
+src/lib/guestbookApi.js
+src/lib/supabase.js
+supabase/migrations/202607120001_guestbook.sql
 public/og-image.jpg
 public/catur-setyo-ragil-cv.pdf
 ```

@@ -794,6 +794,76 @@ button {
   letter-spacing: 0;
 }
 
+.guestbook-owner-session,
+.guestbook-owner-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+}
+
+.guestbook-owner-session {
+  justify-content: space-between;
+  max-width: 30rem;
+  margin-top: 1rem;
+  border-block: 1px solid var(--line);
+  padding: 0.65rem 0;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.guestbook-owner-actions {
+  margin-top: 0.65rem;
+}
+
+.guestbook-text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+}
+
+.guestbook-text-button svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.guestbook-delete {
+  color: oklch(0.67 0.15 23);
+}
+
+.guestbook-owner-like,
+.guestbook-pending,
+.guestbook-state {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+}
+
+.guestbook-owner-like {
+  color: var(--accent-warm);
+}
+
+.guestbook-pending {
+  color: rgb(255 255 255 / 0.3);
+  text-transform: uppercase;
+}
+
+.guestbook-state {
+  color: var(--muted);
+}
+
+.guestbook-owner-badge {
+  margin-left: 0.5rem;
+  color: var(--accent);
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+}
+
 .guestbook-form {
   display: grid;
   max-width: 30rem;
@@ -877,6 +947,13 @@ button {
 .command-button:focus-visible {
   border-color: var(--accent);
   background: oklch(0.22 0.03 245 / 0.78);
+}
+
+.command-button:disabled,
+.guestbook-like:disabled,
+.guestbook-text-button:disabled {
+  cursor: wait;
+  opacity: 0.45;
 }
 
 .form-status {
@@ -969,6 +1046,46 @@ button {
   margin-top: 1.4rem;
   border-top: 1px solid var(--line);
   padding-top: 1.4rem;
+}
+
+.owner-login-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+}
+
+.owner-login-back svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.owner-login-copy,
+.owner-login-panel,
+.owner-login-form {
+  max-width: 30rem;
+  margin-top: 2rem;
+}
+
+.owner-login-panel {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 1.25rem;
+  color: var(--muted);
+}
+
+.owner-login-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.owner-login-form {
+  display: grid;
+  gap: 1rem;
 }
 
 .post-list {

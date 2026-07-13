@@ -2,7 +2,7 @@
 
 ## Goal
 
-Visitors may leave a short public message, reply one level deep, and like messages or replies.
+Visitors may leave a short public message and like messages or replies. Only the authenticated owner may publish a one-level reply.
 
 This feature is optional. It must not delay core portfolio completion.
 
@@ -17,7 +17,7 @@ A public guestbook is production-ready only when it has:
 - like deduplication,
 - loading, success, empty, error, and unavailable states.
 
-`localStorage` is allowed only for a clearly labeled development prototype.
+Supabase is the selected production provider. `localStorage` remains only as a clearly labeled development preview when Supabase is not configured.
 
 ## Message Rules
 
@@ -29,18 +29,21 @@ A public guestbook is production-ready only when it has:
 ## Reply Rules
 
 - One level deep.
-- Name: required, 2–40 characters.
+- Owner session required.
+- Author name and owner role come from the server, never the form.
 - Message: required, 1–220 characters.
 - Parent message must exist.
-- New replies may enter pending moderation.
+- Owner replies publish immediately but remain hidden while their parent is pending.
 
 ## Like Rules
 
 - Apply to messages and replies.
 - Visitor may like or unlike.
 - Server deduplicates by anonymous visitor identity.
+- Server applies a short cooldown to repeated toggles.
 - Counts come from the server.
-- Optimistic UI must roll back on failure.
+- Owner likes also set a server-controlled `liked by caur` marker.
+- The client reloads server state after a successful toggle.
 
 ## UI States
 
@@ -102,7 +105,19 @@ Use `aria-live` for submission feedback.
 
 ## Owner Replies
 
-Owner replies may use a verified visual badge based on server data such as `authorRole: 'owner'`. Never infer owner status from a submitted name.
+Owner identity is verified by Supabase Auth and the `is_guestbook_owner()` database function. The private `/owner/login` route sends a magic link only to a pre-existing owner account. The guestbook exposes approve, reply, delete, and logout controls inline after verification; no admin dashboard is required.
+
+The owner email currently lives in the migration as a deliberate single-owner rule. Changing it requires a new migration, not a browser environment variable.
+
+## Supabase Setup
+
+1. Create a Supabase project and run `supabase/migrations/202607120001_guestbook.sql`.
+2. Enable anonymous sign-ins and configure CAPTCHA for production traffic.
+3. Create the owner Auth user for `catursetyo26@gmail.com` before requesting a magic link.
+4. Add the deployed `/owner/login` URL to the allowed Auth redirect URLs.
+5. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` from `.env.example` in the deployment environment.
+
+The publishable key is browser-safe. Never expose a secret key or service-role key in a `VITE_*` variable.
 
 ## Safety
 
@@ -111,7 +126,7 @@ Owner replies may use a verified visual badge based on server data such as `auth
 - Validate on server and client.
 - Limit request size.
 - Rate-limit writes.
-- Hash anonymous identifiers server-side.
+- Store only the random Supabase Auth user ID needed for rate limiting and like deduplication; do not store visitor IP addresses.
 - Moderate untrusted content before public display when needed.
 
 ## Acceptance Criteria
@@ -122,6 +137,8 @@ Owner replies may use a verified visual badge based on server data such as `auth
 - Loading, empty, success, error, and unavailable states work.
 - Pending moderation is explained.
 - Likes deduplicate.
+- Only the verified owner can reply, approve, or delete.
+- Owner likes and replies cannot be forged by submitting the name `caur`.
 - Replies remain one level deep.
 - The message composer opens and closes from the CTA without losing typed input.
 - Keyboard and mobile use are comfortable.
