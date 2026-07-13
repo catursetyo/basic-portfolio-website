@@ -2,7 +2,7 @@
 
 Reviewed branch: `v2-redesign`
 Reviewed state: current working tree
-Reviewed date: 2026-07-11
+Reviewed date: 2026-07-13
 
 ## Existing Stack
 
@@ -20,7 +20,7 @@ Reviewed date: 2026-07-11
 - Empty Blog and blog-post scaffolds intentionally exposed through primary navigation without filler content.
 - Resume redirect with a public-facing fallback.
 - Contact/social data.
-- Local guestbook preview.
+- Supabase-backed guestbook with a development-only local preview.
 - View-counter helper.
 - Product, design, architecture, feature, decision, and quality documents.
 
@@ -43,24 +43,21 @@ Reviewed date: 2026-07-11
 - Projects remain summaries rather than complete case studies.
 - Blog has no useful article content.
 - Resume file is not configured.
-- Guestbook and counter are prototypes rather than launch-ready services.
+- Guestbook still needs production abuse-control verification; the counter remains a prototype.
 
 ### Architecture
 
 - Routing has outgrown manual pathname matching.
-- Unknown routes silently render Home.
-- Guestbook state is browser-only.
 - Counter provider and timeout behavior are incomplete.
 
 ### Design
 
-- A dedicated favicon and social-preview crop are still missing.
+- A dedicated social-preview crop is still missing.
 - Final visual review should include owner feedback on the video crop and motion pacing.
 - Internal routes need another pass after project detail pages exist.
 
 ### Accessibility
 
-- Guestbook still lacks server/network loading and error states.
 - Full keyboard and screen-reader testing remains manual.
 - Contrast should be measured against the final production asset and browser set.
 
@@ -72,8 +69,7 @@ Reviewed date: 2026-07-11
 
 ### Repository Presentation
 
-- Root README is still a Vite template.
-- SPA fallback and CI are not configured.
+- Cloudflare Pages builds and deploys the repository with its built-in SPA fallback.
 
 ## Keep
 
@@ -89,12 +85,6 @@ Reviewed date: 2026-07-11
 - Manual routing.
 - Project data depth and case-study routes.
 - Resume delivery.
-- Guestbook persistence.
+- Guestbook production abuse controls.
 - Counter contract.
-- Repository metadata and deployment fallback.
-
-## Remove After Verification
-
-- Legacy `src/pages/About.jsx`.
-- Unused dependencies such as `react-use-measure`, if confirmed.
-- Browser-only guestbook code once the production API replaces it.
+- Repository metadata and social-preview artwork.

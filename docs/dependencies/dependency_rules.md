@@ -9,8 +9,6 @@
 - `framer-motion`
 - `lenis`
 - `lucide-react`
-- `clsx`
-- `tailwind-merge`
 - `@fontsource/space-grotesk`
 - `@fontsource/barlow-condensed`
 - `@fontsource/inter`
@@ -35,12 +33,6 @@ Approved because the application now has:
 - direct-route loading requirements.
 
 The manual pathname switch is no longer the smallest reliable solution.
-
-## Verify and Remove if Unused
-
-- `react-use-measure`
-
-Do not remove a package based only on memory. Search all imports and run build/lint after removal.
 
 ## Avoid in V1
 

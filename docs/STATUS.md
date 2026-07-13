@@ -42,7 +42,8 @@ This file describes what exists now. It is not a wish list.
 - The counter preserves a valid count of zero.
 - Basic title, description, theme color, and Open Graph metadata are configured.
 - The browser title is `caursty`.
-- Unknown application paths render a dedicated NotFound page, and Azure Static Web Apps receives an SPA navigation fallback configuration.
+- Unknown application paths render a dedicated NotFound page, and Cloudflare Pages provides the production SPA fallback.
+- Cloudflare Pages builds `main`, publishes `dist/`, and serves `caursty.dev` and `www.caursty.dev`.
 - The resume fallback is visitor-facing rather than developer-facing.
 - `PRODUCT.md` captures the brand register and strategic constraints.
 
@@ -53,8 +54,7 @@ This file describes what exists now. It is not a wish list.
 - Final resume PDF or public URL.
 - Provisioning the Supabase project, applying the migration, and configuring the owner Auth account.
 - Final view-counter provider decision.
-- Dedicated favicon and social-preview artwork.
-- Root repository README.
+- Social-preview artwork.
 
 ## Known Problems
 
@@ -82,24 +82,16 @@ This file describes what exists now. It is not a wish list.
 - The Supabase migration has not been applied to a remote project from this repository session.
 - CAPTCHA and provider-level Auth rate limits still need production configuration in Supabase.
 
-### Legacy and Cleanup
-
-- `src/pages/About.jsx` remains unused and contains outdated positioning copy.
-- `react-use-measure` may be unused and must be verified before removal.
-- The root README remains the Vite template.
-- A dedicated favicon is still missing.
-
 ## Next Work
 
 1. Replace manual routing with React Router.
 2. Add one complete project case study and `/projects/:slug`.
-3. Verify direct route loads after the Azure SPA fallback is deployed.
+3. Verify direct route loads on the Cloudflare Pages deployment.
 4. Add the final public resume file.
-5. Replace the root README and add a dedicated favicon/social image.
+5. Add the final social-preview image.
 6. Apply the guestbook migration and configure Supabase Auth, redirect URLs, and production CAPTCHA.
 7. Finalize the view-counter provider contract.
-8. Remove verified legacy code and unused dependencies.
-9. Run final accessibility, performance, and cross-browser audits.
+8. Run final accessibility, performance, and cross-browser audits.
 
 ## Blocked Decisions
 

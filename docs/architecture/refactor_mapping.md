@@ -23,7 +23,7 @@ This is the canonical refactor map.
 | `src/pages/OwnerLogin.jsx` | Private owner access | Keep unlisted; authenticate by magic link and expose controls inline in Guestbook. |
 | `src/pages/Resume.jsx` | Resume route | Use public PDF or visitor-facing fallback. |
 | `src/pages/NotFound.jsx` | Application 404 | Keep as the manual-router catch-all, then move it into React Router. |
-| `src/pages/About.jsx` | Legacy brutalist page | Delete after confirming no imports or links remain. |
+| `src/pages/About.jsx` | Legacy brutalist page | Deleted after confirming no imports or links remained. |
 | `src/data/projects.js` | Project source data | Expand to case-study fields and add slugs. |
 | `src/data/posts.js` | Blog source data | Add real published content; the empty route is currently visible by explicit user choice. |
 | `src/data/socials.js` | Contact source data | Keep. |
@@ -32,8 +32,8 @@ This is the canonical refactor map.
 | `src/lib/supabase.js` | Supabase client | Keep public environment configuration isolated here. |
 | `src/lib/viewCounter.js` | Counter adapter | Make provider-neutral and preserve valid zero values. |
 | `index.html` | Document metadata | Replace Vite title/favicon, remove redundant Inter import, add SEO/social metadata. |
-| `public/staticwebapp.config.json` | Azure SPA fallback | Keep at the Vite public root so it is copied into `dist/`. |
-| `README.md` | Repository documentation | Replace the Vite template. |
+| `public/staticwebapp.config.json` | Former deployment fallback | Deleted after migration to Cloudflare Pages built-in SPA fallback. |
+| `README.md` | Repository documentation | Vite template replaced with project setup and Cloudflare build details. |
 
 ## Approved New Files
 
@@ -57,14 +57,8 @@ Names of public assets may change, but documentation and links must stay consist
 
 Verify before removing:
 
-- `src/pages/About.jsx`
-- `react-use-measure`
-- unused old brutalist CSS selectors
-- Google Fonts Inter links
-- `/vite.svg`
 - manual route helper functions
 - manual Lenis anchor listeners
-- localStorage guestbook production code
 
 ## Refactor Order
 

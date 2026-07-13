@@ -166,4 +166,4 @@ The application is a static Vite build. Hosting must:
 - avoid caching `index.html` permanently,
 - preserve public resume and social-preview assets.
 
-Azure Static Web Apps uses `public/staticwebapp.config.json` to rewrite application routes to `/index.html`.
+Cloudflare Pages builds `main` with `npm run build`, publishes `dist/`, and provides its built-in SPA fallback when no top-level `404.html` exists.
