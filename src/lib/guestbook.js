@@ -37,7 +37,6 @@ export function nestEntries(rows) {
     message: row.body,
     createdAt: row.created_at,
     authorRole: row.author_role,
-    approved: row.approved,
     liked: row.liked_by_me,
     likes: row.like_count,
     ownerLiked: row.owner_liked,

@@ -107,7 +107,7 @@ Tasks:
 
 - Implement shared API.
 - Add server validation.
-- Add moderation.
+- Add owner deletion.
 - Add rate limiting.
 - Add likes and one-level replies.
 - Add full UI states.
@@ -115,7 +115,7 @@ Tasks:
 Acceptance:
 
 - Messages persist across browsers.
-- Pending moderation is explained.
+- Valid messages publish immediately and the owner can delete them.
 - Invalid writes fail safely.
 - Likes deduplicate.
 - Failure does not break Home.

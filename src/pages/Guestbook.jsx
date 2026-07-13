@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Check, ChevronDown, Heart, LogOut, MessageCircle, Send, Trash2 } from 'lucide-react';
+import { ChevronDown, Heart, LogOut, MessageCircle, Send, Trash2 } from 'lucide-react';
 import {
   fetchGuestbook,
   isSupabaseConfigured,
@@ -73,7 +73,7 @@ export default function Guestbook({ embedded = false }) {
       if (remote) {
         await submitGuestbookMessage(form);
         await reloadRemote();
-        setStatus('Message submitted for moderation.');
+        setStatus('Message published.');
       } else {
         setMessages((items) => addMessage(items, form));
         setStatus('Message saved in this browser.');
@@ -122,14 +122,14 @@ export default function Guestbook({ embedded = false }) {
     }
   }
 
-  async function handleModeration(entryId, action) {
-    setBusyId(`${action}:${entryId}`);
+  async function handleDelete(entryId) {
+    setBusyId(`delete:${entryId}`);
     try {
-      await moderateGuestbookEntry(entryId, action);
+      await moderateGuestbookEntry(entryId, 'delete');
       await reloadRemote();
-      setStatus(action === 'approve' ? 'Message approved.' : 'Message deleted.');
+      setStatus('Message deleted.');
     } catch {
-      setStatus('Moderation action failed. Please retry.');
+      setStatus('Message could not be deleted. Please retry.');
     } finally {
       setBusyId('');
     }
@@ -158,7 +158,6 @@ export default function Guestbook({ embedded = false }) {
         <span>{messages.length} messages</span>
       </div>
       <p className="guestbook-subtitle">leave a message! i'd love to hear from you.</p>
-      {remote && <p className="guestbook-note">Messages are shared and moderated before publication.</p>}
 
       {isOwner && (
         <div className="guestbook-owner-session">
@@ -178,12 +177,11 @@ export default function Guestbook({ embedded = false }) {
             <article key={message.id} className="guestbook-entry">
               <MessageHeader
                 item={message}
-                onLike={message.approved || isOwner || !remote ? () => handleLike(message.id) : null}
+                onLike={() => handleLike(message.id)}
                 disabled={busyId === `like:${message.id}`}
               />
               <p className="guestbook-message">{message.message}</p>
               {message.ownerLiked && <p className="guestbook-owner-like">♥ liked by caur</p>}
-              {remote && !message.approved && <p className="guestbook-pending">pending moderation</p>}
 
               {message.replies.length > 0 && (
                 <div className="guestbook-replies">
@@ -203,15 +201,10 @@ export default function Guestbook({ embedded = false }) {
 
               {isOwner && (
                 <div className="guestbook-owner-actions">
-                  {!message.approved && (
-                    <button className="guestbook-text-button soft-link" type="button" onClick={() => handleModeration(message.id, 'approve')} disabled={Boolean(busyId)}>
-                      <Check aria-hidden="true" /> approve
-                    </button>
-                  )}
                   <button className="guestbook-text-button soft-link" type="button" onClick={() => setReplyTo(replyTo === message.id ? null : message.id)}>
                     <MessageCircle aria-hidden="true" /> reply
                   </button>
-                  <button className="guestbook-text-button guestbook-delete soft-link" type="button" onClick={() => handleModeration(message.id, 'delete')} disabled={Boolean(busyId)}>
+                  <button className="guestbook-text-button guestbook-delete soft-link" type="button" onClick={() => handleDelete(message.id)} disabled={Boolean(busyId)}>
                     <Trash2 aria-hidden="true" /> delete
                   </button>
                 </div>

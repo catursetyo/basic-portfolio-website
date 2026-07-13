@@ -764,8 +764,7 @@ button {
   line-height: 1.5;
 }
 
-.guestbook-subtitle,
-.guestbook-note {
+.guestbook-subtitle {
   max-width: 58ch;
   color: rgb(255 255 255 / 0.45);
   font-family: var(--font-copy);
@@ -776,14 +775,6 @@ button {
 
 .guestbook-subtitle {
   margin: 0.25rem 0 0;
-}
-
-.guestbook-note {
-  margin: 0.45rem 0 0;
-  color: rgb(255 255 255 / 0.3);
-  font-family: var(--font-meta);
-  font-size: 0.625rem;
-  letter-spacing: 0;
 }
 
 .guestbook-owner-session,
@@ -829,7 +820,6 @@ button {
 }
 
 .guestbook-owner-like,
-.guestbook-pending,
 .guestbook-state {
   margin: 0.35rem 0 0;
   font-family: var(--font-meta);
@@ -838,11 +828,6 @@ button {
 
 .guestbook-owner-like {
   color: var(--accent-warm);
-}
-
-.guestbook-pending {
-  color: rgb(255 255 255 / 0.3);
-  text-transform: uppercase;
 }
 
 .guestbook-state {

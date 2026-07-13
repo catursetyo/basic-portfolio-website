@@ -46,7 +46,7 @@ Secondary:
 Conditional V1 features:
 
 - Blog only when useful content exists.
-- Guestbook only when shared persistence, validation, moderation, and failure states exist.
+- Guestbook only when shared persistence, validation, owner deletion, and failure states exist.
 - View counter only when it can fail quietly and does not delay the page.
 
 ## Priority

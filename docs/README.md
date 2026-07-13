@@ -26,7 +26,7 @@ Start with the repository-level `AGENTS.md`, then read `STATUS.md`.
 | Design | [`design/design_system.md`](design/design_system.md) | Brand, color, typography, layout, imagery, glass, motion, and responsive rules. |
 | Dependencies | [`dependencies/dependency_rules.md`](dependencies/dependency_rules.md) | Allowed, approved, discouraged, and removable dependencies. |
 | Features | [`features/blog.md`](features/blog.md) | Blog content and route behavior. |
-| Features | [`features/guestbook.md`](features/guestbook.md) | Guestbook behavior, validation, persistence, moderation, and UI. |
+| Features | [`features/guestbook.md`](features/guestbook.md) | Guestbook behavior, validation, persistence, owner controls, and UI. |
 | Features | [`features/resume.md`](features/resume.md) | Resume route and fallback behavior. |
 | Features | [`features/view_counter.md`](features/view_counter.md) | Provider-neutral counter contract and graceful failure. |
 | Implementation | [`implementation/roadmap.md`](implementation/roadmap.md) | Ordered phases and phase acceptance criteria. |
