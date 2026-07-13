@@ -8,7 +8,7 @@ This file is the first instruction source for every AI coding agent working in t
 
 Build a portfolio that presents Catur honestly as:
 
-> IT student · backend developer · data & AI builder
+> IT student · backend developer · AI engineer
 
 The site must make real projects easy to inspect. Visual polish supports the work; it must not hide weak, missing, or fabricated content.
 

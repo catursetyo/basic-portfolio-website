@@ -16,7 +16,7 @@ Use:
 
 Recommended hero line:
 
-> IT student · backend developer · data & AI builder
+> IT student · backend developer · AI engineer
 
 Do not present multiple job titles that the project evidence cannot support.
 

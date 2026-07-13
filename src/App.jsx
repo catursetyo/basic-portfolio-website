@@ -6,6 +6,7 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import OwnerLogin from './pages/OwnerLogin';
 import Projects from './pages/Projects';
 import Resume from './pages/Resume';
@@ -39,7 +40,7 @@ function App() {
       <DataOverlay hidden={path === '/'} />
 
       <main className="site-main">
-        {page ?? <Home onNavigate={navigate} />}
+        {page}
       </main>
     </>
   );
@@ -53,7 +54,7 @@ function getPage(path, navigate) {
   if (path === '/contact') return <Contact />;
   if (path === '/resume') return <Resume />;
   if (path === '/owner/login') return <OwnerLogin onNavigate={navigate} />;
-  return null;
+  return <NotFound />;
 }
 
 export default App;

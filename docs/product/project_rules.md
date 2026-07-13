@@ -10,7 +10,7 @@ The site should feel memorable without pretending that visual effects are profes
 
 Use this baseline positioning:
 
-> IT student · backend developer · data & AI builder
+> IT student · backend developer · AI engineer
 
 Avoid broad claims such as “data scientist” or “AI engineer” as the primary identity unless the project evidence and resume support them clearly.
 

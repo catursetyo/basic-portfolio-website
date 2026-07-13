@@ -56,9 +56,8 @@ export default function Home({ onNavigate }) {
       <div className="home-content">
       <section className="home-hero" aria-labelledby="home-title">
         <div className="home-hero-copy">
-          <p className="home-overline">Catur Setyo Ragil <span>/ portfolio 2026</span></p>
           <h1 id="home-title" className="home-logo">caursty<span>.</span></h1>
-          <p className="home-role">IT student · backend developer · data &amp; AI builder</p>
+          <p className="home-role">IT student · backend developer · AI engineer</p>
 
           <nav className="home-menu" aria-label="Home sections">
             {menu.map(([label, href], index) => (
