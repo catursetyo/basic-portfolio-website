@@ -19,10 +19,10 @@ This is the canonical refactor map.
 | `src/pages/ProjectDetail.jsx` | Project case study | Add. |
 | `src/pages/Blog.jsx` | Blog index | Add intentional empty state or hide navigation until content exists. |
 | `src/pages/BlogPost.jsx` | Blog detail | Use route params and not-found behavior. |
-| `src/pages/Guestbook.jsx` | Embedded guestbook | Supabase-backed when configured, with a labeled local preview fallback. |
+| `src/pages/Guestbook.jsx` | Embedded guestbook | Supabase-backed in production, with a Vite-development-only local fallback. |
 | `src/pages/OwnerLogin.jsx` | Private owner access | Keep unlisted; authenticate by magic link and expose controls inline in Guestbook. |
 | `src/pages/Resume.jsx` | Resume route | Use public PDF or visitor-facing fallback. |
-| `src/pages/NotFound.jsx` | Application 404 | Add. |
+| `src/pages/NotFound.jsx` | Application 404 | Keep as the manual-router catch-all, then move it into React Router. |
 | `src/pages/About.jsx` | Legacy brutalist page | Delete after confirming no imports or links remain. |
 | `src/data/projects.js` | Project source data | Expand to case-study fields and add slugs. |
 | `src/data/posts.js` | Blog source data | Add real published content; the empty route is currently visible by explicit user choice. |
@@ -32,6 +32,7 @@ This is the canonical refactor map.
 | `src/lib/supabase.js` | Supabase client | Keep public environment configuration isolated here. |
 | `src/lib/viewCounter.js` | Counter adapter | Make provider-neutral and preserve valid zero values. |
 | `index.html` | Document metadata | Replace Vite title/favicon, remove redundant Inter import, add SEO/social metadata. |
+| `public/staticwebapp.config.json` | Azure SPA fallback | Keep at the Vite public root so it is copied into `dist/`. |
 | `README.md` | Repository documentation | Replace the Vite template. |
 
 ## Approved New Files

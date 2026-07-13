@@ -16,7 +16,8 @@ const dateFormatter = new Intl.DateTimeFormat('en', { dateStyle: 'medium' });
 
 export default function Guestbook({ embedded = false }) {
   const remote = isSupabaseConfigured;
-  const [messages, setMessages] = useState(() => (remote ? [] : readMessages()));
+  const localPreview = !remote && import.meta.env.DEV;
+  const [messages, setMessages] = useState(() => (localPreview ? readMessages() : []));
   const [form, setForm] = useState({ name: '', message: '' });
   const [replyTo, setReplyTo] = useState(null);
   const [reply, setReply] = useState('');
@@ -24,14 +25,14 @@ export default function Guestbook({ embedded = false }) {
   const [composerOpen, setComposerOpen] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [loading, setLoading] = useState(remote);
-  const [unavailable, setUnavailable] = useState(false);
+  const [unavailable, setUnavailable] = useState(!remote && !localPreview);
   const [busyId, setBusyId] = useState('');
 
   useEffect(() => {
-    if (remote) return;
+    if (!localPreview) return;
     // ponytail: local demo fallback until Supabase credentials are configured.
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-  }, [messages, remote]);
+  }, [localPreview, messages]);
 
   useEffect(() => {
     if (!remote) return undefined;
@@ -157,9 +158,7 @@ export default function Guestbook({ embedded = false }) {
         <span>{messages.length} messages</span>
       </div>
       <p className="guestbook-subtitle">leave a message! i'd love to hear from you.</p>
-      <p className="guestbook-note">
-        {remote ? 'Messages are shared and moderated before publication.' : 'Local preview: messages and likes stay in this browser.'}
-      </p>
+      {remote && <p className="guestbook-note">Messages are shared and moderated before publication.</p>}
 
       {isOwner && (
         <div className="guestbook-owner-session">

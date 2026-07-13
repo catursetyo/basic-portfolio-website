@@ -11,7 +11,8 @@ Important files:
 - `src/pages/Projects.jsx`: project index.
 - `src/pages/Blog.jsx`: blog index scaffold.
 - `src/pages/BlogPost.jsx`: blog detail scaffold.
-- `src/pages/Guestbook.jsx`: embedded guestbook with Supabase mode and labeled local fallback.
+- `src/pages/Guestbook.jsx`: embedded Supabase guestbook with a development-only local fallback.
+- `src/pages/NotFound.jsx`: catch-all missing-route page.
 - `src/pages/OwnerLogin.jsx`: private magic-link owner access.
 - `src/pages/Resume.jsx`: resume redirect scaffold.
 - `src/components/layout/Navbar.jsx`: fixed glass navigation.
@@ -28,7 +29,7 @@ Important files:
 ## Current Temporary Implementations
 
 - Routing is manual.
-- Guestbook falls back to `localStorage` until public Supabase configuration is supplied.
+- Guestbook uses `localStorage` only in Vite development mode and becomes unavailable in production until public Supabase configuration is supplied.
 - Blog data is empty.
 - Resume URL is environment-driven but unconfigured.
 - Counter provider contract is incomplete.
@@ -164,3 +165,5 @@ The application is a static Vite build. Hosting must:
 - cache hashed assets,
 - avoid caching `index.html` permanently,
 - preserve public resume and social-preview assets.
+
+Azure Static Web Apps uses `public/staticwebapp.config.json` to rewrite application routes to `/index.html`.

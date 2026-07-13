@@ -289,7 +289,6 @@ button {
   width: min(29rem, 100%);
 }
 
-.home-overline,
 .home-role,
 .home-scroll-note,
 .home-hero-meta,
@@ -298,13 +297,6 @@ button {
   text-transform: uppercase;
 }
 
-.home-overline {
-  margin: 0 0 0.8rem;
-  color: var(--muted);
-  font-size: 0.68rem;
-}
-
-.home-overline span,
 .home-hero-meta span {
   color: var(--faint);
 }

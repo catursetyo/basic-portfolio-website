@@ -2,7 +2,7 @@
 
 Reviewed branch: `v2-redesign`
 Reviewed state: current working tree
-Status date: 2026-07-12
+Status date: 2026-07-13
 
 This file describes what exists now. It is not a wish list.
 
@@ -16,7 +16,7 @@ This file describes what exists now. It is not a wish list.
   - compact hero navigation,
   - about and social sections,
   - a compact repository-format project grid,
-  - embedded guestbook preview,
+  - embedded guestbook,
   - quiet footer metadata.
 - Hero uses `public/background/hero.webm` (VP9, 1.57 MB) with `public/background/hero.mp4` (H.264, 2.77 MB) fallback.
 - `public/background/hero-poster.webp` provides the initial, failure, and reduced-motion background.
@@ -30,7 +30,7 @@ This file describes what exists now. It is not a wish list.
 - The homepage landing sections now use the approved Figma typography roles: Barlow Condensed for navigation, Inter for metadata, DM Sans for supporting copy, and the existing Space Grotesk for the `caursty.` wordmark.
 - The long-scroll content uses a transparent-to-black fade that keeps the hero video visible before settling into the solid archive background.
 - About, social links, repository cards, and guestbook rows now share the compact type hierarchy and restrained opacity treatment from the approved landing frame.
-- Guestbook fields have visible labels, native limits, keyboard focus, and an `aria-live` local-save status.
+- Guestbook fields have visible labels, native limits, keyboard focus, and an `aria-live` submission status.
 - The primary guestbook form is collapsed by default and disclosed by an accessible `leave a message` CTA.
 - A Supabase guestbook adapter and PostgreSQL migration now provide shared messages, anonymous likes, pending moderation, and one-level owner replies when public Supabase credentials are configured.
 - Owner access uses a private `/owner/login` magic-link flow. Owner identity, replies, moderation controls, and the `liked by caur` marker are verified by database functions rather than visitor-submitted names.
@@ -41,12 +41,14 @@ This file describes what exists now. It is not a wish list.
 - Ambient time uses the `Asia/Jakarta` timezone and updates once per minute.
 - The counter preserves a valid count of zero.
 - Basic title, description, theme color, and Open Graph metadata are configured.
+- The browser title is `caursty`.
+- Unknown application paths render a dedicated NotFound page, and Azure Static Web Apps receives an SPA navigation fallback configuration.
 - The resume fallback is visitor-facing rather than developer-facing.
 - `PRODUCT.md` captures the brand register and strategic constraints.
 
 ## In Progress
 
-- React Router migration and real not-found handling.
+- React Router migration.
 - Project case-study routes and contribution details.
 - Final resume PDF or public URL.
 - Provisioning the Supabase project, applying the migration, and configuring the owner Auth account.
@@ -59,8 +61,6 @@ This file describes what exists now. It is not a wish list.
 ### Routing
 
 - Routing still uses `window.location.pathname`, `pushState`, and manual matching.
-- Unknown paths still fall back to Home instead of a real 404 page.
-- Direct refresh still depends on hosting fallback configuration.
 - Some older page-level links still intercept modifier-click.
 
 ### Content
@@ -78,7 +78,7 @@ This file describes what exists now. It is not a wish list.
 
 ### Guestbook
 
-- No local `.env` is configured, so the current local development view intentionally uses the labeled `localStorage` preview mode.
+- No local `.env` is configured, so `localStorage` is available only during Vite development; production renders an unavailable state when Supabase is missing.
 - The Supabase migration has not been applied to a remote project from this repository session.
 - CAPTCHA and provider-level Auth rate limits still need production configuration in Supabase.
 
@@ -91,9 +91,9 @@ This file describes what exists now. It is not a wish list.
 
 ## Next Work
 
-1. Replace manual routing with React Router and add a real 404 route.
+1. Replace manual routing with React Router.
 2. Add one complete project case study and `/projects/:slug`.
-3. Configure SPA deployment fallback and verify direct route loads.
+3. Verify direct route loads after the Azure SPA fallback is deployed.
 4. Add the final public resume file.
 5. Replace the root README and add a dedicated favicon/social image.
 6. Apply the guestbook migration and configure Supabase Auth, redirect URLs, and production CAPTCHA.

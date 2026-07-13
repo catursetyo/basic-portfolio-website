@@ -17,7 +17,7 @@ A public guestbook is production-ready only when it has:
 - like deduplication,
 - loading, success, empty, error, and unavailable states.
 
-Supabase is the selected production provider. `localStorage` remains only as a clearly labeled development preview when Supabase is not configured.
+Supabase is the selected production provider. `localStorage` exists only in Vite development mode; production shows an unavailable state when Supabase is not configured.
 
 ## Message Rules
 
