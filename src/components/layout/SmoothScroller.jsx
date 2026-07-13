@@ -2,48 +2,35 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 
 export default function SmoothScroller() {
-    useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
+  useEffect(() => {
+    const hash = window.location.hash;
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const hashFrame = requestAnimationFrame(() => {
+        if (hash) document.querySelector(hash)?.scrollIntoView();
+      });
+      return () => cancelAnimationFrame(hashFrame);
+    }
 
-        requestAnimationFrame(raf);
+    const lenis = new Lenis({ duration: 1.05, anchors: true });
+    let frame;
+    const hashFrame = requestAnimationFrame(() => {
+      if (hash) lenis.scrollTo(hash, { immediate: true });
+    });
 
-        // Handle anchor links
-        const handleAnchorClick = (e) => {
-            const href = e.currentTarget.getAttribute('href');
-            if (href?.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    lenis.scrollTo(target, {
-                        offset: 0,
-                        duration: 1.5,
-                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Same easing
-                    });
-                }
-            }
-        };
+    const raf = (time) => {
+      lenis.raf(time);
+      frame = requestAnimationFrame(raf);
+    };
 
-        const anchors = document.querySelectorAll('a[href^="#"]');
-        anchors.forEach(anchor => anchor.addEventListener('click', handleAnchorClick));
+    frame = requestAnimationFrame(raf);
 
-        return () => {
-            lenis.destroy();
-            anchors.forEach(anchor => anchor.removeEventListener('click', handleAnchorClick));
-        };
-    }, []);
+    return () => {
+      cancelAnimationFrame(hashFrame);
+      cancelAnimationFrame(frame);
+      lenis.destroy();
+    };
+  }, []);
 
-    return null;
+  return null;
 }

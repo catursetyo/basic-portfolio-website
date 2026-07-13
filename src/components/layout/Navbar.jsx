@@ -1,31 +1,55 @@
+import { useEffect, useState } from 'react';
+import { Home } from 'lucide-react';
 
+const navLinks = [
+  { name: 'projects', path: '/projects' },
+  { name: 'blog', path: '/blog' },
+  { name: 'resume', path: '/resume' },
+];
 
-export default function Navbar() {
-    const navLinks = [
-        { name: 'work', href: '#projects' },
-        { name: 'about', href: '#about' },
-        { name: 'contact', href: '#contact' },
-    ];
+export default function Navbar({ activePath, onNavigate }) {
+  const [scrolled, setScrolled] = useState(() => window.scrollY > window.innerHeight * 0.72);
 
-    return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-background border-b border-grid">
-            <div className="flex justify-between items-stretch h-14 md:h-20">
-                <a href="#home" className="flex items-center px-4 md:px-10 border-r border-grid font-bold text-lg md:text-2xl tracking-tighter hover:bg-foreground hover:text-background transition-colors duration-300">
-                    caursty.
-                </a>
+  useEffect(() => {
+    if (activePath !== '/') return undefined;
 
-                <div className="flex items-stretch divide-x divide-grid border-l border-grid">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className="flex items-center px-3 md:px-10 text-[10px] md:text-lg font-bold hover:bg-foreground hover:text-background transition-colors duration-300 uppercase tracking-widest"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
-                </div>
-            </div>
-        </nav>
-    );
+    const update = () => setScrolled(window.scrollY > window.innerHeight * 0.72);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, [activePath]);
+
+  const visible = activePath !== '/' || scrolled;
+
+  return (
+    <nav className={`site-nav ${visible ? 'site-nav--visible' : ''}`} aria-label="Primary navigation">
+      <a
+        href="/"
+        aria-label="Home"
+        onClick={(event) => handleNav(event, '/', onNavigate)}
+        className="site-nav-home soft-link"
+      >
+        <Home className="h-4 w-4" />
+      </a>
+
+      <div className="site-nav-links">
+        {navLinks.map((link) => (
+          <a
+            key={link.path}
+            href={link.path}
+            onClick={(event) => handleNav(event, link.path, onNavigate)}
+            className={`site-nav-link soft-link ${activePath.startsWith(link.path) ? 'active' : ''}`}
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function handleNav(event, path, onNavigate) {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  onNavigate(path);
 }

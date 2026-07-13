@@ -1,89 +1,231 @@
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, BookOpen } from 'lucide-react';
+import { posts } from '../data/posts';
+import { projects } from '../data/projects';
+import { socials } from '../data/socials';
+import { getSiteViews } from '../lib/viewCounter';
+import Guestbook from './Guestbook';
 
-export default function Home({ startAnimation = true }) {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.5 // Wait for preloader curtain to lift slightly
-            }
-        }
-    };
+const menu = [
+  ['about me', '#about'],
+  ['projects', '/projects'],
+  ['blog', '/blog'],
+  ['others', '#guestbook'],
+];
 
-    const itemVariants = {
-        hidden: { y: 100, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-        }
-    };
+const skills = [
+  ['JavaScript', '/icons/js.svg'],
+  ['TypeScript', '/icons/ts.svg'],
+  ['React', '/icons/react.svg'],
+  ['Tailwind CSS', '/icons/tailwind.svg'],
+  ['Next.js', '/icons/nextjs.svg'],
+  ['Node.js', '/icons/nodejs.svg'],
+  ['Go', '/icons/go.svg'],
+  ['Python', '/icons/python.svg'],
+  ['Django', '/icons/django.svg'],
+  ['MongoDB', '/icons/mongodb.svg'],
+  ['PostgreSQL', '/icons/postgre.svg'],
+  ['PyTorch', '/icons/pytorch.svg'],
+  ['TensorFlow', '/icons/tensorflow.svg'],
+];
+const languageColors = {
+  Python: '#3572a5',
+  'Next.js': '#f1f1f1',
+  React: '#61dafb',
+};
 
-    return (
-        <section id="home" className="relative min-h-screen flex flex-col justify-center border-x border-grid max-w-[1920px] mx-auto bg-background overflow-hidden relative z-10">
-            {/* Vertical Grid Lines Decoration */}
-            <div className="absolute inset-0 pointer-events-none select-none flex justify-between px-[10%] md:px-[20%] opacity-20 z-0">
-                <div className="w-[1px] h-full bg-grid"></div>
-                <div className="w-[1px] h-full bg-grid"></div>
-                <div className="w-[1px] h-full bg-grid"></div>
+export default function Home({ onNavigate }) {
+  const [views, setViews] = useState(null);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  useEffect(() => {
+    getSiteViews().then(({ count }) => setViews(count));
+  }, []);
+
+  return (
+    <section className="home-page" onPointerMove={handlePageSway} onPointerLeave={resetPageSway}>
+      <div className="home-bg" aria-hidden="true">
+        {!reducedMotion && (
+          <video autoPlay muted loop playsInline preload="metadata" poster="/background/hero-poster.webp" className="home-bg-media">
+            <source src="/background/hero.webm" type="video/webm" />
+            <source src="/background/hero.mp4" type="video/mp4" />
+          </video>
+        )}
+      </div>
+
+      <div className="home-content">
+      <section className="home-hero" aria-labelledby="home-title">
+        <div className="home-hero-copy">
+          <p className="home-overline">Catur Setyo Ragil <span>/ portfolio 2026</span></p>
+          <h1 id="home-title" className="home-logo">caursty<span>.</span></h1>
+          <p className="home-role">IT student · backend developer · data &amp; AI builder</p>
+
+          <nav className="home-menu" aria-label="Home sections">
+            {menu.map(([label, href], index) => (
+              <a
+                key={href}
+                className="home-menu-link soft-link"
+                href={href}
+                onClick={(event) => handleInternalLink(event, href, onNavigate)}
+              >
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{label}</strong>
+              </a>
+            ))}
+          </nav>
+          <p className="home-scroll-note">scroll to explore</p>
+        </div>
+
+        <div className="home-hero-meta">
+          <p>based in surabaya, indonesia</p>
+          <p>{views !== null ? `${views.toLocaleString()} visits` : 'independent archive'} <span>/ v1</span></p>
+        </div>
+      </section>
+
+      <div className="home-scroll">
+        <section id="about" className="home-section home-two-col home-about">
+          <div>
+            <p className="section-label">about me</p>
+            <div className="about-lockup">
+              <img src="/profile/profile.png" alt="Catur Setyo Ragil" width="100" height="100" loading="lazy" />
+              <div>
+                <p className="about-intro">hey, i'm</p>
+                <h2>caur.</h2>
+              </div>
             </div>
+            <p className="about-copy">
+              I build practical backend, data, and AI systems while studying Information Technology at Institut
+              Teknologi Sepuluh Nopember.
+            </p>
+            <ul className="tech-list" aria-label="Core tools">
+              {skills.map(([name, icon]) => (
+                <li key={name} title={name}>
+                  <img src={icon} alt={name} width="28" height="28" loading="lazy" />
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/*Corner Decor */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={startAnimation ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="absolute top-24 right-4 md:right-10 font-mono text-[10px] md:text-xs text-grid text-right select-none z-10"
-            >
-                [SYSTEM: ONLINE]<br />
-                [MODE: NEO-BRUTALISM]
-            </motion.div>
-
-            <motion.div
-                className="flex-1 flex flex-col justify-center items-start px-2 md:px-0 relative z-10 mt-20 md:mt-0"
-                variants={containerVariants}
-                initial="hidden"
-                animate={startAnimation ? "visible" : "hidden"}
-            >
-                {/* Giant Name - Responsive Clamp */}
-                <h1 className="leading-[0.85] font-bold tracking-tighter uppercase break-words w-full border-b border-grid pb-4 md:pb-10 pl-4 md:pl-10 overflow-hidden">
-                    <motion.span variants={itemVariants} className="block text-[13vw] md:text-[clamp(10vw,11vw,200px)]">Catur*</motion.span>
-                    <motion.span variants={itemVariants} className="block ml-[8vw] md:ml-[10vw] text-[13vw] md:text-[clamp(10vw,11vw,200px)]">→ Setyo</motion.span>
-                    <motion.span variants={itemVariants} className="block text-[13vw] md:text-[clamp(10vw,11vw,200px)]">Ragil+++++</motion.span>
-                </h1>
-
-                {/* Subtext */}
-                <motion.div variants={itemVariants} className="w-full grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-grid border-b border-grid bg-background">
-                    <div className="p-4 md:p-8">
-                        <p className="font-mono text-sm uppercase opacity-60">[Role]</p>
-                        <p className="text-xl md:text-3xl font-medium mt-2">DATA SCIENTIST & AI ENGINEER</p>
-                    </div>
-                    <div className="p-4 md:p-8">
-                        <p className="font-mono text-sm uppercase opacity-60">[Located]</p>
-                        <p className="text-xl md:text-3xl font-medium mt-2">SURABAYA, INDONESIA</p>
-                    </div>
-                    <div className="p-4 md:p-8 flex items-end justify-end">
-                        <p className="font-mono text-xs opacity-50 uppercase">SCROLL FOR ARCHIVE ↓</p>
-                    </div>
-                </motion.div>
-
-                {/* Infinite Marquee */}
-                <motion.div variants={itemVariants} className="w-full border-b border-grid py-3 md:py-6 overflow-hidden flex bg-foreground text-background">
-                    <motion.div
-                        animate={{ x: "-50%" }}
-                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                        className="flex whitespace-nowrap min-w-max gap-8 font-bold text-3xl md:text-5xl uppercase tracking-tight"
-                    >
-                        {[...Array(4)].map((_, i) => (
-                            <span key={i} className="flex items-center gap-8">
-                                DATA SCIENCE ENTHUSIAST • BACKEND DEVELOPER • INFORMATION TECHNOLOGY STUDENT AT INSTITUT TEKNOLOGI SEPULUH NOPEMBER •
-                            </span>
-                        ))}
-                    </motion.div>
-                </motion.div>
-            </motion.div>
+          <div>
+            <p className="section-label">find me at</p>
+            <div className="social-list">
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  className="soft-link social-row"
+                  href={social.href}
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  <span className="social-label">{social.label}</span>
+                  <span className="social-slash" aria-hidden="true">/</span>
+                  <strong>{social.value}</strong>
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
         </section>
-    );
+
+        <section id="work" className="home-section home-work">
+          <p className="section-label">my work</p>
+
+          <div className="repo-grid">
+            {projects.map((project) => {
+              const href = project.externalUrl || project.githubUrl || '/projects';
+              const external = Boolean(project.externalUrl || project.githubUrl);
+
+              return (
+                <a
+                  key={project.id}
+                  className="repo-card soft-link"
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  onClick={(event) => {
+                    if (!external) handleInternalLink(event, href, onNavigate);
+                  }}
+                  style={{ '--repo-language': languageColors[project.techStack[0]] || 'var(--accent)' }}
+                >
+                  <div className="repo-card-header">
+                    <BookOpen aria-hidden="true" />
+                    <span>catursetyo</span>
+                    <span className="repo-slash" aria-hidden="true">/</span>
+                    <strong>{project.id}</strong>
+                  </div>
+                  <p>{project.description}</p>
+                  <footer>
+                    <span aria-hidden="true" />
+                    {project.techStack[0]}
+                  </footer>
+                </a>
+              );
+            })}
+          </div>
+
+          <p className="repo-note">
+            also check the full{' '}
+            <a className="soft-link" href="/projects" onClick={(event) => handleInternalLink(event, '/projects', onNavigate)}>
+              project archive
+            </a>
+          </p>
+        </section>
+
+        <section id="guestbook" className={`home-section home-bottom ${posts.length ? 'home-two-col' : ''}`}>
+          <Guestbook embedded />
+
+          {posts.length > 0 && (
+            <aside>
+              <p className="section-label">recent posts</p>
+              <div className="post-list">
+                {posts.slice(0, 4).map((post) => (
+                  <a
+                    key={post.slug}
+                    className="soft-link post-row"
+                    href={`/blog/${post.slug}`}
+                    onClick={(event) => handleInternalLink(event, `/blog/${post.slug}`, onNavigate)}
+                  >
+                    <span>
+                      <strong>{post.title}</strong>
+                      <small>{post.tags.join(' · ')}</small>
+                    </span>
+                    <ArrowUpRight aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            </aside>
+          )}
+        </section>
+
+        <footer className="home-footer">
+          <span>Catur Setyo Ragil</span>
+          <span>Surabaya, ID</span>
+          <span>© 2026</span>
+        </footer>
+      </div>
+      </div>
+    </section>
+  );
+}
+
+function handleInternalLink(event, href, onNavigate) {
+  if (!href.startsWith('/') || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  onNavigate(href);
+}
+
+function handlePageSway(event) {
+  if (event.pointerType !== 'mouse') return;
+
+  const x = event.clientX / window.innerWidth - 0.5;
+  const y = event.clientY / window.innerHeight - 0.5;
+
+  event.currentTarget.style.setProperty(
+    '--page-sway-transform',
+    `translate3d(${x * 16}px, ${y * 12}px, 0) rotate(${x * 0.14}deg)`,
+  );
+}
+
+function resetPageSway(event) {
+  event.currentTarget.style.removeProperty('--page-sway-transform');
 }

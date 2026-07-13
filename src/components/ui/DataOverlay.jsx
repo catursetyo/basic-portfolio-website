@@ -1,29 +1,26 @@
-import { useState, useEffect } from 'react';
-import useMeasure from 'react-use-measure';
+import { useEffect, useState } from 'react';
 
-export default function DataOverlay() {
-    const [time, setTime] = useState(Date.now());
-    const [mouse, setMouse] = useState({ x: 0, y: 0 });
+const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZone: 'Asia/Jakarta',
+});
 
-    useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 100);
+export default function DataOverlay({ hidden = false }) {
+  const [time, setTime] = useState(new Date());
 
-        const handleMouseMove = (e) => {
-            setMouse({ x: e.clientX, y: e.clientY });
-        };
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 60_000);
+    return () => clearInterval(interval);
+  }, []);
 
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => {
-            clearInterval(interval);
-            window.removeEventListener('mousemove', handleMouseMove);
-        }
-    }, []);
+  if (hidden) return null;
 
-    return (
-        <div className="fixed bottom-6 left-6 md:bottom-10 md:left-10 z-40 pointer-events-none font-mono text-[10px] md:text-xs text-grid flex flex-col gap-1 mix-blend-difference">
-            <div>XY: {String(mouse.x).padStart(4, '0')} / {String(mouse.y).padStart(4, '0')}</div>
-            <div>TS: {time}</div>
-            <div>LOC: SURABAYA, ID</div>
-        </div>
-    )
+  return (
+    <div className="ambient-data" aria-label={`Surabaya time ${timeFormatter.format(time)}`}>
+      <span>surabaya, id</span>
+      <span>{timeFormatter.format(time)} wib</span>
+    </div>
+  );
 }
