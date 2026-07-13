@@ -12,7 +12,7 @@ A public guestbook is production-ready only when it has:
 
 - shared persistence,
 - server-side validation,
-- moderation,
+- owner deletion,
 - rate limiting,
 - like deduplication,
 - loading, success, empty, error, and unavailable states.
@@ -24,7 +24,7 @@ Supabase is the selected production provider. `localStorage` exists only in Vite
 - Name: required, 2–40 characters.
 - Message: required, 1–280 characters.
 - Rendered as text.
-- New messages may enter pending moderation.
+- New messages publish immediately after server validation succeeds.
 
 ## Reply Rules
 
@@ -33,7 +33,7 @@ Supabase is the selected production provider. `localStorage` exists only in Vite
 - Author name and owner role come from the server, never the form.
 - Message: required, 1–220 characters.
 - Parent message must exist.
-- Owner replies publish immediately but remain hidden while their parent is pending.
+- Owner replies publish immediately under their parent message.
 
 ## Like Rules
 
@@ -64,7 +64,7 @@ Supabase is the selected production provider. `localStorage` exists only in Vite
 
 ### Submission Success
 
-- Explain whether the message is public or pending moderation.
+- Confirm that the message was published.
 - Clear the form only after success.
 
 ### Submission Error
@@ -105,7 +105,7 @@ Use `aria-live` for submission feedback.
 
 ## Owner Replies
 
-Owner identity is verified by Supabase Auth and the `is_guestbook_owner()` database function. The private `/owner/login` route sends a magic link only to a pre-existing owner account. The guestbook exposes approve, reply, delete, and logout controls inline after verification; no admin dashboard is required.
+Owner identity is verified by Supabase Auth and the `is_guestbook_owner()` database function. The private `/owner/login` route sends a magic link only to a pre-existing owner account. The guestbook exposes reply, delete, and logout controls inline after verification; no admin dashboard is required.
 
 The owner email currently lives in the migration as a deliberate single-owner rule. Changing it requires a new migration, not a browser environment variable.
 
@@ -127,7 +127,7 @@ The publishable key is browser-safe. Never expose a secret key or service-role k
 - Limit request size.
 - Rate-limit writes.
 - Store only the random Supabase Auth user ID needed for rate limiting and like deduplication; do not store visitor IP addresses.
-- Moderate untrusted content before public display when needed.
+- Let the owner delete abusive or unwanted content after publication.
 
 ## Acceptance Criteria
 
@@ -135,9 +135,9 @@ The publishable key is browser-safe. Never expose a secret key or service-role k
 - Refresh does not lose state.
 - Invalid input cannot be submitted.
 - Loading, empty, success, error, and unavailable states work.
-- Pending moderation is explained.
+- Valid messages appear publicly after submission.
 - Likes deduplicate.
-- Only the verified owner can reply, approve, or delete.
+- Only the verified owner can reply or delete.
 - Owner likes and replies cannot be forged by submitting the name `caur`.
 - Replies remain one level deep.
 - The message composer opens and closes from the CTA without losing typed input.

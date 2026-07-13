@@ -6,7 +6,7 @@ Status: Accepted; production verification pending
 
 The current guestbook stores messages, replies, and likes in `localStorage`. That behavior is useful for UI prototyping but each visitor sees separate data.
 
-A public guestbook contains untrusted shared content and therefore needs validation, moderation, abuse prevention, and persistence.
+A public guestbook contains untrusted shared content and therefore needs validation, owner deletion, abuse prevention, and persistence.
 
 ## Decision
 
@@ -16,20 +16,20 @@ Before public launch, implement:
 
 - shared database persistence,
 - server-side validation,
-- moderation,
+- immediate publication with owner deletion,
 - rate limiting,
 - anonymous like deduplication,
 - loading and failure states.
 
 Use Supabase Auth, PostgreSQL functions, and RLS-backed tables. Visitors receive anonymous Auth identities; the owner signs in by magic link. The browser may execute only the granted RPC functions and cannot access the guestbook tables directly.
 
-Owner privileges are intentionally available inline in the homepage guestbook. Do not add an admin dashboard until moderation volume makes one necessary.
+Owner reply and deletion privileges are intentionally available inline in the homepage guestbook. Do not add an admin dashboard until message volume makes one necessary.
 
 ## Alternatives
 
 ### Keep localStorage
 
-Rejected for production because data is not shared or moderated.
+Rejected for production because data is not shared and the owner cannot remove abusive entries globally.
 
 ### Remove guestbook permanently
 
@@ -53,4 +53,4 @@ Rejected for V1 because Supabase Auth and database functions cover the required 
 
 ## Revisit When
 
-Revisit if moderation volume requires a dedicated dashboard or the single-owner email rule needs multiple roles.
+Revisit if message volume requires a dedicated dashboard or the single-owner email rule needs multiple roles.

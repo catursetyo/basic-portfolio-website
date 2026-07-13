@@ -9,7 +9,7 @@ A backend is required only for shared, untrusted, or secret-backed behavior:
 - guestbook messages,
 - guestbook replies,
 - likes,
-- moderation,
+- owner deletion,
 - rate limiting,
 - optional view counter.
 
@@ -51,7 +51,7 @@ The counter endpoints are optional and may be replaced by an external provider a
   "messages": [],
   "meta": {
     "status": "live",
-    "moderation": "pre"
+    "publication": "immediate"
   }
 }
 ```
@@ -61,12 +61,6 @@ Allowed status values:
 - `live`
 - `read_only`
 - `unavailable`
-
-Allowed moderation values:
-
-- `pre`
-- `post`
-- `none`
 
 ## Database Shape
 
@@ -151,16 +145,15 @@ Reject:
 - Use the hash for like deduplication and abuse controls.
 - Do not display IP addresses or hashes.
 
-## Moderation
+## Publication And Deletion
 
-Default recommendation:
+Current behavior:
 
-- public reads return only approved content,
-- new public messages and replies enter pending moderation,
-- owner replies may be marked with `author_role = owner`,
-- the UI states whether submission is pending.
+- valid public messages are visible immediately,
+- owner replies are marked with `author_role = owner`,
+- only the authenticated owner may delete entries.
 
-An admin dashboard is not required in V1. Moderation may initially happen through the database/provider console.
+An admin dashboard is not required in V1. Owner deletion remains available inline in the homepage guestbook.
 
 ## Rate Limiting
 

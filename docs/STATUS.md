@@ -32,8 +32,8 @@ This file describes what exists now. It is not a wish list.
 - About, social links, repository cards, and guestbook rows now share the compact type hierarchy and restrained opacity treatment from the approved landing frame.
 - Guestbook fields have visible labels, native limits, keyboard focus, and an `aria-live` submission status.
 - The primary guestbook form is collapsed by default and disclosed by an accessible `leave a message` CTA.
-- A Supabase guestbook adapter and PostgreSQL migration now provide shared messages, anonymous likes, pending moderation, and one-level owner replies when public Supabase credentials are configured.
-- Owner access uses a private `/owner/login` magic-link flow. Owner identity, replies, moderation controls, and the `liked by caur` marker are verified by database functions rather than visitor-submitted names.
+- Supabase guestbook migrations now provide immediately published shared messages, anonymous likes, and one-level owner replies when public Supabase credentials are configured.
+- Owner access uses a private `/owner/login` magic-link flow. Owner identity, replies, deletion controls, and the `liked by caur` marker are verified by database functions rather than visitor-submitted names.
 - Direct table access is revoked; browser writes use validated RPC functions and anonymous Supabase Auth identities for rate limiting and like deduplication.
 - The full homepage foreground from hero through footer sways as one plane with cursor position on fine pointers only.
 - The fixed preloader has been removed.
