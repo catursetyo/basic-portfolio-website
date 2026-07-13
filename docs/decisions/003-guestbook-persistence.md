@@ -1,6 +1,6 @@
 # ADR 003 — Require Shared Persistence for Guestbook
 
-Status: Accepted; implemented, deployment configuration pending
+Status: Accepted; production verification pending
 
 ## Context
 
